@@ -4,6 +4,17 @@ const kButtonColor = Color(0xFFEC368D);
 
 const kBackgroundColor = Color(0xFFFCF0F0);
 
+const kCallBackgroundColor = Color(0xFF1A2319);
+
+const kCallContainerColor = Color(0xDF070907);
+
+const kCallerIdTextStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 40.0,
+  color: Colors.white,
+  fontWeight: FontWeight.w500,
+);
+
 const kButtonRoundness = 10.0;
 
 const kButtonTextStyle = TextStyle(

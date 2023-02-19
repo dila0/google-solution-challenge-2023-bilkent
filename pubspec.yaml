@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  line_icons: ^2.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -55,8 +56,7 @@ flutter:
   uses-material-design: true
 
   assets:
-  - images/walking_girl.png
-  - images/circles.png
+    - images/
 
   fonts:
     - family: AmaticSC
