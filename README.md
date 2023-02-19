@@ -1,16 +1,27 @@
-# google_solution
+# Google Solution Challange Project
 
-A new Flutter project.
 
-## Getting Started
+## Application Overview
 
-This project is a starting point for a Flutter application.
+This application aims to help women feel more secure when they are walking alone. It provides users pre-recorded phone calls to talk when they don't feel safe walking alone, and when the *wake-up phrase* is used it sends emergency messages with location information to the selected contacts. 
 
-A few resources to get you started if this is your first Flutter project:
+## Technologies
+Project is created with:
+* Flutter version: 3.7.3
+* Firebase
+* Figma 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## SETUP
+
+* At this point, the application is not deployed to AppStore and PlayStore. However, feel free to clone this repository on your device and run the code on  Android and IOS emulators and reach us for your reviews and suggestions.
+
+* Will be available in Google Play Store by the end of March 2023.
+
+
+### Important Imformation
+##### This project is  developed for Google Solution Challange 2023 by:
+* [Ali Tunahan Işık](BURAYA GITHUB LINKINI YAPIŞTIR) 
+* [Atakan Şerifoğlu](https://github.com/atakanserifoglu)
+* [Dila Tosun](https://github.com/dila0)
+* [Tuna Bozkurt](BURAYA GITHUB LINKINI YAPIŞTIR) 
