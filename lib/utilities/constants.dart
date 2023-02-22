@@ -5,13 +5,22 @@ const kCirclesColor = Color(0xFFEE96B8);
 const kContactColor = Color(0xFFF3B5CB);
 const kBackgroundColor = Color(0xFFFCEEF7);
 const kBottomAppBarColor = Color(0XFFFFD7FC);
+const kCallBackgroundColor = Color(0xFF1A2319);
+const kCallContainerColor = Color(0xDF070907);
 
 const kButtonRoundness = 10.0;
 
 const kButtonTextStyle = TextStyle(
-  fontFamily: 'Amatic SC' ,
+  fontFamily: 'Amatic SC',
   fontSize: 20.0,
   color: Colors.white,
+);
+
+const kCallerIdTextStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 40.0,
+  color: Colors.white,
+  fontWeight: FontWeight.w500,
 );
 
 const kWelcomeTextStyle = TextStyle(
@@ -45,7 +54,7 @@ const kStartScreenBottomStyle = TextStyle(
 const kSignUpTextFieldTextStyle = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w300,
-  color: Colors.white24,
+  color: Colors.black45,
 );
 
 const kStartScreenButtonTextStyle = TextStyle(
@@ -79,7 +88,6 @@ const kTextFieldDecoration = InputDecoration(
   filled: true,
   fillColor: Colors.white60,
   hintText: 'Enter a value',
-
   contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
@@ -93,14 +101,15 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
 );
-
 const kContactNameTextStyle = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 20.0,
-  shadows: [Shadow(
-    color: Colors.black87,
-    offset: Offset(0, -3),
-  )],
+  shadows: [
+    Shadow(
+      color: Colors.black87,
+      offset: Offset(0, -3),
+    )
+  ],
   fontWeight: FontWeight.w900,
   decorationColor: Colors.black,
   color: Colors.transparent,
@@ -109,10 +118,12 @@ const kContactNameTextStyle = TextStyle(
 );
 
 const kContactDurationTextStyle = TextStyle(
-  shadows: [Shadow(
-    color: Colors.black45,
-    offset:Offset(0, -3),
-  ),],
+  shadows: [
+    Shadow(
+      color: Colors.black45,
+      offset: Offset(0, -3),
+    ),
+  ],
   decorationColor: Colors.black45,
   color: Colors.transparent,
   fontFamily: 'Poppins',
