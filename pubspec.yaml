@@ -38,6 +38,7 @@ dependencies:
   favorite_button: ^0.0.4
   page_transition: ^2.0.9
   line_icons: ^2.0.1
+  porcupine_flutter: ^2.1.0
 
 dev_dependencies:
   flutter_test:
