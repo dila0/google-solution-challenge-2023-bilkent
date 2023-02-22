@@ -134,6 +134,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "swipe_to",
+      "rootUri": "file:///Users/atakanserifoglu/.pub-cache/hosted/pub.dev/swipe_to-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "term_glyph",
       "rootUri": "file:///Users/atakanserifoglu/.pub-cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
@@ -158,7 +164,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-02-19T11:05:08.552917Z",
+  "generated": "2023-02-21T16:12:59.213995Z",
   "generator": "pub",
   "generatorVersion": "2.19.2"
 }

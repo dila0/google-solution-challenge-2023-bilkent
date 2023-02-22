@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_solution/screens/incoming_call_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
 
@@ -133,7 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                     elevation: 5.0,
                     child: MaterialButton(
                       onPressed: (){
-                        Navigator.pushNamed(context, SignUpScreen.id);
+                        Navigator.pushNamed(context, IncomingScreen.id);
                       },
                       minWidth: 200.0,
                       height: 40.0,

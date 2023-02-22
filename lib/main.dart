@@ -6,6 +6,7 @@ import 'screens/contact_options_screen.dart';
 import 'screens/start_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/phone_call_screen.dart';
+import 'screens/incoming_call_screen.dart';
 
 void main() {
   runApp (GoogleSolution());
@@ -25,6 +26,7 @@ class GoogleSolution extends StatelessWidget {
         ContactOptionsScreen.id: (context) => ContactOptionsScreen(),
         ContactDetailsScreen.id: (context) => ContactDetailsScreen(),
         CallScreen.id: (context) => CallScreen(),
+        IncomingScreen.id: (context) => IncomingScreen(),
       },
     );
   }

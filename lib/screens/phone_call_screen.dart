@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:swipe_to/swipe_to.dart';
+
+import 'incoming_call_screen.dart';
 
 class CallScreen extends StatefulWidget{
   static const String id = 'Call Screen';
@@ -71,10 +74,15 @@ class _CallScreenState extends State<CallScreen>{
                             IconWidget(iconPath: LineIcons.braille, iconDescription: "Keypad"),
                           ],
                         ),
-                        const CircleAvatar(
-                          radius: 37,
-                          backgroundColor: Color(0xDFFF2323),
-                          child: Icon(LineIcons.phoneSlash),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context, IncomingScreen.id);
+                          },
+                          child: const CircleAvatar(
+                            radius: 37,
+                            backgroundColor: Color(0xDFFF2323),
+                            child: Icon(LineIcons.phoneSlash),
+                          ),
                         )
                       ],
                     ),
