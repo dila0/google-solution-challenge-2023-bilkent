@@ -21,7 +21,7 @@ Project is created with:
 
 ### Important Imformation
 ##### This project is  developed for Google Solution Challange 2023 by:
-* [Ali Tunahan Işık](BURAYA GITHUB LINKINI YAPIŞTIR) 
+* [Ali Tunahan Işık](https://github.com/ali-tunahan) 
 * [Atakan Şerifoğlu](https://github.com/atakanserifoglu)
 * [Dila Tosun](https://github.com/dila0)
 * [Tuna Bozkurt](BURAYA GITHUB LINKINI YAPIŞTIR) 
