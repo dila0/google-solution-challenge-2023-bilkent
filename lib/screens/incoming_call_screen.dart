@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_solution/models/callerData.dart';
 import 'package:google_solution/screens/phone_call_screen.dart';
 import 'package:google_solution/screens/start_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:swipe_to/swipe_to.dart';
-
+import 'package:provider/provider.dart';
 import 'contact_options_screen.dart';
 
 class IncomingScreen extends StatefulWidget{
@@ -38,7 +39,7 @@ class _IncomingCallScreen extends State<IncomingScreen> {
                   .of(context)
                   .size
                   .height) / 5),
-              Text("  FATHER ❤️",
+              Text("  ${Provider.of<callerData>(context).callerName} ❤️",
                   style: kCallerIdTextStyle.copyWith(color: Color(0xFFF7FCF9))),
               Text("Türkiye", style: TextStyle(color: Colors.white70),),
               SizedBox(height: 3 * (MediaQuery
@@ -65,7 +66,7 @@ class _IncomingCallScreen extends State<IncomingScreen> {
                         child: AnswerButton(Color(0xFF7FF4B42),LineIcons.phoneSlash),
                         offsetDx: (0.8),
                         onLeftSwipe: (){
-                        Navigator.pushNamed(context, StartScreen.id);
+                        Navigator.pushNamed(context, ContactOptionsScreen.id);
                       },
                       iconSize: 0,
                     ),
