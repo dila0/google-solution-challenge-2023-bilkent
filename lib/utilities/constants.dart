@@ -9,28 +9,31 @@ const kCallBackgroundColor = Color(0xFF1A2319);
 const kCallContainerColor = Color(0xDF070907);
 
 const kButtonRoundness = 10.0;
-
+/*
+Conflict
 const kCallerIdTextStyle = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 40,
   color: Colors.white70,
 );
-
-const kCallContainerColor = Color(0xBF070907);
-
-const kCallBackgroundColor = Colors.red;
-
-const kButtonTextStyle = TextStyle(
-  fontFamily: 'Amatic SC',
-  fontSize: 20.0,
-  color: Colors.white,
-);
+*/
 
 const kCallerIdTextStyle = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 40.0,
   color: Colors.white,
   fontWeight: FontWeight.w500,
+);
+
+//Conflict
+//const kCallContainerColor = Color(0xBF070907);
+//Conflict
+//const kCallBackgroundColor = Colors.red;
+
+const kButtonTextStyle = TextStyle(
+  fontFamily: 'Amatic SC',
+  fontSize: 20.0,
+  color: Colors.white,
 );
 
 const kWelcomeTextStyle = TextStyle(
