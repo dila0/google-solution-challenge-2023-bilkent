@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../models/callerData.dart';
 import 'constants.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:google_solution/contact_options/dad_screen.dart';
+import 'package:provider/provider.dart';
 
 class ContactCard extends StatelessWidget {
   const ContactCard({
@@ -23,6 +25,7 @@ class ContactCard extends StatelessWidget {
         splashColor: kButtonColor,
         onTap: (){
           Navigator.pushNamed(context, routeName);
+          Provider.of<callerData>(context, listen: false).setCallerName(contactName);
         },
         child: SizedBox(
           width: 330.0,

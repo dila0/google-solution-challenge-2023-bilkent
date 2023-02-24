@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_solution/screens/call_information_screen.dart';
 import 'package:google_solution/screens/emergency_call.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
@@ -10,6 +11,8 @@ import 'package:google_solution/contact_options/dad_screen.dart';
 import 'package:google_solution/contact_options/lover_screen.dart';
 import 'package:google_solution/contact_options/bestie_screen.dart';
 import 'package:page_transition/page_transition.dart';
+
+import 'incoming_call_screen.dart';
 
 String startText = 'CONTACT OPTIONS';
 
@@ -42,7 +45,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen>{
                           shrinkWrap: true,
                           children: const [
                             ContactCard(
-                              routeName: MomScreen.id,
+                              routeName: CallInfo.id,
                               imageUrl: 'images/mom_daughter.png',
                               contactName: 'MOM <3',
                               durationText: '2min',
@@ -50,15 +53,16 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen>{
                             ),
                             SizedBox(height: 10.0),
                             ContactCard(
-                              routeName: DadScreen.id,
+                              routeName: CallInfo.id,
                               imageUrl: 'images/dad_girl.png',
                               contactName: 'DAD <3',
                               durationText: '2min',
                               utilitiesText: 'A two minute relaxing audio with your dad while walking',
+
                             ),
                             SizedBox(height: 10.0),
                             ContactCard(
-                              routeName: BestieScreen.id,
+                              routeName: CallInfo.id,
                               imageUrl: 'images/bestie.png',
                               contactName: 'BESTIE <3',
                               durationText: '2min',
@@ -66,7 +70,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen>{
                             ),
                             SizedBox(height: 10.0),
                             ContactCard(
-                              routeName: LoverScreen.id,
+                              routeName: CallInfo.id,
                               imageUrl: 'images/lovers.png',
                               contactName: 'LOVER <3',
                               durationText: '2min',
