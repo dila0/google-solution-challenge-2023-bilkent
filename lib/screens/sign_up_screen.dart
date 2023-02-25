@@ -34,7 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(height: 121.0),
+                  const SizedBox(height: 120.0),
 
                   //started text
                   Text(startedText, style: kSignUpInScreen),
