@@ -34,7 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(height: 120.0),
+                  const SizedBox(height: 121.0),
 
                   //started text
                   Text(startedText, style: kSignUpInScreen),
@@ -68,7 +68,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       routeName: ContactOptionsScreen.id,
                       minWidth: 200.0,
                       height: 40.0),
-                  const SizedBox(height: 10.0),
 
                   //bottom text
                   const Center(
@@ -78,6 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       routeName: SignInScreen.id,
                     ),
                   ),
+                  const SizedBox(height: 10.0),
                 ],
               ),
             ),
