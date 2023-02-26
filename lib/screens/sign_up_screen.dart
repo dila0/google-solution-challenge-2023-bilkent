@@ -30,6 +30,9 @@ void initFirebase() async {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final _auth = FirebaseAuth.instance;
+  bool showSpinner = false;
+  //credentials
   String name = "";
   String surname = "";
   String email = "";
@@ -61,7 +64,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
     passwordCheck = inputPassword;
   }
 
-  void signUp() {}
+  void signUp() async {
+    setState(() {
+      showSpinner = true;
+    });
+
+    //TODO do something if passwords dont match
+
+    try {
+      final newUser = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      print("up to here******************");
+      await _auth.currentUser?.updateDisplayName("$name $surname");
+//TODO does this work really?
+      //TODO if failed do SOMETHING
+      setState(() {
+        showSpinner = false;
+      });
+      print("user signed up***************************");
+      String? dispName = (await _auth.currentUser?.displayName);
+      print(dispName);
+    } catch (e) {
+      //TODO if exception is about bad password do SOMETHING
+      print("FAILED*****************************");
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

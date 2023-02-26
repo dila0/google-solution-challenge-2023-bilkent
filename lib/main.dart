@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_solution/models/callerData.dart';
 import 'package:google_solution/screens/call_information_screen.dart';
@@ -17,35 +18,34 @@ import 'contact_options/lover_screen.dart';
 import 'screens/phone_call_screen.dart';
 import 'screens/incoming_call_screen.dart';
 
-void main() {
-  runApp (GoogleSolution());
+void main() async {
+  //initialize firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(GoogleSolution());
 }
 
 class GoogleSolution extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
-      return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<callerData>(create: (context) => callerData())
-        ],
-        child: MaterialApp(
-          home: StartScreen(),
-          routes: {
-            StartScreen.id: (context) => StartScreen(),
-            SignUpScreen.id: (context) => SignUpScreen(),
-            SignInScreen.id: (context) => SignInScreen(),
-            ProfileScreen.id: (context) => ProfileScreen(),
-            ContactOptionsScreen.id: (context) => ContactOptionsScreen(),
-            ContactDetailsScreen.id: (context) => ContactDetailsScreen(),
-            CallScreen.id: (context) => CallScreen(),
-            IncomingScreen.id: (context) => IncomingScreen(),
-            CallInfo.id: (context) => CallInfo(),
-          },
-        ),
-      );
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<callerData>(create: (context) => callerData())
+      ],
+      child: MaterialApp(
+        home: StartScreen(),
+        routes: {
+          StartScreen.id: (context) => StartScreen(),
+          SignUpScreen.id: (context) => SignUpScreen(),
+          SignInScreen.id: (context) => SignInScreen(),
+          ProfileScreen.id: (context) => ProfileScreen(),
+          ContactOptionsScreen.id: (context) => ContactOptionsScreen(),
+          ContactDetailsScreen.id: (context) => ContactDetailsScreen(),
+          CallScreen.id: (context) => CallScreen(),
+          IncomingScreen.id: (context) => IncomingScreen(),
+          CallInfo.id: (context) => CallInfo(),
+        },
+      ),
+    );
   }
 }
-
-

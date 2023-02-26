@@ -25,7 +25,9 @@ class ContactOptionsScreen extends StatefulWidget {
 class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
   void emergencyPressed() {
     //TODO emergency function
+    print("Emergency pressed");
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
