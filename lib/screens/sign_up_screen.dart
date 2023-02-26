@@ -114,12 +114,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   RegisterTextField(
                     hintText: 'Choose a Password',
                     onChanged: setPassword,
+                    obscured: true,
                   ),
 
                   //confirm password
                   RegisterTextField(
                     hintText: 'Confirm Your Password',
                     onChanged: setPasswordCheck,
+                    obscured: true,
                   ),
 
                   //register button

@@ -65,6 +65,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 RegisterTextField(
                   hintText: 'Enter Your Password',
                   onChanged: setPassword,
+                  obscured: true,
                 ),
                 const SizedBox(height: 20.0),
 

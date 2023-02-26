@@ -3,8 +3,11 @@ import 'package:google_solution/utilities/constants.dart';
 
 class RegisterTextField extends StatelessWidget {
   const RegisterTextField(
-      {super.key, required this.hintText, required this.onChanged});
-
+      {super.key,
+      required this.hintText,
+      required this.onChanged,
+      this.obscured = false});
+  final bool obscured;
   final String hintText;
   final Function onChanged;
 
@@ -18,6 +21,7 @@ class RegisterTextField extends StatelessWidget {
         onChanged: (value) {
           onChanged(value);
         },
+        obscureText: obscured,
         decoration: kTextFieldDecoration.copyWith(hintText: hintText),
       ),
     );
