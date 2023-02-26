@@ -58,6 +58,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 RegisterTextField(
                   hintText: 'Enter Your Email',
                   onChanged: setEmail,
+                  inputType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: kSignUpScreenDistanceBetweenTextFields),
 
@@ -66,6 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   hintText: 'Enter Your Password',
                   onChanged: setPassword,
                   obscured: true,
+                  inputType: TextInputType.visiblePassword,
                 ),
                 const SizedBox(height: 20.0),
 

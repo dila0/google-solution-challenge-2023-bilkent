@@ -90,24 +90,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   RegisterTextField(
                     hintText: 'Enter Your Name',
                     onChanged: setName,
+                    inputType: TextInputType.name,
                   ),
 
                   //surname
                   RegisterTextField(
                     hintText: 'Enter Your Surname',
                     onChanged: setSurname,
+                    inputType: TextInputType.name,
                   ),
 
                   //email
                   RegisterTextField(
                     hintText: 'Enter Your Email',
                     onChanged: setEmail,
+                    inputType: TextInputType.emailAddress,
                   ),
 
                   //phone number
                   RegisterTextField(
                     hintText: 'Enter Your Phone Number',
                     onChanged: setPhoneNumber,
+                    inputType: TextInputType.phone,
                   ),
 
                   //choose password
@@ -115,6 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     hintText: 'Choose a Password',
                     onChanged: setPassword,
                     obscured: true,
+                    inputType: TextInputType.visiblePassword,
                   ),
 
                   //confirm password
@@ -122,6 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     hintText: 'Confirm Your Password',
                     onChanged: setPasswordCheck,
                     obscured: true,
+                    inputType: TextInputType.visiblePassword,
                   ),
 
                   //register button

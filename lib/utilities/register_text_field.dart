@@ -6,11 +6,12 @@ class RegisterTextField extends StatelessWidget {
       {super.key,
       required this.hintText,
       required this.onChanged,
-      this.obscured = false});
+      this.obscured = false,
+      this.inputType = TextInputType.text});
   final bool obscured;
   final String hintText;
   final Function onChanged;
-
+  final TextInputType inputType;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -23,6 +24,7 @@ class RegisterTextField extends StatelessWidget {
         },
         obscureText: obscured,
         decoration: kTextFieldDecoration.copyWith(hintText: hintText),
+        keyboardType: inputType,
       ),
     );
   }
