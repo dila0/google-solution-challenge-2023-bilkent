@@ -30,12 +30,27 @@ void initFirebase() async {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  String name = "";
+  String surname = "";
   String email = "";
+  String phoneNumber = "";
   String password = "";
   String passwordCheck = "";
 
+  void setName(String input) {
+    name = input;
+  }
+
+  void setSurname(String input) {
+    surname = input;
+  }
+
   void setEmail(String inputEmail) {
     email = inputEmail;
+  }
+
+  void setPhoneNumber(String input) {
+    phoneNumber = input;
   }
 
   void setPassword(String inputPassword) {
@@ -74,13 +89,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   //name
                   RegisterTextField(
                     hintText: 'Enter Your Name',
-                    onChanged: setEmail,
+                    onChanged: setName,
                   ),
 
                   //surname
                   RegisterTextField(
                     hintText: 'Enter Your Surname',
-                    onChanged: setEmail,
+                    onChanged: setSurname,
                   ),
 
                   //email
@@ -92,7 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   //phone number
                   RegisterTextField(
                     hintText: 'Enter Your Phone Number',
-                    onChanged: setEmail,
+                    onChanged: setPhoneNumber,
                   ),
 
                   //choose password
