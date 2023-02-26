@@ -41,6 +41,9 @@ dependencies:
   page_transition: ^2.0.9
   line_icons: ^2.0.1
   porcupine_flutter: ^2.1.0
+  firebase_auth: ^4.2.9
+  firebase_core: ^2.7.0
+  cloud_firestore: ^4.4.3
 
 dev_dependencies:
   flutter_test:

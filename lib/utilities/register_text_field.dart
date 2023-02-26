@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_solution/utilities/constants.dart';
 
 class RegisterTextField extends StatelessWidget {
-
-  const RegisterTextField({super.key, required this.hintText});
+  const RegisterTextField(
+      {super.key, required this.hintText, required this.onChanged});
 
   final String hintText;
+  final Function onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +16,9 @@ class RegisterTextField extends StatelessWidget {
         style: kSignUpTextFieldTextStyle,
         textAlign: TextAlign.left,
         onChanged: (value) {
-          //TODO: on changed set state
+          onChanged(value);
         },
-        decoration:
-        kTextFieldDecoration.copyWith(hintText: hintText),
+        decoration: kTextFieldDecoration.copyWith(hintText: hintText),
       ),
     );
   }

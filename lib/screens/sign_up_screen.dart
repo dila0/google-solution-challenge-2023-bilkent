@@ -7,6 +7,9 @@ import 'package:google_solution/utilities/register_text_field.dart';
 import 'package:google_solution/utilities/bottom_text_sign_in.dart';
 import 'sign_in_screen.dart';
 import 'contact_options_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:google_solution/firebase_options.dart';
 
 String startedText = 'LET\'S GET STARTED';
 String getInfoText = 'First, we need some basic information';
@@ -20,7 +23,31 @@ class SignUpScreen extends StatefulWidget {
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
+void initFirebase() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+}
+
 class _SignUpScreenState extends State<SignUpScreen> {
+  String email = "";
+  String password = "";
+  String passwordCheck = "";
+
+  void setEmail(String inputEmail) {
+    email = inputEmail;
+  }
+
+  void setPassword(String inputPassword) {
+    password = inputPassword;
+  }
+
+  void setPasswordCheck(String inputPassword) {
+    passwordCheck = inputPassword;
+  }
+
+  void signUp() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,29 +72,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(height: 5.0),
 
                   //name
-                  const RegisterTextField(hintText: 'Enter Your Name'),
+                  RegisterTextField(
+                    hintText: 'Enter Your Name',
+                    onChanged: setEmail,
+                  ),
 
                   //surname
-                  const RegisterTextField(hintText: 'Enter Your Surname'),
+                  RegisterTextField(
+                    hintText: 'Enter Your Surname',
+                    onChanged: setEmail,
+                  ),
 
                   //email
-                  const RegisterTextField(hintText: 'Enter Your Email'),
+                  RegisterTextField(
+                    hintText: 'Enter Your Email',
+                    onChanged: setEmail,
+                  ),
 
                   //phone number
-                  const RegisterTextField(hintText: 'Enter Your Phone Number'),
+                  RegisterTextField(
+                    hintText: 'Enter Your Phone Number',
+                    onChanged: setEmail,
+                  ),
 
                   //choose password
-                  const RegisterTextField(hintText: 'Choose a Password'),
+                  RegisterTextField(
+                    hintText: 'Choose a Password',
+                    onChanged: setPassword,
+                  ),
 
                   //confirm password
-                  const RegisterTextField(hintText: 'Confirm Your Password'),
+                  RegisterTextField(
+                    hintText: 'Confirm Your Password',
+                    onChanged: setPasswordCheck,
+                  ),
 
                   //register button
                   RegisterButton(
-                      title: registerText,
-                      routeName: ContactOptionsScreen.id,
-                      minWidth: 200.0,
-                      height: 40.0),
+                    title: registerText,
+                    routeName: ContactOptionsScreen.id,
+                    minWidth: 200.0,
+                    height: 40.0,
+                    pressedFunct: signUp,
+                  ),
 
                   //bottom text
                   const Center(

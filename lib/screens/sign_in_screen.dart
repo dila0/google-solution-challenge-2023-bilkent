@@ -10,15 +10,28 @@ import 'package:google_solution/screens/sign_up_screen.dart';
 String startText = 'WELCOME BACK!';
 String logInText = 'Log In';
 
-class SignInScreen extends StatefulWidget{
+class SignInScreen extends StatefulWidget {
   static const String id = 'Sign In Screen';
   @override
   _SignInScreenState createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen>{
+class _SignInScreenState extends State<SignInScreen> {
+  String email = "";
+  String password = "";
+
+  void setEmail(String inputEmail) {
+    email = inputEmail;
+  }
+
+  void setPassword(String inputPassword) {
+    password = inputPassword;
+  }
+
+  void signIn() {}
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Stack(
@@ -42,15 +55,27 @@ class _SignInScreenState extends State<SignInScreen>{
 
                 const SizedBox(height: 15.0),
                 //email
-                const RegisterTextField(hintText: 'Enter Your Email'),
+                RegisterTextField(
+                  hintText: 'Enter Your Email',
+                  onChanged: setEmail,
+                ),
                 const SizedBox(height: kSignUpScreenDistanceBetweenTextFields),
 
                 //password
-                const RegisterTextField(hintText: 'Enter Your Password'),
+                RegisterTextField(
+                  hintText: 'Enter Your Password',
+                  onChanged: setPassword,
+                ),
                 const SizedBox(height: 20.0),
 
                 //register button
-                RegisterButton(title: logInText, routeName: ContactOptionsScreen.id, minWidth: 200.0, height: 40.0),
+                RegisterButton(
+                  title: logInText,
+                  routeName: ContactOptionsScreen.id,
+                  minWidth: 200.0,
+                  height: 40.0,
+                  pressedFunct: signIn,
+                ),
                 const SizedBox(height: 20.0),
 
                 //bottom text

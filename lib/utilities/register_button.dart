@@ -3,13 +3,19 @@ import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/screens/sign_up_screen.dart';
 
 class RegisterButton extends StatelessWidget {
-
-  const RegisterButton({super.key, required this.height, required this.minWidth, required this.title, required this.routeName});
+  const RegisterButton(
+      {super.key,
+      required this.height,
+      required this.minWidth,
+      required this.title,
+      required this.routeName,
+      required this.pressedFunct});
 
   final String title;
   final String routeName;
   final double minWidth;
   final double height;
+  final Function pressedFunct;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,8 @@ class RegisterButton extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(kButtonRoundness)),
         elevation: 5.0,
         child: MaterialButton(
-          onPressed: (){
+          onPressed: () {
+            pressedFunct();
             Navigator.pushNamed(context, routeName);
           },
           minWidth: minWidth,
