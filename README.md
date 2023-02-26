@@ -24,4 +24,4 @@ Project is created with:
 * [Ali Tunahan Işık](https://github.com/ali-tunahan) 
 * [Atakan Şerifoğlu](https://github.com/atakanserifoglu)
 * [Dila Tosun](https://github.com/dila0)
-* [Tuna Bozkurt](BURAYA GITHUB LINKINI YAPIŞTIR) 
+* [Tuna Bozkurt](https://github.com/tbozk) 
