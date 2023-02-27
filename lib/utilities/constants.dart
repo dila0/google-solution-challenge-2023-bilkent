@@ -8,18 +8,10 @@ const kBottomAppBarColor = Color(0XFFFFD7FC);
 const kCallBackgroundColor = Color(0xFF1A2319);
 
 const kButtonRoundness = 10.0;
-<<<<<<< Updated upstream
-/*
-Conflict
-const kCallerIdTextStyle = TextStyle(
-  fontFamily: 'Poppins',
-  fontSize: 40,
-  color: Colors.white70,
-);
-*/
-=======
 
->>>>>>> Stashed changes
+const kCallContainerColor = Color(0xBF070907);
+
+
 
 const kCallerIdTextStyle = TextStyle(
   fontFamily: 'Poppins',
@@ -27,14 +19,6 @@ const kCallerIdTextStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.w500,
 );
-
-<<<<<<< Updated upstream
-//Conflict
-//const kCallContainerColor = Color(0xBF070907);
-//Conflict
-//const kCallBackgroundColor = Colors.red;
-=======
->>>>>>> Stashed changes
 
 const kButtonTextStyle = TextStyle(
   fontFamily: 'Amatic SC',
