@@ -901,7 +901,9 @@ DerivedData/
 <<<<<<< Updated upstream
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 .flutter-plugins-dependencies
-<<<<<<< Updated upstream
+=======
+!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+>>>>>>> Stashed changes
 
 pubspec.lock
 =======
