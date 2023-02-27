@@ -6,10 +6,16 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<flutter_voice_processor/FlutterVoiceProcessorPlugin.h>)
-#import <flutter_voice_processor/FlutterVoiceProcessorPlugin.h>
+#if __has_include(<assets_audio_player/AssetsAudioPlayerPlugin.h>)
+#import <assets_audio_player/AssetsAudioPlayerPlugin.h>
 #else
-@import flutter_voice_processor;
+@import assets_audio_player;
+#endif
+
+#if __has_include(<assets_audio_player_web/AssetsAudioPlayerWebPlugin.h>)
+#import <assets_audio_player_web/AssetsAudioPlayerWebPlugin.h>
+#else
+@import assets_audio_player_web;
 #endif
 
 #if __has_include(<path_provider_foundation/PathProviderPlugin.h>)
@@ -18,10 +24,10 @@
 @import path_provider_foundation;
 #endif
 
-#if __has_include(<porcupine_flutter/PorcupinePlugin.h>)
-#import <porcupine_flutter/PorcupinePlugin.h>
+#if __has_include(<speech_to_text/SpeechToTextPlugin.h>)
+#import <speech_to_text/SpeechToTextPlugin.h>
 #else
-@import porcupine_flutter;
+@import speech_to_text;
 #endif
 
 #if __has_include(<url_launcher_ios/FLTURLLauncherPlugin.h>)
@@ -33,9 +39,10 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [FlutterVoiceProcessorPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterVoiceProcessorPlugin"]];
+  [AssetsAudioPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"AssetsAudioPlayerPlugin"]];
+  [AssetsAudioPlayerWebPlugin registerWithRegistrar:[registry registrarForPlugin:@"AssetsAudioPlayerWebPlugin"]];
   [PathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"PathProviderPlugin"]];
-  [PorcupinePlugin registerWithRegistrar:[registry registrarForPlugin:@"PorcupinePlugin"]];
+  [SpeechToTextPlugin registerWithRegistrar:[registry registrarForPlugin:@"SpeechToTextPlugin"]];
   [FLTURLLauncherPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTURLLauncherPlugin"]];
 }
 

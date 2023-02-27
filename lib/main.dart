@@ -3,6 +3,7 @@ import 'package:google_solution/models/callerData.dart';
 import 'package:google_solution/screens/call_information_screen.dart';
 import 'package:google_solution/screens/contact_details_screen.dart';
 import 'package:google_solution/screens/settings_screen.dart';
+import 'package:google_solution/utilities/constants.dart';
 import 'package:provider/provider.dart';
 import 'screens/sign_in_screen.dart';
 import 'screens/sign_up_screen.dart';
@@ -32,6 +33,13 @@ class GoogleSolution extends StatelessWidget {
         ],
         child: MaterialApp(
           home: StartScreen(),
+          theme: ThemeData(
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: Colors.purpleAccent,
+              ),
+            ),
+          ),
           routes: {
             StartScreen.id: (context) => StartScreen(),
             SignUpScreen.id: (context) => SignUpScreen(),

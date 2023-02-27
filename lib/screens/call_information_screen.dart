@@ -7,6 +7,7 @@ import 'package:swipe_to/swipe_to.dart';
 import '../models/callerData.dart';
 import 'contact_options_screen.dart';
 import 'incoming_call_screen.dart';
+import 'package:banner_carousel/banner_carousel.dart';
 
 
 class CallInfo extends StatefulWidget{
@@ -24,7 +25,7 @@ class _CallInfoState extends State<CallInfo>{
         child: Column(
           children: [
               Padding(
-                padding: const EdgeInsets.only(top: 20),
+                padding:EdgeInsets.only(top:(MediaQuery.of(context).size.height)/25),
                 //TODO allign text to left, ben yapamadım.
                 child: Text('How does it work?', style: kWelcomeTextStyle.copyWith(
                   fontSize: 30,
@@ -32,31 +33,51 @@ class _CallInfoState extends State<CallInfo>{
                 ),
               ),
             Padding(
-              padding:  EdgeInsets.only(top:(MediaQuery.of(context).size.height)/30),
-              child: Container(
-                  margin: new EdgeInsets.symmetric(horizontal: 15.0),
-                height: 3*(MediaQuery.of(context).size.height)/7,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    color: kContactColor,
-                  ),
-              ),
+              padding:  EdgeInsets.only(top:(MediaQuery.of(context).size.height)/20),
+              child: BannerCarousel(
+                animation: false,
+                height: 3*(MediaQuery.of(context).size.height)/8,
+                activeColor: kButtonColor,
+                viewportFraction: 1,
+                customizedBanners: [
+                  CardContainer(context,"WHEN YOU ADD A CONTACT TO YOUR LIKED LIST, YOU WILL NOT SEE THIS PAGE AGAIN FOR THE SELECTED CONTACT")
+                  ,CardContainer(context,"WHEN YOU ADD A CONTACT TO YOUR LIKED LIST, YOU WILL NOT SEE THIS PAGE AGAIN FOR THE SELECTED CONTACT"),
+                  CardContainer(context,"WHEN YOU ADD A CONTACT TO YOUR LIKED LIST, YOU WILL NOT SEE THIS PAGE AGAIN FOR THE SELECTED CONTACT")
+                ],
+              )
             ),
+
             Padding(
-              padding:EdgeInsets.only(top:(MediaQuery.of(context).size.height)/60),
-              child: Container(
-                color: Color(0xAFF3B5CB),
-                margin: new EdgeInsets.symmetric(horizontal: 20.0),
-                child: Text("  ** WHEN YOU ADD A CONTACT TO YOUR LIKED LIST, YOU WILL NOT SEE THIS PAGE AGAIN FOR THE SELECTED CONTACT **  ", style: kWelcomeTextStyle.copyWith(fontSize: 15, color: Colors.black87),
-                ),
-              ),
-            ),
-            TextButton(onPressed: (){
-                Navigator.pushNamed(context, IncomingScreen.id);
-            }, child: Text("START CALL"))
+              padding: EdgeInsets.only(top:(MediaQuery.of(context).size.height)/20),
+              child: TextButton(
+                  onPressed: (){
+                  Navigator.pushNamed(context, IncomingScreen.id);
+              },
+                  style: ButtonStyle(
+
+                  ),
+                  child: Text("START CALL")),
+            )
           ],
         ),
       ),
     );
+  }
+
+  Container CardContainer(BuildContext context,text) {
+    return Container(
+                margin: new EdgeInsets.symmetric(horizontal: 15.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40),
+                  color: kContactColor,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                child:Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(text, style: kCallerIdTextStyle.copyWith(fontSize: 20, fontWeight: FontWeight.w900),textAlign: TextAlign.center,)
+                  ],
+                ) ,
+            );
   }
 }

@@ -6,9 +6,9 @@ const kContactColor = Color(0xFFF3B5CB);
 const kBackgroundColor = Color(0xFFFCEEF7);
 const kBottomAppBarColor = Color(0XFFFFD7FC);
 const kCallBackgroundColor = Color(0xFF1A2319);
-const kCallContainerColor = Color(0xDF070907);
 
 const kButtonRoundness = 10.0;
+<<<<<<< Updated upstream
 /*
 Conflict
 const kCallerIdTextStyle = TextStyle(
@@ -17,6 +17,9 @@ const kCallerIdTextStyle = TextStyle(
   color: Colors.white70,
 );
 */
+=======
+
+>>>>>>> Stashed changes
 
 const kCallerIdTextStyle = TextStyle(
   fontFamily: 'Poppins',
@@ -25,10 +28,13 @@ const kCallerIdTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
 );
 
+<<<<<<< Updated upstream
 //Conflict
 //const kCallContainerColor = Color(0xBF070907);
 //Conflict
 //const kCallBackgroundColor = Colors.red;
+=======
+>>>>>>> Stashed changes
 
 const kButtonTextStyle = TextStyle(
   fontFamily: 'Amatic SC',

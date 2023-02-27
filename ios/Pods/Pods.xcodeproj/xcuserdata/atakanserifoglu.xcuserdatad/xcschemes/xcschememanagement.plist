@@ -14,6 +14,31 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Try.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>assets_audio_player.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>assets_audio_player_web.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>path_provider_foundation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>speech_to_text.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>url_launcher_ios.xcscheme</key>
 		<dict>
 			<key>isShown</key>
