@@ -8,11 +8,9 @@ class RegisterButton extends StatelessWidget {
       required this.height,
       required this.minWidth,
       required this.title,
-      required this.routeName,
       required this.pressedFunct});
 
   final String title;
-  final String routeName;
   final double minWidth;
   final double height;
   final Function pressedFunct;
@@ -26,9 +24,8 @@ class RegisterButton extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(kButtonRoundness)),
         elevation: 5.0,
         child: MaterialButton(
-          onPressed: () {
-            pressedFunct();
-            Navigator.pushNamed(context, routeName);
+          onPressed: () async {
+            await pressedFunct();
           },
           minWidth: minWidth,
           height: height,

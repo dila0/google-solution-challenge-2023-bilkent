@@ -93,7 +93,7 @@ const kSignBottomTextRichStyle = TextStyle(
 
 const kStartScreenDistanceFromTop = 80.0;
 const kSignUpScreenDistanceBetweenTextFields = 20.0;
-const kSignUpScreenDistanceFromTop = 140.0;
+const kSignUpScreenDistanceFromTop = 70.0;
 const kBottomIconSize = 40.0;
 const kBottomIconDistance = 50.0;
 
@@ -152,3 +152,5 @@ const kContactUtilitiesTextStyle = TextStyle(
   fontWeight: FontWeight.w700,
   color: Colors.black54,
 );
+
+const String kGenericFailureSnackBarTitle = 'Looks like there is a mistake!';

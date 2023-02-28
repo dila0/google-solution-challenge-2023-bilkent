@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_solution/screens/call_information_screen.dart';
 import 'package:google_solution/screens/emergency_call.dart';
@@ -11,13 +12,15 @@ import 'package:google_solution/contact_options/dad_screen.dart';
 import 'package:google_solution/contact_options/lover_screen.dart';
 import 'package:google_solution/contact_options/bestie_screen.dart';
 import 'package:page_transition/page_transition.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'incoming_call_screen.dart';
 
 String startText = 'CONTACT OPTIONS';
+String welcomeString = 'Welcome';
 
 class ContactOptionsScreen extends StatefulWidget {
   static const String id = 'Contact Options Screen';
+
   @override
   _ContactOptionsScreenState createState() => _ContactOptionsScreenState();
 }
@@ -25,11 +28,17 @@ class ContactOptionsScreen extends StatefulWidget {
 class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
   void emergencyPressed() {
     //TODO emergency function
+    Navigator.pushNamed(context, EmergencyScreen.id);
     print("Emergency pressed");
   }
 
+  final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
+    final user = _auth.currentUser;
+    final String userName = user?.displayName ?? 'Unnamed';
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Stack(
@@ -39,6 +48,13 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
             child: Column(
               children: <Widget>[
                 const SizedBox(height: kSignUpScreenDistanceFromTop),
+                Center(
+                    child: Text(welcomeString,
+                        style: kSignUpInfoStyle.copyWith(fontSize: 30))),
+                Center(
+                    child: Text(userName,
+                        style: kSignUpInfoStyle.copyWith(fontSize: 40))),
+                const SizedBox(height: 20),
                 Text(startText, style: kSignUpInScreen),
                 Expanded(
                   child: Stack(
@@ -96,7 +112,6 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                               padding: EdgeInsets.only(bottom: 20.0),
                               child: RegisterButton(
                                 title: 'EMERGENCY CALL',
-                                routeName: EmergencyScreen.id,
                                 minWidth: 350.0,
                                 height: 60.0,
                                 pressedFunct: emergencyPressed,
