@@ -42,6 +42,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Stack(
+        //TODO her şeyi scrollview içine mi alsak? welcome falan da kaysa, sliver appbar diye bişey var ondan yapılabilir
         children: <Widget>[
           const Circles(),
           Center(
@@ -49,11 +50,21 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
               children: <Widget>[
                 const SizedBox(height: kSignUpScreenDistanceFromTop),
                 Center(
-                    child: Text(welcomeString,
-                        style: kSignUpInfoStyle.copyWith(fontSize: 30))),
-                Center(
-                    child: Text(userName,
-                        style: kSignUpInfoStyle.copyWith(fontSize: 40))),
+                    child: Text(
+                  welcomeString,
+                  style: kSignUpInfoStyle.copyWith(fontSize: 30),
+                )),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 50),
+                  child: Center(
+                      child: Text(
+                    userName,
+                    style: kSignUpInfoStyle.copyWith(
+                      fontSize: 40,
+                    ),
+                    textAlign: TextAlign.center,
+                  )),
+                ),
                 const SizedBox(height: 20),
                 Text(startText, style: kSignUpInScreen),
                 Expanded(

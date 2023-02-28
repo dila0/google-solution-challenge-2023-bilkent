@@ -69,6 +69,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {
       showSpinner = true;
     });
+    if (password != passwordCheck) {
+      SnackBarUtility.showFailureSnackBar(context, 'Passwords does not match!',
+          kGenericFailureSnackBarTitle, kButtonColor);
+      return;
+    }
 
     String errorMessage = "Login failed. Please try again.";
 
@@ -88,6 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       print("user signed up***************************");
       String? dispName = (await _auth.currentUser?.displayName);
       print(dispName);
+      return; //to avoid snackbar
     } on FirebaseAuthException catch (error) {
       print(error.code);
       print(error.message);

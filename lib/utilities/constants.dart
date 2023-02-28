@@ -153,4 +153,4 @@ const kContactUtilitiesTextStyle = TextStyle(
   color: Colors.black54,
 );
 
-const String kGenericFailureSnackBarTitle = 'Looks like there is a mistake!';
+const String kGenericFailureSnackBarTitle = '  Looks like there is a mistake!';

@@ -48,6 +48,7 @@ class _SignInScreenState extends State<SignInScreen> {
       if (user != null) {
         Navigator.pushNamed(context, ContactOptionsScreen.id);
       }
+      return;
     } on FirebaseAuthException catch (error) {
       print(error.code);
       print(error.message);
@@ -57,7 +58,7 @@ class _SignInScreenState extends State<SignInScreen> {
         case "ERROR_EMAIL_ALREADY_IN_USE":
         case "account-exists-with-different-credential":
         case "email-already-in-use":
-          errorMessage = "Email already used. Go to login page.";
+          errorMessage = "Email already used. Go to login page please.";
           break;
         case "ERROR_WRONG_PASSWORD":
         case "wrong-password":
