@@ -50,8 +50,6 @@ class _SignInScreenState extends State<SignInScreen> {
       }
       return;
     } on FirebaseAuthException catch (error) {
-      print(error.code);
-      print(error.message);
       switch (error.code) {
         //Taken from https://stackoverflow.com/questions/56113778/how-to-handle-firebase-auth-exceptions-on-flutter
         //Credit to Corentin Houdayer https://stackoverflow.com/users/6812501/corentin-houdayer
@@ -90,9 +88,8 @@ class _SignInScreenState extends State<SignInScreen> {
           }
           break;
       }
-      print(errorMessage);
     } catch (e) {
-      print("FAILED*****************************");
+      print("FAILED TO REGISTER*****************************");
       print(e);
     }
 

@@ -84,21 +84,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     try {
       final newUser = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      print("up to here******************");
+          email: email, password: password); //create the user
       await _auth.currentUser?.updateDisplayName("$name $surname");
       //TODO link phone number
       setState(() {
-        showSpinner = false;
+        showSpinner = false; //TODO add spinner
       });
       Navigator.pushNamed(context, ContactOptionsScreen.id);
-      print("user signed up***************************");
-      String? dispName = (await _auth.currentUser?.displayName);
-      print(dispName);
-      return; //to avoid snackbar
+
+      String? dispName =
+          (await _auth.currentUser?.displayName); //Update the display name
+
+      return; //to avoid snackbar if everything is fine
     } on FirebaseAuthException catch (error) {
-      print(error.code);
-      print(error.message);
       switch (error.code) {
         //Taken from https://stackoverflow.com/questions/56113778/how-to-handle-firebase-auth-exceptions-on-flutter
         //Credit to Corentin Houdayer https://stackoverflow.com/users/6812501/corentin-houdayer
@@ -137,9 +135,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           }
           break;
       }
-      print(errorMessage);
     } catch (e) {
-      print("FAILED*****************************");
+      print("FAILED TO REGISTER*****************************");
       print(e);
     }
     SnackBarUtility.showFailureSnackBar(
