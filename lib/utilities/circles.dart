@@ -10,7 +10,7 @@ class Circles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 175.0,
+      height: MediaQuery.of(context).size.height / 4,
       decoration: BoxDecoration(
         image: DecorationImage(
           alignment: Alignment.topLeft,

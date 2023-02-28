@@ -32,12 +32,13 @@ class _StartScreenState extends State<StartScreen> {
                 //girl image
                 Image.asset(
                   girlWalkingImage,
-                  height: 250.0,
+                  height: MediaQuery.of(context).size.height / 2.5,
                 ),
 
                 //feel safe text
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 45.0),
+                  margin: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.height / 18),
                   child: Text(
                     boldText,
                     style: kWelcomeTextStyle,
@@ -46,7 +47,8 @@ class _StartScreenState extends State<StartScreen> {
                 ),
                 //small text
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 70.0),
+                  margin: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.height / 12),
                   child: Text(
                     bottomText,
                     style: kStartScreenBottomStyle,
@@ -56,7 +58,8 @@ class _StartScreenState extends State<StartScreen> {
 
                 //get started button
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  padding: EdgeInsets.symmetric(
+                      vertical: MediaQuery.of(context).size.height / 50),
                   child: Material(
                     color: kButtonColor,
                     borderRadius:
@@ -66,8 +69,8 @@ class _StartScreenState extends State<StartScreen> {
                       onPressed: () {
                         Navigator.pushNamed(context, SignUpScreen.id);
                       },
-                      minWidth: 350.0,
-                      height: 60.0,
+                      minWidth: MediaQuery.of(context).size.height / 2,
+                      height: MediaQuery.of(context).size.height / 12,
                       child: Text(
                         buttonText,
                         style: kStartScreenButtonTextStyle,

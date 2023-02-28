@@ -38,7 +38,6 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
   Widget build(BuildContext context) {
     final user = _auth.currentUser;
     final String userName = user?.displayName ?? 'Unnamed';
-
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Stack(
@@ -52,10 +51,13 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                 Center(
                     child: Text(
                   welcomeString,
-                  style: kSignUpInfoStyle.copyWith(fontSize: 30),
+                  style: kSignUpInfoStyle.copyWith(
+                      fontSize: MediaQuery.of(context).size.height / 20),
                 )),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 50),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0,
+                      horizontal: MediaQuery.of(context).size.height / 15),
                   child: Center(
                       child: Text(
                     userName,
@@ -65,17 +67,19 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                     textAlign: TextAlign.center,
                   )),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: MediaQuery.of(context).size.height / 40),
                 Text(startText, style: kSignUpInScreen),
                 Expanded(
                   child: Stack(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.height / 40),
                         child: ListView(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
-                          children:  [
+                          children: [
                             ContactCard(
                               routeName: CallInfo.id,
                               imageUrl: 'images/mom_daughter.png',
@@ -111,7 +115,8 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                               utilitiesText:
                                   'A two minute relaxing audio with your lover while walking',
                             ),
-                            SizedBox(height: 60.0),
+                            SizedBox(
+                                height: MediaQuery.of(context).size.height / 8),
                           ],
                         ),
                       ),
@@ -120,11 +125,14 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(bottom: 20.0),
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).size.height / 40),
                               child: RegisterButton(
                                 title: 'EMERGENCY CALL',
-                                minWidth: 350.0,
-                                height: 60.0,
+                                minWidth:
+                                    MediaQuery.of(context).size.height / 2,
+                                height: MediaQuery.of(context).size.height / 12,
                                 pressedFunct: emergencyPressed,
                               ),
                             ),

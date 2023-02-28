@@ -7,15 +7,17 @@ class RegisterTextField extends StatelessWidget {
       required this.hintText,
       required this.onChanged,
       this.obscured = false,
-      this.inputType = TextInputType.text});
+      this.inputType = TextInputType.text,
+      this.isLast = false});
   final bool obscured;
   final String hintText;
   final Function onChanged;
   final TextInputType inputType;
+  final bool isLast;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 350.0,
+      width: (MediaQuery.of(context).size.height / 2),
       child: TextField(
         style: kSignUpTextFieldTextStyle,
         textAlign: TextAlign.left,
@@ -25,6 +27,7 @@ class RegisterTextField extends StatelessWidget {
         obscureText: obscured,
         decoration: kTextFieldDecoration.copyWith(hintText: hintText),
         keyboardType: inputType,
+        textInputAction: isLast ? TextInputAction.done : TextInputAction.next,
       ),
     );
   }

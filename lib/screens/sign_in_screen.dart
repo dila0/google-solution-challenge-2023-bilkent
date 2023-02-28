@@ -101,64 +101,68 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: Stack(
-        children: <Widget>[
-          const Circles(),
-          //text fields
-          Center(
-            child: Column(
-              children: [
-                const SizedBox(height: kSignUpScreenDistanceFromTop),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: <Widget>[
+            const Circles(),
+            //text fields
+            Center(
+              child: Column(
+                children: [
+                  const SizedBox(height: kSignUpScreenDistanceFromTop),
 
-                //started text
-                Text(startText, style: kSignUpInScreen),
-                const SizedBox(height: 25.0),
+                  //started text
+                  Text(startText, style: kSignUpInScreen),
+                  SizedBox(height: MediaQuery.of(context).size.height / 30),
 
-                //image
-                Image.asset(
-                  'images/audio.png',
-                  height: 300.0,
-                ),
-
-                const SizedBox(height: 15.0),
-                //email
-                RegisterTextField(
-                  hintText: 'Enter Your Email',
-                  onChanged: setEmail,
-                  inputType: TextInputType.emailAddress,
-                ),
-                const SizedBox(height: kSignUpScreenDistanceBetweenTextFields),
-
-                //password
-                RegisterTextField(
-                  hintText: 'Enter Your Password',
-                  onChanged: setPassword,
-                  obscured: true,
-                  inputType: TextInputType.visiblePassword,
-                ),
-                const SizedBox(height: 20.0),
-
-                //register button
-                RegisterButton(
-                  title: logInText,
-                  minWidth: 200.0,
-                  height: 40.0,
-                  pressedFunct: signIn,
-                ),
-                const SizedBox(height: 20.0),
-
-                //bottom text
-                const Center(
-                  child: BottomText(
-                    bottomText: 'Don\'t have an account?  ',
-                    bottomHyperLink: 'Sign Up',
-                    routeName: SignUpScreen.id,
+                  //image
+                  Image.asset(
+                    'images/audio.png',
+                    height: MediaQuery.of(context).size.height / 2.1,
                   ),
-                ),
-              ],
+
+                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  //email
+                  RegisterTextField(
+                    hintText: 'Enter Your Email',
+                    onChanged: setEmail,
+                    inputType: TextInputType.emailAddress,
+                  ),
+                  const SizedBox(
+                      height: kSignUpScreenDistanceBetweenTextFields),
+
+                  //password
+                  RegisterTextField(
+                    hintText: 'Enter Your Password',
+                    onChanged: setPassword,
+                    obscured: true,
+                    inputType: TextInputType.visiblePassword,
+                    isLast: true,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 100),
+
+                  //register button
+                  RegisterButton(
+                    title: logInText,
+                    minWidth: MediaQuery.of(context).size.height / 4,
+                    height: MediaQuery.of(context).size.height / 21,
+                    pressedFunct: signIn,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 100),
+
+                  //bottom text
+                  const Center(
+                    child: BottomText(
+                      bottomText: 'Don\'t have an account?  ',
+                      bottomHyperLink: 'Sign Up',
+                      routeName: SignUpScreen.id,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
