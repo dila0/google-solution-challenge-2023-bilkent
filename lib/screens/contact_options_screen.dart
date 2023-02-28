@@ -75,7 +75,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                         child: ListView(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
-                          children: const [
+                          children:  [
                             ContactCard(
                               routeName: CallInfo.id,
                               imageUrl: 'images/mom_daughter.png',

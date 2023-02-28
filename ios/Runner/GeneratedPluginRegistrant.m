@@ -24,8 +24,14 @@
 @import firebase_core;
 #endif
 
-#if __has_include(<flutter_voice_processor/FlutterVoiceProcessorPlugin.h>)
-#import <flutter_voice_processor/FlutterVoiceProcessorPlugin.h>
+#if __has_include(<assets_audio_player/AssetsAudioPlayerPlugin.h>)
+#import <assets_audio_player/AssetsAudioPlayerPlugin.h>
+#else
+@import assets_audio_player;
+#endif
+
+#if __has_include(<assets_audio_player_web/AssetsAudioPlayerWebPlugin.h>)
+#import <assets_audio_player_web/AssetsAudioPlayerWebPlugin.h>
 #else
 @import flutter_voice_processor;
 #endif

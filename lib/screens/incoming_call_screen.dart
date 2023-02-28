@@ -8,6 +8,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'package:provider/provider.dart';
 import 'contact_options_screen.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class IncomingScreen extends StatefulWidget{
   static const String id = 'Incoming Call Screen';
@@ -16,9 +17,23 @@ class IncomingScreen extends StatefulWidget{
 }
 
 class _IncomingCallScreen extends State<IncomingScreen> {
+  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
+  @override
+  void initState() {
+    super.initState();
+    audioPlayer.open(
+      Audio("sounds/ringtone.mp3"),
+      autoStart: true,
+      showNotification: true,
+      loopMode: LoopMode.none,
+    );
+  }
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
+
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
@@ -56,6 +71,7 @@ class _IncomingCallScreen extends State<IncomingScreen> {
                         offsetDx: (0.8),
                         onRightSwipe: (){
                           Navigator.pushNamed(context, CallScreen.id);
+                          audioPlayer.stop();
                         },
                         iconSize: 0,
                     ),
@@ -67,6 +83,7 @@ class _IncomingCallScreen extends State<IncomingScreen> {
                         offsetDx: (0.8),
                         onLeftSwipe: (){
                         Navigator.pushNamed(context, ContactOptionsScreen.id);
+                        audioPlayer.stop();
                       },
                       iconSize: 0,
                     ),
@@ -97,4 +114,8 @@ class _IncomingCallScreen extends State<IncomingScreen> {
           )
         ]
     );
+  }
+
+  void playSound(){
+
   }
