@@ -27,37 +27,33 @@ void main() async {
 }
 
 class GoogleSolution extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
-      return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<callerData>(create: (context) => callerData())
-        ],
-        child: MaterialApp(
-          home: StartScreen(),
-          theme: ThemeData(
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                primary: Colors.purpleAccent,
-              ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<callerData>(create: (context) => callerData())
+      ],
+      child: MaterialApp(
+        home: StartScreen(),
+        theme: ThemeData(
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              primary: Colors.purpleAccent,
             ),
           ),
-          routes: {
-            StartScreen.id: (context) => StartScreen(),
-            SignUpScreen.id: (context) => SignUpScreen(),
-            SignInScreen.id: (context) => SignInScreen(),
-            ProfileScreen.id: (context) => ProfileScreen(),
-            ContactOptionsScreen.id: (context) => ContactOptionsScreen(),
-            ContactDetailsScreen.id: (context) => ContactDetailsScreen(),
-            CallScreen.id: (context) => CallScreen(),
-            IncomingScreen.id: (context) => IncomingScreen(),
-            CallInfo.id: (context) => CallInfo(),
-          },
         ),
-      );
+        routes: {
+          StartScreen.id: (context) => StartScreen(),
+          SignUpScreen.id: (context) => SignUpScreen(),
+          SignInScreen.id: (context) => SignInScreen(),
+          ProfileScreen.id: (context) => ProfileScreen(),
+          ContactOptionsScreen.id: (context) => ContactOptionsScreen(),
+          ContactDetailsScreen.id: (context) => ContactDetailsScreen(),
+          CallScreen.id: (context) => CallScreen(),
+          IncomingScreen.id: (context) => IncomingScreen(),
+          CallInfo.id: (context) => CallInfo(),
+        },
+      ),
+    );
   }
 }
-
-

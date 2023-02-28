@@ -917,3 +917,13 @@ pubspec.lock
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+
+android/app/src/main/java/io/flutter/plugins/
+
+*.podspec
+
+*.xcconfig
+
+*.sh
+
+*.m
