@@ -77,15 +77,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     String errorMessage = "Login failed. Please try again.";
 
-    //TODO do something if passwords dont match
-
     try {
       final newUser = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       print("up to here******************");
       await _auth.currentUser?.updateDisplayName("$name $surname");
-//TODO does this work really?
-      //TODO if failed do SOMETHING
+      //TODO link phone number
       setState(() {
         showSpinner = false;
       });
