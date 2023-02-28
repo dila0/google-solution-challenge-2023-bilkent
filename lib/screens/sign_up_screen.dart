@@ -17,6 +17,7 @@ String getInfoText = 'First, we need some basic information';
 String registerText = 'REGISTER';
 String bottomText = 'Already have an account? ';
 String bottomHyperlink = ' Sign In';
+bool isDebug = true; //TODO remove before release, used to skip sign up screen
 
 class SignUpScreen extends StatefulWidget {
   static const String id = 'Sign Up Screen';
@@ -66,6 +67,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void signUp() async {
+    if (isDebug) {
+      //TODO remove before release
+      Navigator.pushNamed(context, ContactOptionsScreen.id);
+    }
     setState(() {
       showSpinner = true;
     });
