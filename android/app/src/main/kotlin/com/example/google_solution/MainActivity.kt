@@ -1,4 +1,4 @@
-package com.example.gdsc23
+package com.example.google_solution
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gdsc23">
+    package="com.example.google_solution">
    <application
-        android:label="gdsc23"
+        android:label="google_solution"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
