@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_solution/firebase_options.dart';
 import 'package:google_solution/models/callerData.dart';
 import 'package:google_solution/screens/call_information_screen.dart';
 import 'package:google_solution/screens/contact_details_screen.dart';
@@ -22,7 +23,7 @@ import 'screens/incoming_call_screen.dart';
 void main() async {
   //initialize firebase
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(GoogleSolution());
 }
 
