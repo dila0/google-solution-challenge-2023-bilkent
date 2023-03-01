@@ -17,7 +17,9 @@ class BottomBar extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.person_2_sharp),
           onPressed: (){
-            Navigator.pushNamed(context, ProfileScreen.id);
+            if(ModalRoute.of(context)?.settings.name != ProfileScreen.id){
+              Navigator.pushNamed(context, ProfileScreen.id);
+              }
           },
           iconSize: kBottomIconSize,
           color: kCirclesColor,
@@ -27,7 +29,9 @@ class BottomBar extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.home_filled),
           onPressed: (){
-            Navigator.pushNamed(context, ContactOptionsScreen.id);
+            if(ModalRoute.of(context)?.settings.name != ContactOptionsScreen.id){
+              Navigator.pushNamed(context, ContactOptionsScreen.id);
+            }
           },
           iconSize: kBottomIconSize,
           color: kCirclesColor,
@@ -37,7 +41,9 @@ class BottomBar extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.settings),
           onPressed: (){
-            Navigator.pushNamed(context, SettingsScreen.id);
+            if(ModalRoute.of(context)?.settings.name != SettingsScreen.id){
+              Navigator.pushNamed(context, SettingsScreen.id);
+            }
           },
           iconSize: kBottomIconSize,
           color: kCirclesColor,
