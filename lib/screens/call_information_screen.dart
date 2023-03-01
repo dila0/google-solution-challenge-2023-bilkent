@@ -59,7 +59,11 @@ class _CallInfoState extends State<CallInfo> {
                   top: (MediaQuery.of(context).size.height) / 20),
               child: TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, IncomingScreen.id);
+                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return IncomingScreen();
+                    }));
                   },
                   style: ButtonStyle(),
                   child: Text("START CALL")),

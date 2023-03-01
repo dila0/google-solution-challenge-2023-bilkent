@@ -28,7 +28,9 @@ class ContactOptionsScreen extends StatefulWidget {
 class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
   void emergencyPressed() {
     //TODO emergency function
-    Navigator.pushNamed(context, EmergencyScreen.id);
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return EmergencyScreen();
+    }));
     print("Emergency pressed");
   }
 
@@ -81,7 +83,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                           shrinkWrap: true,
                           children: [
                             ContactCard(
-                              routeName: CallInfo.id,
+                              page: CallInfo(),
                               imageUrl: 'images/mom_daughter.png',
                               contactName: 'MOM <3',
                               durationText: '2min',
@@ -90,7 +92,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                             ),
                             SizedBox(height: 10.0),
                             ContactCard(
-                              routeName: CallInfo.id,
+                              page: CallInfo(),
                               imageUrl: 'images/dad_girl.png',
                               contactName: 'DAD <3',
                               durationText: '2min',
@@ -99,7 +101,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                             ),
                             SizedBox(height: 10.0),
                             ContactCard(
-                              routeName: CallInfo.id,
+                              page: CallInfo(),
                               imageUrl: 'images/bestie.png',
                               contactName: 'BESTIE <3',
                               durationText: '2min',
@@ -108,7 +110,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                             ),
                             SizedBox(height: 10.0),
                             ContactCard(
-                              routeName: CallInfo.id,
+                              page: CallInfo(),
                               imageUrl: 'images/lovers.png',
                               contactName: 'LOVER <3',
                               durationText: '2min',

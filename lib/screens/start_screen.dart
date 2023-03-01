@@ -67,7 +67,10 @@ class _StartScreenState extends State<StartScreen> {
                     elevation: 5.0,
                     child: MaterialButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, SignUpScreen.id);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return SignUpScreen();
+                        }));
                       },
                       minWidth: MediaQuery.of(context).size.height / 2,
                       height: MediaQuery.of(context).size.height / 12,

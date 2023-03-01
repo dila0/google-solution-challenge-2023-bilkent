@@ -18,6 +18,7 @@ class SignInScreen extends StatefulWidget {
   static const String id = 'Sign In Screen';
   @override
   _SignInScreenState createState() => _SignInScreenState();
+  const SignInScreen({super.key});
 }
 
 class _SignInScreenState extends State<SignInScreen> {
@@ -46,7 +47,9 @@ class _SignInScreenState extends State<SignInScreen> {
         showSpinner = false;
       });
       if (user != null) {
-        Navigator.pushNamed(context, ContactOptionsScreen.id);
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return ContactOptionsScreen();
+        }));
       }
       return;
     } on FirebaseAuthException catch (error) {
@@ -155,7 +158,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: BottomText(
                       bottomText: 'Don\'t have an account?  ',
                       bottomHyperLink: 'Sign Up',
-                      routeName: SignUpScreen.id,
+                      page: SignUpScreen(),
+                      toPop: true,
                     ),
                   ),
                 ],

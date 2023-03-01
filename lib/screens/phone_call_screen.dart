@@ -120,8 +120,8 @@ class _CallScreenState extends State<CallScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, ContactOptionsScreen.id);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
                           },
                           child: CircleAvatar(
                             radius: MediaQuery.of(context).size.height / 20,

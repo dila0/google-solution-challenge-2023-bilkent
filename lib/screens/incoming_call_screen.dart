@@ -82,7 +82,7 @@ class _IncomingCallScreen extends State<IncomingScreen> {
                           Color(0xFF7FF4B42), LineIcons.phoneSlash),
                       offsetDx: (0.8),
                       onLeftSwipe: () {
-                        Navigator.pushNamed(context, ContactOptionsScreen.id);
+                        Navigator.pop(context);
                         audioPlayer.stop();
                       },
                       iconSize: 0,

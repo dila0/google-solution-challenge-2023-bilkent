@@ -5,10 +5,8 @@ import 'package:google_solution/screens/contact_options_screen.dart';
 import 'package:google_solution/screens/settings_screen.dart';
 
 class BottomBar extends StatelessWidget {
-  const BottomBar({
-    super.key,
-  });
-
+  const BottomBar({super.key, this.toPop = false});
+  final bool toPop;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -16,10 +14,14 @@ class BottomBar extends StatelessWidget {
       children: [
         IconButton(
           icon: Icon(Icons.person_2_sharp),
-          onPressed: (){
-            if(ModalRoute.of(context)?.settings.name != ProfileScreen.id){
-              Navigator.pushNamed(context, ProfileScreen.id);
-              }
+          onPressed: () {
+            if (toPop) {
+              Navigator.pop(context);
+            } else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ProfileScreen();
+              }));
+            }
           },
           iconSize: kBottomIconSize,
           color: kCirclesColor,
@@ -28,9 +30,11 @@ class BottomBar extends StatelessWidget {
         const SizedBox(width: kBottomIconDistance),
         IconButton(
           icon: Icon(Icons.home_filled),
-          onPressed: (){
-            if(ModalRoute.of(context)?.settings.name != ContactOptionsScreen.id){
-              Navigator.pushNamed(context, ContactOptionsScreen.id);
+          onPressed: () {
+            if (toPop) {
+              Navigator.pop(context);
+            } else {
+              //TODO unknown behaviour
             }
           },
           iconSize: kBottomIconSize,
@@ -40,9 +44,13 @@ class BottomBar extends StatelessWidget {
         SizedBox(width: kBottomIconDistance),
         IconButton(
           icon: Icon(Icons.settings),
-          onPressed: (){
-            if(ModalRoute.of(context)?.settings.name != SettingsScreen.id){
-              Navigator.pushNamed(context, SettingsScreen.id);
+          onPressed: () {
+            if (toPop) {
+              Navigator.pop(context);
+            } else {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return SettingsScreen();
+              }));
             }
           },
           iconSize: kBottomIconSize,

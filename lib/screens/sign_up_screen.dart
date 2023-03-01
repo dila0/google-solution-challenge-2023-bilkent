@@ -23,6 +23,7 @@ class SignUpScreen extends StatefulWidget {
   static const String id = 'Sign Up Screen';
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
+  const SignUpScreen({super.key});
 }
 
 void initFirebase() async {
@@ -69,7 +70,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void signUp() async {
     if (isDebug) {
       //TODO remove before release
-      Navigator.pushNamed(context, ContactOptionsScreen.id);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return ContactOptionsScreen();
+      }));
     }
     setState(() {
       showSpinner = true;
@@ -90,7 +93,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         showSpinner = false; //TODO add spinner
       });
-      Navigator.pushNamed(context, ContactOptionsScreen.id);
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return SignUpScreen();
+      }));
 
       String? dispName =
           (await _auth.currentUser?.displayName); //Update the display name
@@ -231,7 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: BottomText(
                         bottomText: 'Already have an account?  ',
                         bottomHyperLink: 'Sign In',
-                        routeName: SignInScreen.id,
+                        page: SignInScreen(),
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height / 85),
