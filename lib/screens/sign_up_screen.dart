@@ -12,7 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:google_solution/firebase_options.dart';
 import 'package:google_solution/utilities/snack_bar_utility.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_solution/utilities/firestore_utility.dart';
+import 'package:google_solution/utilities/firebase_utility.dart';
 
 String startedText = 'LET\'S GET STARTED';
 String getInfoText = 'First, we need some basic information';
@@ -75,8 +75,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       showSpinner = true;
     });
     if (password != passwordCheck) {
-      SnackBarUtility.showFailureSnackBar(context, 'Passwords does not match!',
-          kGenericFailureSnackBarTitle, kButtonColor);
+      SnackBarUtility.showFailureSnackBar(
+          context, 'Passwords does not match!', kGenericFailureSnackBarTitle);
       return;
     }
 
@@ -95,13 +95,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       String? dispName = (await _auth.currentUser?.displayName);
 
       //If everything is fine write to database
-      FirestoreUtility.saveUserData(
+      FirebaseUtility.saveUserData(
           name: name, surname: surname, phoneNumber: phoneNumber);
       List<String> list = [
         "05555555555",
         "11122222221"
       ]; //TODO place holder, get from somewhere else
-      FirestoreUtility.updateContacts(list);
+      FirebaseUtility.updateContacts(list);
 
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return SignUpScreen();
@@ -152,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       print(e);
     }
     SnackBarUtility.showFailureSnackBar(
-        context, errorMessage, kGenericFailureSnackBarTitle, kButtonColor);
+        context, errorMessage, kGenericFailureSnackBarTitle);
   }
 
   @override

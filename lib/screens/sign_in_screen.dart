@@ -97,7 +97,7 @@ class _SignInScreenState extends State<SignInScreen> {
     }
 
     SnackBarUtility.showFailureSnackBar(
-        context, errorMessage, kGenericFailureSnackBarTitle, kButtonColor);
+        context, errorMessage, kGenericFailureSnackBarTitle);
   }
 
   @override

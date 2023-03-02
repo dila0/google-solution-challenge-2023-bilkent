@@ -11,9 +11,11 @@ import 'package:google_solution/contact_options/mom_screen.dart';
 import 'package:google_solution/contact_options/dad_screen.dart';
 import 'package:google_solution/contact_options/lover_screen.dart';
 import 'package:google_solution/contact_options/bestie_screen.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'incoming_call_screen.dart';
+import 'package:google_solution/utilities/firebase_utility.dart';
 
 String startText = 'CONTACT OPTIONS';
 String welcomeString = 'Welcome';
@@ -49,6 +51,18 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
           Center(
             child: Column(
               children: <Widget>[
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      FirebaseUtility.logout(context);
+                    });
+                  },
+                  color: Colors.red,
+                  icon: const Icon(
+                    LineIcons.running,
+                    size: 50,
+                  ),
+                ),
                 const SizedBox(height: kSignUpScreenDistanceFromTop),
                 Center(
                     child: Text(

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_solution/firebase_options.dart';
@@ -28,6 +29,7 @@ void main() async {
 }
 
 class GoogleSolution extends StatelessWidget {
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -35,7 +37,9 @@ class GoogleSolution extends StatelessWidget {
         ChangeNotifierProvider<callerData>(create: (context) => callerData())
       ],
       child: MaterialApp(
-        home: StartScreen(),
+        home: (user == null)
+            ? StartScreen()
+            : ContactOptionsScreen(), //check if already logged in
         theme: ThemeData(
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
@@ -48,8 +52,10 @@ class GoogleSolution extends StatelessWidget {
           SignUpScreen.id: (BuildContext context) => SignUpScreen(),
           SignInScreen.id: (BuildContext context) => SignInScreen(),
           ProfileScreen.id: (BuildContext context) => ProfileScreen(),
-          ContactOptionsScreen.id: (BuildContext context) => ContactOptionsScreen(),
-          ContactDetailsScreen.id: (BuildContext context) => ContactDetailsScreen(),
+          ContactOptionsScreen.id: (BuildContext context) =>
+              ContactOptionsScreen(),
+          ContactDetailsScreen.id: (BuildContext context) =>
+              ContactDetailsScreen(),
           CallScreen.id: (BuildContext context) => CallScreen(),
           IncomingScreen.id: (BuildContext context) => IncomingScreen(),
           CallInfo.id: (BuildContext context) => CallInfo(),
