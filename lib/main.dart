@@ -38,9 +38,9 @@ class GoogleSolution extends StatelessWidget {
         ChangeNotifierProvider<callerData>(create: (context) => callerData())
       ],
       child: MaterialApp(
-        home: (user == null)
-            ? IntroScreen()
-            : ContactOptionsScreen(), //check if already logged in
+        initialRoute: (user == null)
+            ? IntroScreen.id
+            : ContactOptionsScreen.id, //check if already logged in
         theme: ThemeData(
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
