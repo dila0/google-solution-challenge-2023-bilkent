@@ -63,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: body: Stack(
+      body: Stack(
         children: <Widget>[
           const Circles(),
           Center(
