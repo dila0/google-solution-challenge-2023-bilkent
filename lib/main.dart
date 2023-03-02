@@ -5,6 +5,7 @@ import 'package:google_solution/firebase_options.dart';
 import 'package:google_solution/models/callerData.dart';
 import 'package:google_solution/screens/call_information_screen.dart';
 import 'package:google_solution/screens/contact_details_screen.dart';
+import 'package:google_solution/screens/intro_screen.dart';
 import 'package:google_solution/screens/settings_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:provider/provider.dart';
@@ -38,12 +39,12 @@ class GoogleSolution extends StatelessWidget {
       ],
       child: MaterialApp(
         home: (user == null)
-            ? StartScreen()
+            ? IntroScreen()
             : ContactOptionsScreen(), //check if already logged in
         theme: ThemeData(
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
-              primary: Colors.purpleAccent,
+              primary: Colors.white70,
             ),
           ),
         ),
