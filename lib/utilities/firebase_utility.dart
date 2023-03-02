@@ -56,6 +56,14 @@ class FirebaseUtility {
             (error) => {print(error)}); //TODO handle error
   }
 
+  static void updateFavourites(List<int> favouritesById) {
+    _fireStore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .update({'favourites': favouritesById}).catchError(
+            (error) => {print(error)}); //TODO handle error
+  }
+
   static void logout(BuildContext context) {
     if (_auth.currentUser != null) {
       _auth
