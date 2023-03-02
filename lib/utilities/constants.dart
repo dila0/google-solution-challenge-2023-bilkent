@@ -145,3 +145,45 @@ const kContactUtilitiesTextStyle = TextStyle(
 );
 
 const String kGenericFailureSnackBarTitle = '  Looks like there is a mistake!';
+
+const kSavedAudioTextStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 30.0,
+  color: Colors.white,
+  fontWeight: FontWeight.w900,
+);
+
+const kEmergencyContactTextStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 17.0,
+  fontWeight: FontWeight.w900,
+  color: Colors.black54,
+);
+
+const kProfileNameTextStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 16.0,
+  fontWeight: FontWeight.w500,
+  color: Colors.black,
+);
+
+const kProfileButton = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 14.0,
+  fontWeight: FontWeight.w700,
+  color: Colors.black54,
+  decoration: TextDecoration.underline,
+  decorationStyle: TextDecorationStyle.solid,
+);
+
+const kProfilePopUpStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 17.0,
+  shadows: [Shadow(
+    color: Colors.black87,
+    offset: Offset(0, -3),
+  )],
+  fontWeight: FontWeight.w900,
+  decorationColor: Colors.black,
+  color: Colors.transparent,
+);
