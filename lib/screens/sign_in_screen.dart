@@ -47,9 +47,7 @@ class _SignInScreenState extends State<SignInScreen> {
         showSpinner = false;
       });
       if (user != null) {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ContactOptionsScreen();
-        }));
+        Navigator.pushNamed(context, ContactOptionsScreen.id);
       }
       return;
     } on FirebaseAuthException catch (error) {

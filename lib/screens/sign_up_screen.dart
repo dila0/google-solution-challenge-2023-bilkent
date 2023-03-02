@@ -19,7 +19,7 @@ String getInfoText = 'First, we need some basic information';
 String registerText = 'REGISTER';
 String bottomText = 'Already have an account? ';
 String bottomHyperlink = ' Sign In';
-bool isDebug = true; //TODO remove before release, used to skip sign up screen
+bool isDebug = false; //TODO remove before release, used to skip sign up screen
 
 class SignUpScreen extends StatefulWidget {
   static const String id = 'Sign Up Screen';
@@ -66,10 +66,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void signUp() async {
     if (isDebug) {
-      //TODO remove before release
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return ContactOptionsScreen();
-      }));
+      //TODO remove
+      Navigator.pushNamed(context, ContactOptionsScreen.id);
     }
     setState(() {
       showSpinner = true;
@@ -81,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
 
     String errorMessage = "Login failed. Please try again.";
-
+    bool isSuccess = true;
     try {
       final newUser = await _auth.createUserWithEmailAndPassword(
           email: email, password: password); //create the user
@@ -103,12 +101,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ]; //TODO place holder, get from somewhere else
       FirebaseUtility.updateContacts(list);
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return SignUpScreen();
-      }));
-
       return; //to avoid snackbar if everything is fine
     } on FirebaseAuthException catch (error) {
+      isSuccess = false;
       switch (error.code) {
         //Taken from https://stackoverflow.com/questions/56113778/how-to-handle-firebase-auth-exceptions-on-flutter
         //Credit to Corentin Houdayer https://stackoverflow.com/users/6812501/corentin-houdayer
@@ -151,8 +146,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       print("FAILED TO REGISTER*****************************");
       print(e);
     }
-    SnackBarUtility.showFailureSnackBar(
-        context, errorMessage, kGenericFailureSnackBarTitle);
+    if (isSuccess) {
+      Navigator.pushNamed(context, ContactOptionsScreen.id);
+    } else {
+      SnackBarUtility.showFailureSnackBar(
+          context, errorMessage, kGenericFailureSnackBarTitle);
+    }
   }
 
   @override

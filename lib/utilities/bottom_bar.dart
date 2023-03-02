@@ -15,13 +15,11 @@ class BottomBar extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.person_2_sharp),
           onPressed: () {
-            if (toPop) {
-              Navigator.pop(context);
-            } else {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ProfileScreen();
-              }));
-            }
+            Navigator.popUntil(
+                context, ModalRoute.withName(ContactOptionsScreen.id));
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ProfileScreen();
+            }));
           },
           iconSize: kBottomIconSize,
           color: kCirclesColor,
@@ -31,11 +29,8 @@ class BottomBar extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.home_filled),
           onPressed: () {
-            if (toPop) {
-              Navigator.pop(context);
-            } else {
-              //TODO unknown behaviour
-            }
+            Navigator.popUntil(
+                context, ModalRoute.withName(ContactOptionsScreen.id));
           },
           iconSize: kBottomIconSize,
           color: kCirclesColor,
@@ -45,13 +40,11 @@ class BottomBar extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.settings),
           onPressed: () {
-            if (toPop) {
-              Navigator.pop(context);
-            } else {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return SettingsScreen();
-              }));
-            }
+            Navigator.popUntil(
+                context, ModalRoute.withName(ContactOptionsScreen.id));
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return SettingsScreen();
+            }));
           },
           iconSize: kBottomIconSize,
           color: kCirclesColor,
