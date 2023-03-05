@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 import '../utilities/snack_bar_utility.dart';
+import 'main_screen.dart';
 
 String startText = 'WELCOME BACK!';
 String logInText = 'Log In';
@@ -47,7 +48,7 @@ class _SignInScreenState extends State<SignInScreen> {
         showSpinner = false;
       });
       if (user != null) {
-        Navigator.pushNamed(context, ContactOptionsScreen.id);
+        Navigator.pushNamed(context, MainPage.id);
       }
       return;
     } on FirebaseAuthException catch (error) {

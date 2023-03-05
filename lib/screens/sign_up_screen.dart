@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution/screens/incoming_call_screen.dart';
+import 'package:google_solution/screens/main_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
 import 'package:google_solution/utilities/register_button.dart';
@@ -67,7 +68,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void signUp() async {
     if (isDebug) {
       //TODO remove
-      Navigator.pushNamed(context, ContactOptionsScreen.id);
+      Navigator.pushNamed(context, MainPage.id);
     }
     setState(() {
       showSpinner = true;
@@ -98,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           surname: surname,
           phoneNumber: phoneNumber); //update the local static variables
       FirebaseUtility.saveUserData(); //write to database
-      Navigator.pushNamed(context, ContactOptionsScreen.id);
+      Navigator.pushNamed(context, MainPage.id);
     } on FirebaseAuthException catch (error) {
       isSuccess = false;
       switch (error.code) {
@@ -144,7 +145,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       print(e);
     }
     if (isSuccess) {
-      Navigator.pushNamed(context, ContactOptionsScreen.id);
+      Navigator.pushNamed(context, MainPage.id);
     } else {
       SnackBarUtility.showFailureSnackBar(
           context, errorMessage, kGenericFailureSnackBarTitle);

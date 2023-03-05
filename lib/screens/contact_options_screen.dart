@@ -166,10 +166,6 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: const BottomAppBar(
-        color: kBackgroundColor,
-        child: BottomBar(),
-      ),
     );
   }
 }

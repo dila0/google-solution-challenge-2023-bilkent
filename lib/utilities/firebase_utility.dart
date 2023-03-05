@@ -29,8 +29,7 @@ class FirebaseUtility {
       name = ds.data()!['name'];
       surname = ds.data()!['surname'];
       phoneNumber = ds.data()!['phone'];
-      favourites = ds.data()!['favourite'];
-      contacts = ds.data()!['emergencyContacts'];
+      //TODO adding favourites and contacts results in an error but should be done
     });
     return false;
   }

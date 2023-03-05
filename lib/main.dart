@@ -6,6 +6,7 @@ import 'package:google_solution/models/callerData.dart';
 import 'package:google_solution/screens/call_information_screen.dart';
 import 'package:google_solution/screens/contact_details_screen.dart';
 import 'package:google_solution/screens/intro_screen.dart';
+import 'package:google_solution/screens/main_screen.dart';
 import 'package:google_solution/screens/settings_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
@@ -27,7 +28,9 @@ void main() async {
   //initialize firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseUtility.refresh();
+  if (FirebaseAuth.instance.currentUser != null) {
+    FirebaseUtility.refresh();
+  }
   runApp(GoogleSolution());
 }
 
@@ -40,9 +43,9 @@ class GoogleSolution extends StatelessWidget {
         ChangeNotifierProvider<callerData>(create: (context) => callerData())
       ],
       child: MaterialApp(
-        initialRoute: (user == null)
-            ? IntroScreen.id
-            : ContactOptionsScreen.id, //check if already logged in
+        home: (user == null)
+            ? IntroScreen()
+            : MainPage(), //check if already logged in
         theme: ThemeData(
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
@@ -62,6 +65,7 @@ class GoogleSolution extends StatelessWidget {
           CallScreen.id: (BuildContext context) => CallScreen(),
           IncomingScreen.id: (BuildContext context) => IncomingScreen(),
           CallInfo.id: (BuildContext context) => CallInfo(),
+          MainPage.id: (BuildContext context) => MainPage(),
         },
       ),
     );

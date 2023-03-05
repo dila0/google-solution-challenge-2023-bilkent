@@ -13,52 +13,49 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  
-  Widget buildColorPicker(){
+  Widget buildColorPicker() {
     return ColorPicker(
-      pickerColor: myColor,
-      onColorChanged: (color){
-        setState(() {
-          myColor = color;
+        pickerColor: myColor,
+        onColorChanged: (color) {
+          setState(() {
+            myColor = color;
+          });
         });
-      }
-    );
   }
-  
-  void changeColor(BuildContext context){
+
+  void changeColor(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (context) =>
-          AlertDialog(
-            title: Text(
-              'Pick Your Profile Picture Color',
-              textAlign: TextAlign.center,
-              style: kProfilePopUpStyle,
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                buildColorPicker(),
-                TextButton(
-                  child: Text(
-                    'SELECT',
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        color: kButtonColor,
-                    ),
-                  ),
-                  onPressed: (){
-                    Navigator.of(context).pop();
-                  },
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Pick Your Profile Picture Color',
+          textAlign: TextAlign.center,
+          style: kProfilePopUpStyle,
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            buildColorPicker(),
+            TextButton(
+              child: Text(
+                'SELECT',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: kButtonColor,
                 ),
-              ],
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
-          ),
+          ],
+        ),
+      ),
     );
   }
-  
+
   Color myColor = kButtonColor;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,14 +91,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     changeColor(context);
                   },
                 ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.07,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.07,
+                ),
                 ProfilePageContainer(
                   iconName: Icon(Icons.account_circle_rounded),
                   profileNameString: 'Name: ',
                   userNameString: '@namesurname',
                   widthBetween: 34.0,
                 ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.05,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 ProfilePageContainer(
                   widthBetween: 0,
                   iconName: Icon(Icons.mail),
@@ -115,19 +116,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   height: MediaQuery.of(context).size.height * 0.15,
-                  margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+                  margin: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * 0.05),
                   child: Material(
                     color: kButtonColor,
-                    borderRadius: const BorderRadius.all(Radius.circular(kButtonRoundness)),
+                    borderRadius: const BorderRadius.all(
+                        Radius.circular(kButtonRoundness)),
                     elevation: 3.0,
                     child: TextButton(
-                      onPressed: (){
+                      onPressed: () {
                         print('DO STH');
                         //TODO: go to saved audio
                       },
                       child: Row(
                         children: [
-                          SizedBox(width: MediaQuery.of(context).size.width * 0.015,),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.015,
+                          ),
                           Opacity(
                             opacity: 0.8,
                             child: Image.asset(
@@ -135,7 +140,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               width: MediaQuery.of(context).size.height * 0.15,
                             ),
                           ),
-                          SizedBox(width: MediaQuery.of(context).size.width * 0.15,),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.15,
+                          ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
@@ -152,12 +159,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: const BottomAppBar(
-        color: kBackgroundColor,
-        child: BottomBar(
-          toPop: true,
-        ),
       ),
     );
   }

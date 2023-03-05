@@ -21,12 +21,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Text('settings screen'),
         ],
       ),
-      bottomNavigationBar: const BottomAppBar(
-        color: kBackgroundColor,
-        child: BottomBar(
-          toPop: true,
-        ),
-      ),
     );
   }
 }
