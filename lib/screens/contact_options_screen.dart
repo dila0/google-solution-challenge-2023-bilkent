@@ -37,11 +37,10 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
   }
 
   final _auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     final user = _auth.currentUser;
-    final String userName = user?.displayName ?? 'Unnamed';
+    String userName = "${FirebaseUtility.name} ${FirebaseUtility.surname}";
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Stack(
@@ -133,7 +132,8 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                                     'A two minute relaxing audio with your lover while walking',
                               ),
                               SizedBox(
-                                  height: MediaQuery.of(context).size.height / 8),
+                                  height:
+                                      MediaQuery.of(context).size.height / 8),
                             ],
                           ),
                         ),
@@ -143,13 +143,14 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(
-                                    bottom:
-                                        MediaQuery.of(context).size.height / 40),
+                                    bottom: MediaQuery.of(context).size.height /
+                                        40),
                                 child: RegisterButton(
                                   title: 'EMERGENCY CALL',
                                   minWidth:
                                       MediaQuery.of(context).size.height / 2,
-                                  height: MediaQuery.of(context).size.height / 12,
+                                  height:
+                                      MediaQuery.of(context).size.height / 12,
                                   pressedFunct: emergencyPressed,
                                 ),
                               ),

@@ -84,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       final newUser = await _auth.createUserWithEmailAndPassword(
           email: email, password: password); //create the user
       await _auth.currentUser?.updateDisplayName("$name $surname");
-      //TODO link phone number
+
       setState(() {
         showSpinner = false; //TODO add spinner
       });
@@ -93,15 +93,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       String? dispName = (await _auth.currentUser?.displayName);
 
       //If everything is fine write to database
-      FirebaseUtility.saveUserData(
-          name: name, surname: surname, phoneNumber: phoneNumber);
-      List<String> list = [
-        "05555555555",
-        "11122222221"
-      ]; //TODO place holder, get from somewhere else
-      FirebaseUtility.updateContacts(list);
-
-      return; //to avoid snackbar if everything is fine
+      FirebaseUtility.setUserData(
+          name: name,
+          surname: surname,
+          phoneNumber: phoneNumber); //update the local static variables
+      FirebaseUtility.saveUserData(); //write to database
+      Navigator.pushNamed(context, ContactOptionsScreen.id);
     } on FirebaseAuthException catch (error) {
       isSuccess = false;
       switch (error.code) {

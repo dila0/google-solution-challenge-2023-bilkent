@@ -8,6 +8,7 @@ import 'package:google_solution/screens/contact_details_screen.dart';
 import 'package:google_solution/screens/intro_screen.dart';
 import 'package:google_solution/screens/settings_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
+import 'package:google_solution/utilities/firebase_utility.dart';
 import 'package:provider/provider.dart';
 import 'screens/sign_in_screen.dart';
 import 'screens/sign_up_screen.dart';
@@ -26,6 +27,7 @@ void main() async {
   //initialize firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseUtility.refresh();
   runApp(GoogleSolution());
 }
 

@@ -5,26 +5,61 @@ import '../screens/start_screen.dart';
 import 'snack_bar_utility.dart';
 
 class FirebaseUtility {
+  //static class since there can only be one user per app
+  //using static allows us to not create an instance of the class for each use
   static final _fireStore = FirebaseFirestore.instance;
   static final _auth = FirebaseAuth.instance;
   static const logOutTitle = 'Logged out';
   static const logOutMessage = 'Successfully logged out from the app';
   static const logOutFailTitle = 'Log out failed!';
   static const logOutFailMessage = 'Failed to log out due to a system error';
-  static void saveUserData(
-      {required String name,
-      required String surname,
-      required String phoneNumber}) {
+  static String name = "";
+  static String surname = "";
+  static String phoneNumber = "";
+  static List<String> contacts = [];
+  static List<String> favourites = [];
+
+  ///read from database and update local static variables
+  static Future<bool> refresh() async {
+    final docRef = await _fireStore
+        .collection("users")
+        .doc(_auth.currentUser?.uid)
+        .get()
+        .then((ds) {
+      name = ds.data()!['name'];
+      surname = ds.data()!['surname'];
+      phoneNumber = ds.data()!['phone'];
+      favourites = ds.data()!['favourite'];
+      contacts = ds.data()!['emergencyContacts'];
+    });
+    return false;
+  }
+
+  /// Sets local static variables
+  static void setUserData(
+      {required name, required surname, required phoneNumber}) {
+    FirebaseUtility.name = name;
+    FirebaseUtility.surname = surname;
+    FirebaseUtility.phoneNumber = phoneNumber;
+  }
+
+  /// Saves every local static variable in this class to database
+  static void saveUserData() {
     _fireStore.collection('users').doc(_auth.currentUser?.uid).set({
       'name': name,
       'surname': surname,
-      'phone': phoneNumber
+      'phone': phoneNumber,
+      'emergencyContacts': contacts,
+      'favourites': favourites
     }).catchError((error) => {print(error)});
 
     //TODO handle error
   }
 
+  /// All functions below updates their respective fields in the database
+  /// Writing local static variables to database
   static void updateContacts(List<String> contacts) {
+    FirebaseUtility.contacts = contacts;
     _fireStore
         .collection('users')
         .doc(_auth.currentUser?.uid)
@@ -33,6 +68,7 @@ class FirebaseUtility {
   }
 
   static void updateName(String name) {
+    FirebaseUtility.name = name;
     _fireStore
         .collection('users')
         .doc(_auth.currentUser?.uid)
@@ -41,6 +77,7 @@ class FirebaseUtility {
   }
 
   static void updateSurname(String surname) {
+    FirebaseUtility.surname = surname;
     _fireStore
         .collection('users')
         .doc(_auth.currentUser?.uid)
@@ -49,6 +86,7 @@ class FirebaseUtility {
   }
 
   static void updatePhone(String phone) {
+    FirebaseUtility.phoneNumber = phone;
     _fireStore
         .collection('users')
         .doc(_auth.currentUser?.uid)
@@ -56,11 +94,12 @@ class FirebaseUtility {
             (error) => {print(error)}); //TODO handle error
   }
 
-  static void updateFavourites(List<int> favouritesById) {
+  static void updateFavourites(List<String> favouritesByName) {
+    FirebaseUtility.favourites = favouritesByName;
     _fireStore
         .collection('users')
         .doc(_auth.currentUser?.uid)
-        .update({'favourites': favouritesById}).catchError(
+        .update({'favourites': favouritesByName}).catchError(
             (error) => {print(error)}); //TODO handle error
   }
 
