@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
+import 'package:google_solution/utilities/firebase_utility.dart';
 import 'package:google_solution/utilities/register_text_field.dart';
 import 'package:google_solution/utilities/register_button.dart';
 import 'package:google_solution/screens/contact_options_screen.dart';
@@ -44,13 +45,15 @@ class _SignInScreenState extends State<SignInScreen> {
     try {
       final user = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      setState(() {
-        showSpinner = false;
-      });
+
       if (user != null) {
+        await FirebaseUtility.refresh();
+        setState(() {
+          showSpinner = false;
+        });
         Navigator.pushNamed(context, MainPage.id);
+        return;
       }
-      return;
     } on FirebaseAuthException catch (error) {
       switch (error.code) {
         //Taken from https://stackoverflow.com/questions/56113778/how-to-handle-firebase-auth-exceptions-on-flutter

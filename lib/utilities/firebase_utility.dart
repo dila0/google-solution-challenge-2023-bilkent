@@ -13,6 +13,11 @@ class FirebaseUtility {
   static const logOutMessage = 'Successfully logged out from the app';
   static const logOutFailTitle = 'Log out failed!';
   static const logOutFailMessage = 'Failed to log out due to a system error';
+  static const deleteTitle = 'Account deleted';
+  static const deleteMessage = 'Successfully deleted your account and data';
+  static const deleteFailTitle = 'Delete failed!';
+  static const deleteFailMessage =
+      'Failed to delete your account due to a system error';
   static String name = "";
   static String surname = "";
   static String phoneNumber = "";
@@ -113,6 +118,24 @@ class FirebaseUtility {
           .catchError((error) => {
                 SnackBarUtility.showSystemFailureSnackBar(
                     context, logOutFailMessage, logOutFailTitle)
+              });
+    }
+    Navigator.pushNamedAndRemoveUntil(context, StartScreen.id,
+        (route) => false); //In any case Navigate back to start page
+  }
+
+  static void deleteAccount(BuildContext context) {
+    if (_auth.currentUser != null) {
+      _fireStore.collection('users').doc(_auth.currentUser?.uid).delete();
+      _auth.currentUser
+          ?.delete()
+          .then((value) => {
+                SnackBarUtility.showSuccessSnackBar(
+                    context, deleteMessage, deleteTitle)
+              })
+          .catchError((error) => {
+                SnackBarUtility.showSystemFailureSnackBar(
+                    context, deleteFailMessage, deleteFailTitle)
               });
     }
     Navigator.pushNamedAndRemoveUntil(context, StartScreen.id,
