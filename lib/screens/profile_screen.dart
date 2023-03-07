@@ -100,13 +100,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     iconName: const Icon(Icons.account_circle_rounded),
                     profileNameString: 'Name: ',
                     userNameString: FirebaseUtility.name,
-                    widthBetween: 34.0,
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   ProfilePageContainer(
-                    widthBetween: 0,
                     iconName: const Icon(Icons.mail),
                     profileNameString: 'Mail Address: ',
                     userNameString: user == null ? '' : user.email ?? 'Error',
@@ -131,7 +129,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       0.008),
                               child: Row(
                                 children: const [
-                                  Text('Edit Message', style: kEditTextStyle)
+                                  Text('Edit Message',
+                                      style:
+                                          kEditTextStyle) //TODO mayge change the whole thing with emergency_contact_textfield.dart
                                 ],
                               ))),
                       Container(
@@ -148,6 +148,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: TextField(
+                                  onTapOutside: (_) {
+                                    setState(() {
+                                      isEnabled = false;
+                                    });
+                                  },
+                                  autofocus: true,
                                   controller: TextEditingController(),
                                   onSubmitted: (value) {
                                     setState(() {

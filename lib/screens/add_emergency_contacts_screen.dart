@@ -1,0 +1,116 @@
+import 'package:flutter/material.dart';
+import 'package:google_solution/utilities/emergency_contact_textfield.dart';
+import 'package:google_solution/utilities/firebase_utility.dart';
+
+import '../utilities/constants.dart';
+import '../utilities/profile_container.dart';
+import '../utilities/register_text_field.dart';
+
+class AddEmergencyContact extends StatefulWidget {
+  const AddEmergencyContact({Key? key}) : super(key: key);
+
+  @override
+  State<AddEmergencyContact> createState() => _AddEmergencyContactState();
+}
+
+class _AddEmergencyContactState extends State<AddEmergencyContact> {
+  List<Widget> containers = [];
+
+  void deleteFunc(int index) {
+    setState(() {
+      containers.removeAt(index);
+    });
+  }
+
+  void initContainers() {
+    containers = [];
+    for (int i = 0; i < FirebaseUtility.contacts.length; i++) {
+      containers.add(
+        EmergencyContactTextField(
+          iconName: Icons.edit,
+          startNumber: FirebaseUtility.contacts[i],
+          index: i,
+          deleteFunction: deleteFunc,
+        ),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initContainers();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    void addEmptyContact() {
+      setState(() {
+        containers.add(EmergencyContactTextField(
+          iconName: Icons.edit,
+          startNumber: "",
+          index: containers.length,
+          deleteFunction: deleteFunc,
+        ));
+      });
+    }
+
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        centerTitle: true,
+        title: Text(
+          "Edit Emergency Contacts",
+          style: kEmergencyContactTextStyle.copyWith(color: Colors.black87),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: kButtonColor,
+          ),
+        ),
+      ),
+      backgroundColor: kBackgroundColor,
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 20,
+              width: double.infinity,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: containers.map((e) {
+                return e;
+              }).toList(),
+            ),
+            IconButton(
+              onPressed: () {
+                addEmptyContact();
+              },
+              icon: const Icon(Icons.add),
+              iconSize: kBottomIconSize,
+              color: kCirclesColor,
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 40),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Text(
+                "To add a new emergency contact please click + and enter their phone number. \n \nEmpty contacts will not be saved! ",
+                style: kContactUtilitiesTextStyle,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

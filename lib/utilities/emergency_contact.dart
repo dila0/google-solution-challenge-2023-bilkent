@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_solution/screens/add_emergency_contacts_screen.dart';
+import 'package:google_solution/utilities/custom_animations.dart';
+import 'package:google_solution/utilities/firebase_utility.dart';
 import 'constants.dart';
 
 class EmergencyContactContainer extends StatelessWidget {
@@ -11,31 +14,42 @@ class EmergencyContactContainer extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.05),
-      color: Colors.white60,
-      child: Material(
+      child: InkWell(
         borderRadius: const BorderRadius.all(Radius.circular(kButtonRoundness)),
-        elevation: 1.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.phone),
-              iconSize: kBottomIconSize,
-              color: kCirclesColor,
+        onTap: () {
+          Navigator.push(context,
+              CustomAnimations.slideTransition(page: AddEmergencyContact()));
+        },
+        child: Container(
+          color: Colors.white60,
+          child: Material(
+            borderRadius:
+                const BorderRadius.all(Radius.circular(kButtonRoundness)),
+            elevation: 1.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(
+                  Icons.phone,
+                  size: kBottomIconSize,
+                  color: kCirclesColor,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: MediaQuery.of(context).size.width * 0.05),
+                  child: const Text(
+                    'ADD EMERGENCY CONTACTS',
+                    style: kEmergencyContactTextStyle,
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_sharp,
+                  size: kBottomIconSize,
+                  color: kCirclesColor,
+                ),
+              ],
             ),
-            const Text(
-              'ADD EMERGENCY CONTACTS',
-              style: kEmergencyContactTextStyle,
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.arrow_forward_ios_sharp),
-              iconSize: kBottomIconSize,
-              color: kCirclesColor,
-              highlightColor: kButtonColor,
-            ),
-          ],
+          ),
         ),
       ),
     );

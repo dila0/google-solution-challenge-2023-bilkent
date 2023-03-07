@@ -54,7 +54,7 @@ class FirebaseUtility {
       favourites = {};
     }
     try {
-      contacts = ds.data()!['contacts'] as List<String>;
+      contacts = List<String>.from(ds.data()!['emergencyContacts']);
     } catch (error) {
       contacts = [];
     }
@@ -100,6 +100,25 @@ class FirebaseUtility {
         .collection('users')
         .doc(_auth.currentUser?.uid)
         .update({'favourites': favourites}).catchError(
+            (error) => {print(error)}); //TODO handle error
+  }
+
+  static void addContact(String contact, String oldContact) {
+    contacts.remove(oldContact);
+    contacts.add(contact);
+    _fireStore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .update({'emergencyContacts': contacts}).catchError(
+            (error) => {print(error)}); //TODO handle error
+  }
+
+  static void removeContact(String contact) {
+    contacts.remove(contact);
+    _fireStore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .update({'emergencyContacts': contacts}).catchError(
             (error) => {print(error)}); //TODO handle error
   }
 

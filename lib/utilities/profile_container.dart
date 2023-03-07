@@ -8,13 +8,11 @@ class ProfilePageContainer extends StatelessWidget {
     required this.iconName,
     required this.profileNameString,
     required this.userNameString,
-    required this.widthBetween,
   });
 
   Icon iconName;
   String profileNameString;
   String userNameString;
-  double widthBetween;
 
   @override
   Widget build(BuildContext context) {
