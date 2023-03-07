@@ -29,7 +29,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   if (FirebaseAuth.instance.currentUser != null) {
-    FirebaseUtility.refresh();
+    await FirebaseUtility.refresh();
   }
   runApp(GoogleSolution());
 }
