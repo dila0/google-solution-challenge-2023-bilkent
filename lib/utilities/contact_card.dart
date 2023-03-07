@@ -34,12 +34,13 @@ class _ContactCard extends State<ContactCard> {
   final String? utilitiesText;
   final String? durationText;
   final Widget page;
+  bool fav = false;
   bool selected = false;
 
   @override
   Widget build(BuildContext context) {
     if (FirebaseUtility.favourites.contains(contactName)) {
-      selected = true;
+      fav = true;
     }
 
     return GestureDetector(
@@ -92,7 +93,7 @@ class _ContactCard extends State<ContactCard> {
                         style: kContactDurationTextStyle,
                       ),
                       FavoriteButton(
-                        isFavorite: selected,
+                        isFavorite: fav,
                         iconSize: 45.0,
                         iconDisabledColor: kBackgroundColor,
                         iconColor: kButtonColor,
