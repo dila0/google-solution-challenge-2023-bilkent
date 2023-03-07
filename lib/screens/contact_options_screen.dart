@@ -81,6 +81,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                               horizontal:
                                   MediaQuery.of(context).size.height / 40),
                           child: ListView(
+                            physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             children: [

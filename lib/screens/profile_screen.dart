@@ -9,8 +9,6 @@ import 'package:google_solution/utilities/firebase_utility.dart';
 import 'package:google_solution/utilities/profile_container.dart';
 import 'package:google_solution/utilities/emergency_contact.dart';
 
-
-
 class ProfileScreen extends StatefulWidget {
   static const String id = 'Profile Screen';
   @override
@@ -27,11 +25,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           });
         });
   }
-  void changeCustomMesssage(){
-      setState(() {
 
-      });
+  void changeCustomMesssage() {
+    setState(() {});
   }
+
   void changeColor(BuildContext context) {
     showDialog(
       context: context,
@@ -62,7 +60,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isEnabled = false;
   final _auth = FirebaseAuth.instance;
 
-
   @override
   Widget build(BuildContext context) {
     final user = _auth.currentUser;
@@ -77,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   SizedBox(height: MediaQuery.of(context).size.height * 0.15),
                   GestureDetector(
-                    onTap:(){
+                    onTap: () {
                       changeColor(context);
                     },
                     child: Container(
@@ -100,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: MediaQuery.of(context).size.width * 0.07,
                   ),
                   ProfilePageContainer(
-                    iconName: Icon(Icons.account_circle_rounded),
+                    iconName: const Icon(Icons.account_circle_rounded),
                     profileNameString: 'Name: ',
                     userNameString: FirebaseUtility.name,
                     widthBetween: 34.0,
@@ -110,9 +107,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   ProfilePageContainer(
                     widthBetween: 0,
-                    iconName: Icon(Icons.mail),
+                    iconName: const Icon(Icons.mail),
                     profileNameString: 'Mail Address: ',
-                    userNameString: user == null ? '' : user.email ?? 'zort',
+                    userNameString: user == null ? '' : user.email ?? 'Error',
                     //TODO: Sadece başı alınacak mailin
                   ),
                   SizedBox(height: MediaQuery.of(context).size.width * 0.05),
@@ -121,56 +118,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Column(
                     children: [
                       GestureDetector(
-                        onTap: (){
-                          setState(() {
-                            isEnabled = true;
-                          });
-                        },
-                        child:Container(
-                          margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.08,vertical: MediaQuery.of(context).size.width * 0.008 ),
-                          child:Row(
-                            children:  const [Text('Edit Message',style: kEditTextStyle)
-                            ],
-                          )
-
-                       )
-
-                      ),
+                          onTap: () {
+                            setState(() {
+                              isEnabled = true;
+                            });
+                          },
+                          child: Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.08,
+                                  vertical: MediaQuery.of(context).size.width *
+                                      0.008),
+                              child: Row(
+                                children: const [
+                                  Text('Edit Message', style: kEditTextStyle)
+                                ],
+                              ))),
                       Container(
-                          margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
+                          margin: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.05),
                           color: Colors.white60,
                           //height: 3*(MediaQuery.of(context).size.height)/17,
-                          child:  Material(
-                              borderRadius: const BorderRadius.all(Radius.circular(kButtonRoundness)),
+                          child: Material(
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(kButtonRoundness)),
                               elevation: 1,
-                              child:  Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: TextField(
                                   controller: TextEditingController(),
-                                  onSubmitted: (value){
+                                  onSubmitted: (value) {
                                     setState(() {
-                                     // db.put('message', value);
-                                      FirebaseUtility.updateCustomMessage(value);
-                                      FirebaseUtility.customMessage = FirebaseUtility.customMessage;
+                                      // db.put('message', value);
+                                      FirebaseUtility.updateCustomMessage(
+                                          value);
+                                      FirebaseUtility.customMessage =
+                                          FirebaseUtility.customMessage;
                                       isEnabled = false;
                                     });
                                   },
                                   //minLines: 1,
                                   maxLines: null,
                                   keyboardType: TextInputType.text,
-                                  decoration:  InputDecoration(
-                                    enabled:  isEnabled,
+                                  decoration: InputDecoration(
+                                    enabled: isEnabled,
                                     border: InputBorder.none,
-                                    hintText: '  ${FirebaseUtility.customMessage}',
+                                    hintText:
+                                        '  ${FirebaseUtility.customMessage}',
                                     hintMaxLines: 8,
                                   ),
                                 ),
-                              )
-                          )
-                      )
+                              )))
                     ],
                   )
-
                 ],
               ),
             ),

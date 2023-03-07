@@ -98,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           name: name,
           surname: surname,
           phoneNumber: phoneNumber,
-          customMessage: "I NEED HELP DB"); //update the local static variables
+          customMessage: kMessage); //update the local static variables
       FirebaseUtility.saveUserData(); //write to database
       Navigator.pushNamed(context, MainPage.id);
     } on FirebaseAuthException catch (error) {

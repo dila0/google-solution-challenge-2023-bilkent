@@ -25,7 +25,7 @@ class FirebaseUtility {
   static String name = "";
   static String surname = "";
   static String phoneNumber = "";
-  static String customMessage = "";
+  static String customMessage = kMessage;
   static List<String> contacts = [];
   static Set<String> favourites = {};
 
@@ -36,9 +36,7 @@ class FirebaseUtility {
         .doc(_auth.currentUser?.uid)
         .get()
         .then((ds) async {
-      await insertData(
-          ds); //TODO does not work waits for the process above and does not update the main screen in time
-      //TODO adding favourites and contacts results in an error but should be done
+      await insertData(ds);
     });
     return false;
   }
@@ -47,6 +45,7 @@ class FirebaseUtility {
     name = ds.data()!['name'];
     surname = ds.data()!['surname'];
     phoneNumber = ds.data()!['phone'];
+    customMessage = ds.data()!['message'];
     //Below try check is to check if retrieved data is Null
     //for some reason if else does not work
     try {
@@ -69,7 +68,7 @@ class FirebaseUtility {
     FirebaseUtility.name = name;
     FirebaseUtility.surname = surname;
     FirebaseUtility.phoneNumber = phoneNumber;
-    FirebaseUtility.customMessage = customMessage ?? 'error';
+    FirebaseUtility.customMessage = customMessage ?? kMessage;
   }
 
   /// Saves every local static variable in this class to database
@@ -78,7 +77,7 @@ class FirebaseUtility {
       'name': name,
       'surname': surname,
       'phone': phoneNumber,
-      'message' : customMessage,
+      'message': customMessage,
       'emergencyContacts': contacts,
       'favourites': favourites,
     }).catchError((error) => {print(error)});
@@ -132,6 +131,7 @@ class FirebaseUtility {
         .update({'surname': surname}).catchError(
             (error) => {print(error)}); //TODO handle error
   }
+
   static void updateCustomMessage(String message) {
     FirebaseUtility.customMessage = message;
     _fireStore

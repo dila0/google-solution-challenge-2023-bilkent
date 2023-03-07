@@ -7,6 +7,8 @@ const kBackgroundColor = Color(0xFFFCEEF7);
 const kBottomAppBarColor = Color(0XFFFFD7FC);
 const kCallBackgroundColor = Color(0xFF1A2319);
 
+const kMessage = "I am in danger!";
+
 const kButtonRoundness = 10.0;
 
 const kCallContainerColor = Color(0xBF070907);
