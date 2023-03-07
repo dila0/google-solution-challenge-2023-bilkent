@@ -1,11 +1,18 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_solution/screens/change_name_screen.dart';
+import 'package:google_solution/screens/change_password_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
 import 'package:google_solution/utilities/bottom_bar.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
+import 'package:google_solution/utilities/custom_animations.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
+import 'package:smart_alert_dialog/models/alert_dialog_style.dart';
+import 'package:smart_alert_dialog/models/alert_dialog_text.dart';
+import 'package:smart_alert_dialog/smart_alert_dialog.dart';
 
 import '../utilities/profile_container.dart';
 
@@ -17,6 +24,27 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool darkMode = false;
+  void _yesNoSmartAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => SmartAlertDialog(
+        style: AlertDialogStyle(
+            confirm: AlertDialogStyle.DEFAULT_CONFIRM
+                .copyWith(color: const Color(0xFFE53935)),
+            cancel: AlertDialogStyle.DEFAULT_CANCEL
+                .copyWith(color: const Color(0xFF26A69A)),
+            message: kContactUtilitiesTextStyle.copyWith(
+                fontWeight: FontWeight.bold),
+            title: kProfileNameTextStyle.copyWith(
+                fontWeight: FontWeight.bold, fontSize: 18)),
+        title: "Are you sure you would like to delete your account?",
+        text: AlertDialogText(),
+        message: "This action cannot be reversed!",
+        onConfirmPressed: () => FirebaseUtility.deleteAccount(context),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +61,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             centerTitle: false,
             titleSpacing: 0,
             automaticallyImplyLeading: false,
-            leading: null,
           ),
         ],
         body: Padding(
@@ -72,20 +99,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 settingsGroupTitle: "Account",
                 items: [
                   SettingsItem(
-                      icons: Icons.person_2_sharp,
-                      title: "Change name",
-                      iconStyle: IconStyle(),
-                      titleStyle: kSignUpInfoStyle,
-                      trailing: Text(
-                        "${FirebaseUtility.name} ${FirebaseUtility.surname}\n",
-                        textAlign: TextAlign.right,
-                        style: kProfileNameTextStyle,
-                      )),
+                    title: "Change name",
+                    icons: Icons.person_2_sharp,
+                    iconStyle: IconStyle(),
+                    titleStyle: kSignUpInfoStyle,
+                    onTap: () => Navigator.push(
+                        context,
+                        CustomAnimations.slideTransition(
+                          page: ChangeName(),
+                        )),
+                  ),
                   SettingsItem(
                     icons: Icons.password_rounded,
                     title: "Change password",
                     iconStyle: IconStyle(backgroundColor: Colors.teal),
                     titleStyle: kSignUpInfoStyle,
+                    onTap: () => Navigator.push(
+                        context,
+                        CustomAnimations.slideTransition(
+                          page: ChangePassword(),
+                        )),
                   ),
                   SettingsItem(
                     onTap: () {
@@ -98,7 +131,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   SettingsItem(
                       onTap: () {
-                        FirebaseUtility.deleteAccount(context);
+                        _yesNoSmartAlert(context);
                       },
                       icons: Icons.delete_forever,
                       iconStyle: IconStyle(backgroundColor: Colors.red),

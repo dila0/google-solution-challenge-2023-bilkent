@@ -14,6 +14,7 @@ class RegisterTextField extends StatelessWidget {
   final Function onChanged;
   final TextInputType inputType;
   final bool isLast;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

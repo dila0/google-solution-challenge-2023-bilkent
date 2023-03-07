@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import '../screens/start_screen.dart';
+import 'constants.dart';
 import 'snack_bar_utility.dart';
 
 class FirebaseUtility {
@@ -11,11 +12,13 @@ class FirebaseUtility {
   static final _auth = FirebaseAuth.instance;
   static const logOutTitle = 'Logged out';
   static const logOutMessage = 'Successfully logged out from the app';
+  static const changePasswordTitle = 'Password Changed!';
+  static const changePasswordMessage = 'Successfully changed the password';
   static const logOutFailTitle = 'Log out failed!';
-  static const logOutFailMessage = 'Failed to log out due to a system error';
+  static const failMessage = 'Failed due to a system error';
   static const deleteTitle = 'Account deleted';
   static const deleteMessage = 'Successfully deleted your account and data';
-  static const deleteFailTitle = 'Delete failed!';
+  static const systemFailTitle = 'Failed!';
   static const deleteFailMessage =
       'Failed to delete your account due to a system error';
   static String name = "";
@@ -117,7 +120,7 @@ class FirebaseUtility {
               })
           .catchError((error) => {
                 SnackBarUtility.showSystemFailureSnackBar(
-                    context, logOutFailMessage, logOutFailTitle)
+                    context, failMessage, logOutFailTitle)
               });
     }
     Navigator.pushNamedAndRemoveUntil(context, StartScreen.id,
@@ -135,10 +138,40 @@ class FirebaseUtility {
               })
           .catchError((error) => {
                 SnackBarUtility.showSystemFailureSnackBar(
-                    context, deleteFailMessage, deleteFailTitle)
+                    context, deleteFailMessage, systemFailTitle)
               });
     }
     Navigator.pushNamedAndRemoveUntil(context, StartScreen.id,
         (route) => false); //In any case Navigate back to start page
+  }
+
+  static bool updatePassword(
+      BuildContext context, String newPassword, String newPasswordCheck) {
+    if (newPassword != newPasswordCheck) {
+      SnackBarUtility.showFailureSnackBar(
+          context, 'Passwords does not match!', kGenericFailureSnackBarTitle);
+      return false;
+    }
+    if (newPassword.length < 6) {
+      SnackBarUtility.showFailureSnackBar(
+          context,
+          'Password should be longer than 6 characters!',
+          kGenericFailureSnackBarTitle);
+      return false;
+    }
+    if (_auth.currentUser != null) {
+      _auth.currentUser
+          ?.updatePassword(newPassword)
+          .then((value) => {
+                SnackBarUtility.showSuccessSnackBar(
+                    context, changePasswordMessage, changePasswordTitle)
+              })
+          .catchError((error) => {
+                SnackBarUtility.showSystemFailureSnackBar(
+                    context, failMessage, systemFailTitle)
+              });
+    }
+    return true; //TODO what if no user? is it even possible?
+    //TODO success message for SOME reason never shows (even when it in fact is successful)
   }
 }
