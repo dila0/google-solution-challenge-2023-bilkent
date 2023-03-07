@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_solution/models/messageData.dart';
 import '../screens/start_screen.dart';
 import 'constants.dart';
 import 'snack_bar_utility.dart';
@@ -24,6 +25,7 @@ class FirebaseUtility {
   static String name = "";
   static String surname = "";
   static String phoneNumber = "";
+  static String customMessage = "";
   static List<String> contacts = [];
   static Set<String> favourites = {};
 
@@ -63,10 +65,11 @@ class FirebaseUtility {
 
   /// Sets local static variables
   static void setUserData(
-      {required name, required surname, required phoneNumber}) {
+      {required name, required surname, required phoneNumber, customMessage}) {
     FirebaseUtility.name = name;
     FirebaseUtility.surname = surname;
     FirebaseUtility.phoneNumber = phoneNumber;
+    FirebaseUtility.customMessage = customMessage ?? 'error';
   }
 
   /// Saves every local static variable in this class to database
@@ -75,8 +78,9 @@ class FirebaseUtility {
       'name': name,
       'surname': surname,
       'phone': phoneNumber,
+      'message' : customMessage,
       'emergencyContacts': contacts,
-      'favourites': favourites
+      'favourites': favourites,
     }).catchError((error) => {print(error)});
 
     //TODO handle error
@@ -126,6 +130,14 @@ class FirebaseUtility {
         .collection('users')
         .doc(_auth.currentUser?.uid)
         .update({'surname': surname}).catchError(
+            (error) => {print(error)}); //TODO handle error
+  }
+  static void updateCustomMessage(String message) {
+    FirebaseUtility.customMessage = message;
+    _fireStore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .update({'message': message}).catchError(
             (error) => {print(error)}); //TODO handle error
   }
 

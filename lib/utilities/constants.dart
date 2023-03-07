@@ -164,6 +164,13 @@ const kProfileNameTextStyle = TextStyle(
   color: Colors.black,
 );
 
+const kEditTextStyle = TextStyle(
+  fontFamily: 'Poppins',
+  color: Colors.black,
+  decoration: TextDecoration.underline,
+  fontSize: 13.0,
+  fontWeight: FontWeight.w500,
+);
 const kProfileButton = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 14.0,
