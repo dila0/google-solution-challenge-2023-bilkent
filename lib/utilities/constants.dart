@@ -9,10 +9,7 @@ const kCallBackgroundColor = Color(0xFF1A2319);
 
 const kButtonRoundness = 10.0;
 
-
 const kCallContainerColor = Color(0xBF070907);
-
-
 
 const kCallerIdTextStyle = TextStyle(
   fontFamily: 'Poppins',
@@ -186,10 +183,12 @@ const kProfileButton = TextStyle(
 const kProfilePopUpStyle = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 17.0,
-  shadows: [Shadow(
-    color: Colors.black87,
-    offset: Offset(0, -3),
-  )],
+  shadows: [
+    Shadow(
+      color: Colors.black87,
+      offset: Offset(0, -3),
+    )
+  ],
   fontWeight: FontWeight.w900,
   decorationColor: Colors.black,
   color: Colors.transparent,

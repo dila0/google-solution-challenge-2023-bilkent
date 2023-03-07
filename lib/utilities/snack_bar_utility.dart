@@ -21,7 +21,7 @@ class SnackBarUtility {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  static void showFailureSnackBar(
+  static bool showFailureSnackBar(
       BuildContext context, String message, String title) {
     final snackBar = SnackBar(
       elevation: 0,
@@ -35,9 +35,10 @@ class SnackBarUtility {
       ),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    return false;
   }
 
-  static void showSystemFailureSnackBar(
+  static bool showSystemFailureSnackBar(
       BuildContext context, String message, String title) {
     final snackBar = SnackBar(
       elevation: 0,
@@ -51,9 +52,10 @@ class SnackBarUtility {
       ),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    return false;
   }
 
-  static void showSuccessSnackBar(
+  static bool showSuccessSnackBar(
       BuildContext context, String message, String title) {
     final snackBar = SnackBar(
       elevation: 0,
@@ -67,5 +69,6 @@ class SnackBarUtility {
       ),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    return true;
   }
 }

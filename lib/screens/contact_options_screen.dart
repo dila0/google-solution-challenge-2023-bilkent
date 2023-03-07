@@ -51,18 +51,6 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
             child: Center(
               child: Column(
                 children: <Widget>[
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        FirebaseUtility.logout(context);
-                      });
-                    },
-                    color: Colors.red,
-                    icon: const Icon(
-                      LineIcons.running,
-                      size: 50,
-                    ),
-                  ),
                   const SizedBox(height: kSignUpScreenDistanceFromTop),
                   Center(
                       child: Text(
