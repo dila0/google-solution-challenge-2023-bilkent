@@ -33,13 +33,19 @@ class FirebaseUtility {
         .collection("users")
         .doc(_auth.currentUser?.uid)
         .get()
-        .then((ds) {
-      name = ds.data()!['name'];
-      surname = ds.data()!['surname'];
-      phoneNumber = ds.data()!['phone'];
+        .then((ds) async {
+      await insertData(
+          ds); //TODO does not work waits for the process above and does not update the main screen in time
       //TODO adding favourites and contacts results in an error but should be done
     });
     return false;
+  }
+
+  static Future<bool> insertData(ds) async {
+    name = ds.data()!['name'];
+    surname = ds.data()!['surname'];
+    phoneNumber = ds.data()!['phone'];
+    return true;
   }
 
   /// Sets local static variables
