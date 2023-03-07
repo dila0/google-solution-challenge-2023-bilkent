@@ -10,8 +10,6 @@ import 'package:google_solution/screens/main_screen.dart';
 import 'package:google_solution/screens/settings_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'models/messageData.dart';
 import 'screens/sign_in_screen.dart';
@@ -28,12 +26,6 @@ import 'screens/phone_call_screen.dart';
 import 'screens/incoming_call_screen.dart';
 
 void main() async {
-
-  //initialize hive
-  await Hive.initFlutter();
-  var box = await Hive.openBox('db');
-  box.put('message', 'I NEED HELP LOLL');
-  //initialize firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   if (FirebaseAuth.instance.currentUser != null) {
