@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_solution/utilities/firebase_utility.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import '../models/callerData.dart';
@@ -10,12 +11,12 @@ import 'package:provider/provider.dart';
 
 class ContactCard extends StatefulWidget {
   ContactCard(
-      {this.contactName,
+      {required this.contactName,
       this.imageUrl,
       this.utilitiesText,
       this.durationText,
       required this.page});
-  final String? contactName;
+  final String contactName;
   final String? imageUrl;
   final String? utilitiesText;
   final String? durationText;
@@ -28,15 +29,19 @@ class ContactCard extends StatefulWidget {
 class _ContactCard extends State<ContactCard> {
   _ContactCard(this.contactName, this.imageUrl, this.utilitiesText,
       this.durationText, this.page);
-  final String? contactName;
+  final String contactName;
   final String? imageUrl;
   final String? utilitiesText;
   final String? durationText;
   final Widget page;
-
   bool selected = false;
+
   @override
   Widget build(BuildContext context) {
+    if (FirebaseUtility.favourites.contains(contactName)) {
+      selected = true;
+    }
+
     return GestureDetector(
       onTap: () {
         print('$selected');
@@ -87,11 +92,17 @@ class _ContactCard extends State<ContactCard> {
                         style: kContactDurationTextStyle,
                       ),
                       FavoriteButton(
+                        isFavorite: selected,
                         iconSize: 45.0,
                         iconDisabledColor: kBackgroundColor,
                         iconColor: kButtonColor,
                         valueChanged: (_isFavorite) {
-                          //TODO: Add the item to saved audio
+                          //TODO nasıl çalışıyor emin değilim bi bakmak lazım digotto ile -ati
+                          if (_isFavorite) {
+                            FirebaseUtility.addFavourite(contactName);
+                          } else {
+                            FirebaseUtility.removeFavourite(contactName);
+                          }
                           print('Is Favorite $_isFavorite');
                         },
                       ),

@@ -47,11 +47,11 @@ class _SignInScreenState extends State<SignInScreen> {
           email: email, password: password);
 
       if (user != null) {
-        await FirebaseUtility.refresh();
+        await FirebaseUtility.refresh()
+            .then((value) => Navigator.pushNamed(context, MainPage.id));
         setState(() {
           showSpinner = false;
         });
-        Navigator.pushNamed(context, MainPage.id);
         return;
       }
     } on FirebaseAuthException catch (error) {

@@ -25,7 +25,7 @@ class FirebaseUtility {
   static String surname = "";
   static String phoneNumber = "";
   static List<String> contacts = [];
-  static List<String> favourites = [];
+  static Set<String> favourites = {};
 
   ///read from database and update local static variables
   static Future<bool> refresh() async {
@@ -45,6 +45,19 @@ class FirebaseUtility {
     name = ds.data()!['name'];
     surname = ds.data()!['surname'];
     phoneNumber = ds.data()!['phone'];
+    //Below try check is to check if retrieved data is Null
+    //for some reason if else does not work
+    try {
+      favourites = Set<String>.from(ds.data()!['favourites']);
+    } catch (error) {
+      favourites = {};
+    }
+    try {
+      contacts = ds.data()!['contacts'] as List<String>;
+    } catch (error) {
+      contacts = [];
+    }
+
     return true;
   }
 
@@ -67,6 +80,24 @@ class FirebaseUtility {
     }).catchError((error) => {print(error)});
 
     //TODO handle error
+  }
+
+  static void addFavourite(String favourite) {
+    favourites.add(favourite);
+    _fireStore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .update({'favourites': favourites}).catchError(
+            (error) => {print(error)}); //TODO handle error
+  }
+
+  static void removeFavourite(String favourite) {
+    favourites.remove(favourite);
+    _fireStore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .update({'favourites': favourites}).catchError(
+            (error) => {print(error)}); //TODO handle error
   }
 
   /// All functions below updates their respective fields in the database
@@ -107,7 +138,7 @@ class FirebaseUtility {
             (error) => {print(error)}); //TODO handle error
   }
 
-  static void updateFavourites(List<String> favouritesByName) {
+  static void updateFavourites(Set<String> favouritesByName) {
     FirebaseUtility.favourites = favouritesByName;
     _fireStore
         .collection('users')
