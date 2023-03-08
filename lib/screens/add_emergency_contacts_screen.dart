@@ -14,11 +14,14 @@ class AddEmergencyContact extends StatefulWidget {
 }
 
 class _AddEmergencyContactState extends State<AddEmergencyContact> {
-  List<Widget> containers = [];
+  List<EmergencyContactTextField> containers = [];
 
   void deleteFunc(int index) {
     setState(() {
       containers.removeAt(index);
+      for (int i = index; i < containers.length; i++) {
+        containers[i].index--;
+      }
     });
   }
 

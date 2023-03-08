@@ -178,6 +178,15 @@ class FirebaseUtility {
             (error) => {print(error)}); //TODO handle error
   }
 
+  static void reset() {
+    name = "";
+    surname = "";
+    phoneNumber = "";
+    customMessage = kMessage;
+    contacts = [];
+    favourites = {};
+  }
+
   static void logout(BuildContext context) {
     if (_auth.currentUser != null) {
       _auth
@@ -191,6 +200,7 @@ class FirebaseUtility {
                     context, failMessage, logOutFailTitle)
               });
     }
+    reset();
     Navigator.pushNamedAndRemoveUntil(context, StartScreen.id,
         (route) => false); //In any case Navigate back to start page
   }
@@ -209,6 +219,7 @@ class FirebaseUtility {
                     context, deleteFailMessage, systemFailTitle)
               });
     }
+    reset();
     Navigator.pushNamedAndRemoveUntil(context, StartScreen.id,
         (route) => false); //In any case Navigate back to start page
   }

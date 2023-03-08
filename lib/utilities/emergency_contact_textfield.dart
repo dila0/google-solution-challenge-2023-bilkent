@@ -15,7 +15,7 @@ class EmergencyContactTextField extends StatefulWidget {
   IconData iconName;
   String startNumber;
   final bool isLast;
-  final int index;
+  int index;
   final Function deleteFunction;
 
   @override
