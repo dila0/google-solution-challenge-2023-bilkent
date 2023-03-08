@@ -175,7 +175,16 @@ class FirebaseUtility {
             (error) => {print(error)}); //TODO handle error
   }
 
-  static void updateCustomMessage(String message) {
+  static void updateCustomMessage(String message, BuildContext context) {
+    if (message == FirebaseUtility.customMessage) {
+      return;
+    }
+    if (message == "") {
+      SnackBarUtility.showFailureSnackBar(
+          context,
+          "Emergency message cannot be empty",
+          "Please enter a valid emergency message");
+    }
     FirebaseUtility.customMessage = message;
     _fireStore
         .collection('users')
