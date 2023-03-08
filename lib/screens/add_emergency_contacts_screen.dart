@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution/utilities/emergency_contact_textfield.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
-
 import '../utilities/constants.dart';
 import '../utilities/profile_container.dart';
 import '../utilities/register_text_field.dart';
+import '../utilities/custom_contact_picker.dart';
 
 class AddEmergencyContact extends StatefulWidget {
   const AddEmergencyContact({Key? key}) : super(key: key);
@@ -28,10 +28,13 @@ class _AddEmergencyContactState extends State<AddEmergencyContact> {
   void initContainers() {
     containers = [];
     for (int i = 0; i < FirebaseUtility.contacts.length; i++) {
+      final Contact c = Contact();
+      c.phoneNumber = FirebaseUtility.contacts[i];
+      c.fullName = FirebaseUtility.contactNames[i];
       containers.add(
         EmergencyContactTextField(
           iconName: Icons.edit,
-          startNumber: FirebaseUtility.contacts[i],
+          startContact: c,
           index: i,
           deleteFunction: deleteFunc,
         ),
@@ -51,7 +54,7 @@ class _AddEmergencyContactState extends State<AddEmergencyContact> {
       setState(() {
         containers.add(EmergencyContactTextField(
           iconName: Icons.edit,
-          startNumber: "",
+          startContact: Contact(fullName: "", phoneNumbers: []),
           index: containers.length,
           deleteFunction: deleteFunc,
         ));

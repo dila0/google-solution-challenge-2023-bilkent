@@ -1,19 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
+import 'package:google_solution/utilities/snack_bar_utility.dart';
 import 'constants.dart';
+import 'custom_contact_picker.dart';
 
 class EmergencyContactTextField extends StatefulWidget {
   EmergencyContactTextField(
       {super.key,
       required this.iconName,
-      required this.startNumber,
+      required this.startContact,
       required this.index,
       required this.deleteFunction,
       this.isLast = false});
 
   IconData iconName;
-  String startNumber;
+  Contact startContact;
   final bool isLast;
   int index;
   final Function deleteFunction;
@@ -24,159 +26,108 @@ class EmergencyContactTextField extends StatefulWidget {
 }
 
 class _EmergencyContactTextFieldState extends State<EmergencyContactTextField> {
-  bool _isEnable = false;
-
   @override
   Widget build(BuildContext context) {
-    void finished({required String input}) {
-      if (input != "" && input != widget.startNumber) {
-        FirebaseUtility.addContact(input, widget.startNumber);
+    Contact currentContact = widget.startContact;
+    Contact prevContact = widget.startContact;
+
+    bool finished(Contact? c) {
+      if (c == null || c.phoneNumber == "") {
+        SnackBarUtility.showFailureSnackBar(
+            context,
+            "Select a contact with a phone number!",
+            "Please select a valid contact");
+        return false;
+      }
+      if (FirebaseUtility.contacts.contains(c.phoneNumber)) {
+        SnackBarUtility.showFailureSnackBar(
+            context,
+            "A person with this phone number exists",
+            "Please select a valid contact");
+        widget.deleteFunction(widget.index);
+        return false;
+      } else if (FirebaseUtility.contactNames.contains(c.fullName)) {
+        SnackBarUtility.showSystemFailureSnackBar(
+            context, "A * has been added to contacts name.", "Name conflict");
+        c.fullName = "*${c.fullName}";
+      }
+      if (c.fullName != "") {
+        FirebaseUtility.addContact(c, prevContact);
         setState(() {
-          widget.startNumber = input;
+          widget.startContact = c;
+          prevContact = widget.startContact;
         });
       }
+      return true;
     }
 
-    void delete(String input) {
+    void delete(Contact input) {
       widget.deleteFunction(widget.index);
-      if (input != "") {
-        FirebaseUtility.removeContact(widget.startNumber);
+      if (input.fullName != "") {
+        FirebaseUtility.removeContact(prevContact);
       }
     }
 
-    TextEditingController _controller =
-        TextEditingController(text: widget.startNumber);
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(kButtonRoundness)),
-        color: Colors.white60,
-      ),
       margin: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.05,
           vertical: MediaQuery.of(context).size.width * 0.01),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.05),
-                width: MediaQuery.of(context).size.width * 0.5,
-                child: Visibility(
-                  visible: _isEnable,
-                  child: TextField(
-                    autofocus: true,
-                    /*onTapOutside: (var a) {
-                      setState(() {
-                        _controller.text = widget.startNumber;
-                        _isEnable = false;
-                      });
-                    },*/
-                    onSubmitted: (s) {
-                      setState(() {
-                        _isEnable = false;
-                        finished(input: s);
-                      });
+      color: Colors.white60,
+      child: Material(
+        borderRadius: const BorderRadius.all(Radius.circular(kButtonRoundness)),
+        elevation: 1.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                currentContact.fullName ?? "-",
+                style: kProfileNameTextStyle,
+              ),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 1),
+                  child: IconButton(
+                    onPressed: () async {
+                      Contact prev = widget.startContact;
+                      print(prev.fullName);
+                      Contact? c = await FlutterContactPicker.selectContact();
+                      if (finished(c)) {
+                        setState(() {
+                          currentContact.fullName = c?.fullName ?? "";
+                          currentContact.phoneNumber = c?.phoneNumber ?? "";
+                        });
+                      }
                     },
-                    style: kSignUpTextFieldTextStyle,
-                    textAlign: TextAlign.left,
-                    keyboardType: TextInputType.phone,
-                    textInputAction: widget.isLast
-                        ? TextInputAction.done
-                        : TextInputAction.next,
-                    controller: _controller,
-                    enabled: _isEnable,
+                    icon: Icon(widget.iconName),
+                    iconSize: kBottomIconSize,
+                    color: kCirclesColor,
                   ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.05),
-                width: MediaQuery.of(context).size.width * 0.5,
-                child: Visibility(
-                  visible: !_isEnable,
-                  child: TextField(
-                    decoration: const InputDecoration(border: InputBorder.none),
-                    autofocus: false,
-                    /*onTapOutside: (var a) {
-                  setState(() {
-                    _controller.text = widget.startNumber;
-                    _isEnable = false;
-                  });
-                },*/
-                    onSubmitted: (s) {
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 1),
+                  child: IconButton(
+                    onPressed: () {
                       setState(() {
-                        _isEnable = false;
-                        finished(input: s);
+                        delete(currentContact);
                       });
                     },
-                    style: kSignUpTextFieldTextStyle,
-                    textAlign: TextAlign.left,
-                    keyboardType: TextInputType.phone,
-                    textInputAction: widget.isLast
-                        ? TextInputAction.done
-                        : TextInputAction.next,
-                    controller: _controller,
-                    enabled: _isEnable,
+                    icon: const Icon(Icons.delete_rounded),
+                    iconSize: kBottomIconSize,
+                    color: kCirclesColor,
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
 
-          Visibility(
-            visible: !_isEnable,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 1),
-              child: IconButton(
-                onPressed: () {
-                  setState(() {
-                    _isEnable = true;
-                  });
-                },
-                icon: Icon(widget.iconName),
-                iconSize: kBottomIconSize,
-                color: kCirclesColor,
-              ),
-            ),
-          ),
-          Visibility(
-            visible: !_isEnable,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 1),
-              child: IconButton(
-                onPressed: () {
-                  setState(() {
-                    delete(_controller.text);
-                  });
-                },
-                icon: const Icon(Icons.delete_rounded),
-                iconSize: kBottomIconSize,
-                color: kCirclesColor,
-              ),
-            ),
-          ),
-          Visibility(
-            visible: _isEnable,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 5.0, bottom: 5.0, left: 5.0, right: 8.0),
-              child: IconButton(
-                onPressed: () {
-                  setState(() {
-                    _isEnable = false;
-                    finished(input: _controller.text);
-                  });
-                },
-                icon: const Icon(Icons.done),
-                iconSize: kBottomIconSize,
-                color: kCirclesColor,
-              ),
-            ),
-          ),
           //TODO: Take username
-        ],
+        ),
       ),
     );
   }

@@ -6,8 +6,8 @@ class ProfilePageContainer extends StatelessWidget {
   ProfilePageContainer({
     super.key,
     required this.iconName,
-    required this.profileNameString,
-    required this.userNameString,
+    this.profileNameString = "",
+    this.userNameString = "",
   });
 
   Icon iconName;

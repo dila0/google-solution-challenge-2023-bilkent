@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_solution/models/messageData.dart';
 import '../screens/start_screen.dart';
 import 'constants.dart';
+import 'custom_contact_picker.dart';
 import 'snack_bar_utility.dart';
 
 class FirebaseUtility {
@@ -27,6 +28,7 @@ class FirebaseUtility {
   static String phoneNumber = "";
   static String customMessage = kMessage;
   static List<String> contacts = [];
+  static List<String> contactNames = [];
   static Set<String> favourites = {};
 
   ///read from database and update local static variables
@@ -55,8 +57,10 @@ class FirebaseUtility {
     }
     try {
       contacts = List<String>.from(ds.data()!['emergencyContacts']);
+      contactNames = List<String>.from(ds.data()!['contactNames']);
     } catch (error) {
       contacts = [];
+      contactNames = [];
     }
 
     return true;
@@ -80,6 +84,7 @@ class FirebaseUtility {
       'message': customMessage,
       'emergencyContacts': contacts,
       'favourites': favourites,
+      'contactNames': contactNames,
     }).catchError((error) => {print(error)});
 
     //TODO handle error
@@ -103,34 +108,53 @@ class FirebaseUtility {
             (error) => {print(error)}); //TODO handle error
   }
 
-  static void addContact(String contact, String oldContact) {
-    contacts.remove(oldContact);
-    contacts.add(contact);
+  static void addContact(Contact contact, Contact oldContact) {
+    contacts.remove(oldContact.phoneNumber);
+    contacts.add(contact.phoneNumber);
+    contactNames.remove(oldContact.fullName);
+    contactNames.add(contact.fullName);
+
     _fireStore
         .collection('users')
         .doc(_auth.currentUser?.uid)
         .update({'emergencyContacts': contacts}).catchError(
             (error) => {print(error)}); //TODO handle error
+
+    _fireStore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .update({'contactNames': contactNames}).catchError(
+            (error) => {print(error)}); //TODO handle error
   }
 
-  static void removeContact(String contact) {
-    contacts.remove(contact);
+  static void removeContact(Contact contact) {
+    contacts.remove(contact.phoneNumber);
+    contactNames.remove(contact.fullName);
     _fireStore
         .collection('users')
         .doc(_auth.currentUser?.uid)
         .update({'emergencyContacts': contacts}).catchError(
+            (error) => {print(error)}); //TODO handle error
+    _fireStore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .update({'contactNames': contactNames}).catchError(
             (error) => {print(error)}); //TODO handle error
   }
 
   /// All functions below updates their respective fields in the database
   /// Writing local static variables to database
-  static void updateContacts(List<String> contacts) {
+  static void updateContacts(List<String> contacts, List<String> contactNames) {
     FirebaseUtility.contacts = contacts;
     _fireStore
         .collection('users')
         .doc(_auth.currentUser?.uid)
         .update({'emergencyContacts': contacts}).catchError(
             (error) => {print(error)}); //TODO handle error
+
+    FirebaseUtility.contactNames = contactNames;
+    _fireStore.collection('users').doc(_auth.currentUser?.uid).update(
+        {'contactNames': contactNames}).catchError((error) => {print(error)});
   }
 
   static void updateName(String name) {
