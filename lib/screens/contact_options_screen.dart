@@ -43,117 +43,121 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
     String userName = "${FirebaseUtility.name} ${FirebaseUtility.surname}";
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: Stack(
-        //TODO her şeyi scrollview içine mi alsak? welcome falan da kaysa, sliver appbar diye bişey var ondan yapılabilir
-        children: <Widget>[
-          const Circles(),
-          SafeArea(
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  const SizedBox(height: kSignUpScreenDistanceFromTop),
-                  Center(
-                      child: Text(
-                    welcomeString,
-                    style: kSignUpInfoStyle.copyWith(
-                        fontSize: MediaQuery.of(context).size.height / 20),
-                  )),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 0,
-                        horizontal: MediaQuery.of(context).size.height / 15),
-                    child: Center(
-                        child: Text(
-                      userName,
-                      style: kSignUpInfoStyle.copyWith(
-                        fontSize: 40,
-                      ),
-                      textAlign: TextAlign.center,
-                    )),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 40),
-                  Text(startText, style: kSignUpInScreen),
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.height / 40),
-                          child: ListView(
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            children: [
-                              ContactCard(
-                                page: CallInfo(),
-                                imageUrl: 'images/mom_daughter.png',
-                                contactName: 'MOM <3',
-                                durationText: '2min',
-                                utilitiesText:
-                                    'A two minute relaxing audio with your mom while walking',
-                              ),
-                              SizedBox(height: 10.0),
-                              ContactCard(
-                                page: CallInfo(),
-                                imageUrl: 'images/dad_girl.png',
-                                contactName: 'DAD <3',
-                                durationText: '2min',
-                                utilitiesText:
-                                    'A two minute relaxing audio with your dad while walking',
-                              ),
-                              SizedBox(height: 10.0),
-                              ContactCard(
-                                page: CallInfo(),
-                                imageUrl: 'images/bestie.png',
-                                contactName: 'BESTIE <3',
-                                durationText: '2min',
-                                utilitiesText:
-                                    'A two minute relaxing audio with your best friend while walking',
-                              ),
-                              SizedBox(height: 10.0),
-                              ContactCard(
-                                page: CallInfo(),
-                                imageUrl: 'images/lovers.png',
-                                contactName: 'LOVER <3',
-                                durationText: '2min',
-                                utilitiesText:
-                                    'A two minute relaxing audio with your lover while walking',
-                              ),
-                              SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height / 8),
-                            ],
-                          ),
-                        ),
-                        Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.height /
-                                        40),
-                                child: RegisterButton(
-                                  title: 'EMERGENCY CALL',
-                                  minWidth:
-                                      MediaQuery.of(context).size.height / 2,
-                                  height:
-                                      MediaQuery.of(context).size.height / 12,
-                                  pressedFunct: emergencyPressed,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
+            [
+          MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            removeBottom: true,
+            child: SliverAppBar(
+              stretch: true,
+              title: const Circles(),
+              backgroundColor: kBackgroundColor,
+              elevation: 0,
+              toolbarHeight: MediaQuery.of(context).size.height / 6,
+              centerTitle: false,
+              titleSpacing: 0,
+              automaticallyImplyLeading: false,
             ),
           ),
         ],
+        body: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  children: [
+                    Center(
+                        child: Text(
+                      welcomeString,
+                      style: kSignUpInfoStyle.copyWith(
+                          fontSize: MediaQuery.of(context).size.height / 20),
+                    )),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 0,
+                          horizontal: MediaQuery.of(context).size.height / 15),
+                      child: Center(
+                          child: Text(
+                        userName,
+                        style: kSignUpInfoStyle.copyWith(
+                          fontSize: 40,
+                        ),
+                        textAlign: TextAlign.center,
+                      )),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height / 40),
+                    Center(child: Text(startText, style: kSignUpInScreen)),
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.height / 40),
+                            child: ListView(
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              children: [
+                                ContactCard(
+                                  page: CallInfo(),
+                                  imageUrl: 'images/mom_daughter.png',
+                                  contactName: 'MOM <3',
+                                  durationText: '2min',
+                                  utilitiesText:
+                                      'A two minute relaxing audio with your mom while walking',
+                                ),
+                                SizedBox(height: 10.0),
+                                ContactCard(
+                                  page: CallInfo(),
+                                  imageUrl: 'images/dad_girl.png',
+                                  contactName: 'DAD <3',
+                                  durationText: '2min',
+                                  utilitiesText:
+                                      'A two minute relaxing audio with your dad while walking',
+                                ),
+                                SizedBox(height: 10.0),
+                                ContactCard(
+                                  page: CallInfo(),
+                                  imageUrl: 'images/bestie.png',
+                                  contactName: 'BESTIE <3',
+                                  durationText: '2min',
+                                  utilitiesText:
+                                      'A two minute relaxing audio with your best friend while walking',
+                                ),
+                                SizedBox(height: 10.0),
+                                ContactCard(
+                                  page: CallInfo(),
+                                  imageUrl: 'images/lovers.png',
+                                  contactName: 'LOVER <3',
+                                  durationText: '2min',
+                                  utilitiesText:
+                                      'A two minute relaxing audio with your lover while walking',
+                                ),
+                                SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height / 8),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )),
+            ],
+          ),
+        ),
       ),
     );
   }
