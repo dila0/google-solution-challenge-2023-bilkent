@@ -51,16 +51,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
             [
-          SliverAppBar(
-            floating: true,
-            stretch: true,
-            title: Circles(),
-            backgroundColor: kBackgroundColor,
-            elevation: 0,
-            toolbarHeight: MediaQuery.of(context).size.height / 4,
-            centerTitle: false,
-            titleSpacing: 0,
-            automaticallyImplyLeading: false,
+          MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            child: SliverAppBar(
+              stretch: true,
+              title: const Circles(),
+              backgroundColor: kBackgroundColor,
+              elevation: 0,
+              toolbarHeight: MediaQuery.of(context).size.height / 4,
+              centerTitle: false,
+              titleSpacing: 0,
+              automaticallyImplyLeading: false,
+            ),
           ),
         ],
         body: Padding(
