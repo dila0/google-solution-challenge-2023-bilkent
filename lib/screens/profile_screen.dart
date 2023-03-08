@@ -159,7 +159,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     setState(() {
                                       // db.put('message', value);
                                       FirebaseUtility.updateCustomMessage(
-                                          value);
+                                          value, context);
                                       FirebaseUtility.customMessage =
                                           FirebaseUtility.customMessage;
                                       isEnabled = false;
