@@ -48,137 +48,138 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
-            [
-          SliverAppBar(
-            floating: true,
-            stretch: true,
-            title: Circles(),
-            backgroundColor: kBackgroundColor,
-            elevation: 0,
-            toolbarHeight: MediaQuery.of(context).size.height / 4,
-            centerTitle: false,
-            titleSpacing: 0,
-            automaticallyImplyLeading: false,
-          ),
-        ],
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              SettingsGroup(
-                settingsGroupTitle: "Appearance",
-                settingsGroupTitleStyle:
-                    kSignUpInfoStyle.copyWith(fontWeight: FontWeight.w900),
-                items: [
-                  SettingsItem(
-                    onTap: () {
-                      setState(() {
-                        darkMode = !darkMode;
-                      });
-                    },
-                    icons: Icons.dark_mode_rounded,
-                    iconStyle: IconStyle(
-                      backgroundColor: Colors.black54,
-                    ),
-                    title: 'Dark mode',
-                    subtitle: "Automatic",
-                    trailing: Switch.adaptive(
-                      value: darkMode,
-                      onChanged: (value) {},
-                    ),
+      body: MediaQuery.removePadding(
+        removeTop: true,
+        context: context,
+        child: ListView(
+          children: [
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: const [
+                  Circles(),
+                ],
+              ),
+            ),
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                children: [
+                  SettingsGroup(
+                    settingsGroupTitle: "Appearance",
+                    settingsGroupTitleStyle:
+                        kSignUpInfoStyle.copyWith(fontWeight: FontWeight.w900),
+                    items: [
+                      SettingsItem(
+                        onTap: () {
+                          setState(() {
+                            darkMode = !darkMode;
+                          });
+                        },
+                        icons: Icons.dark_mode_rounded,
+                        iconStyle: IconStyle(
+                          backgroundColor: Colors.black54,
+                        ),
+                        title: 'Dark mode',
+                        subtitle: "Automatic",
+                        trailing: Switch.adaptive(
+                          value: darkMode,
+                          onChanged: (value) {},
+                        ),
+                      ),
+                    ],
+                  ),
+                  // You can add a settings title
+                  SettingsGroup(
+                    settingsGroupTitleStyle:
+                        kSignUpInfoStyle.copyWith(fontWeight: FontWeight.w900),
+                    settingsGroupTitle: "Account",
+                    items: [
+                      SettingsItem(
+                        title: "Change name",
+                        icons: Icons.person_2_sharp,
+                        iconStyle: IconStyle(),
+                        titleStyle: kSignUpInfoStyle,
+                        onTap: () => Navigator.push(
+                            context,
+                            CustomAnimations.slideTransition(
+                              page: ChangeName(),
+                            )),
+                      ),
+                      SettingsItem(
+                        icons: Icons.password_rounded,
+                        title: "Change password",
+                        iconStyle: IconStyle(backgroundColor: Colors.teal),
+                        titleStyle: kSignUpInfoStyle,
+                        onTap: () => Navigator.push(
+                            context,
+                            CustomAnimations.slideTransition(
+                              page: ChangePassword(),
+                            )),
+                      ),
+                      SettingsItem(
+                        onTap: () {
+                          FirebaseUtility.logout(context);
+                        },
+                        icons: Icons.exit_to_app_rounded,
+                        iconStyle: IconStyle(backgroundColor: Colors.amber),
+                        title: "Sign out",
+                        titleStyle: kSignUpInfoStyle,
+                      ),
+                      SettingsItem(
+                          onTap: () {
+                            _yesNoSmartAlert(context);
+                          },
+                          icons: Icons.delete_forever,
+                          iconStyle: IconStyle(backgroundColor: Colors.red),
+                          title: "Delete account",
+                          titleStyle: kSignUpInfoStyle.copyWith(
+                              fontWeight: FontWeight.bold, color: Colors.red)),
+                    ],
+                  ),
+                  SettingsGroup(
+                    settingsGroupTitleStyle:
+                        kSignUpInfoStyle.copyWith(fontWeight: FontWeight.w900),
+                    settingsGroupTitle: "Information",
+                    items: [
+                      SettingsItem(
+                        onTap: () {},
+                        icons: Icons.share_rounded,
+                        iconStyle: IconStyle(
+                          backgroundColor: Colors.lightGreen,
+                        ),
+                        title: 'Share',
+                        subtitle: "Share our App with your friends <3",
+                      ),
+                      SettingsItem(
+                        onTap: () {},
+                        icons: Icons.info_rounded,
+                        iconStyle: IconStyle(
+                          backgroundColor: Colors.purple,
+                        ),
+                        title: 'About',
+                        subtitle: "Learn more about our App",
+                      ),
+                      SettingsItem(
+                        onTap: () {},
+                        icons: Icons.insert_drive_file_outlined,
+                        iconStyle: IconStyle(
+                          backgroundColor: Colors.blueGrey,
+                        ),
+                        title: 'KVKK',
+                        subtitle: "Read KVKK",
+                      ),
+                    ],
                   ),
                 ],
               ),
-              // You can add a settings title
-              SettingsGroup(
-                settingsGroupTitleStyle:
-                    kSignUpInfoStyle.copyWith(fontWeight: FontWeight.w900),
-                settingsGroupTitle: "Account",
-                items: [
-                  SettingsItem(
-                    title: "Change name",
-                    icons: Icons.person_2_sharp,
-                    iconStyle: IconStyle(),
-                    titleStyle: kSignUpInfoStyle,
-                    onTap: () => Navigator.push(
-                        context,
-                        CustomAnimations.slideTransition(
-                          page: ChangeName(),
-                        )),
-                  ),
-                  SettingsItem(
-                    icons: Icons.password_rounded,
-                    title: "Change password",
-                    iconStyle: IconStyle(backgroundColor: Colors.teal),
-                    titleStyle: kSignUpInfoStyle,
-                    onTap: () => Navigator.push(
-                        context,
-                        CustomAnimations.slideTransition(
-                          page: ChangePassword(),
-                        )),
-                  ),
-                  SettingsItem(
-                    onTap: () {
-                      FirebaseUtility.logout(context);
-                    },
-                    icons: Icons.exit_to_app_rounded,
-                    iconStyle: IconStyle(backgroundColor: Colors.amber),
-                    title: "Sign out",
-                    titleStyle: kSignUpInfoStyle,
-                  ),
-                  SettingsItem(
-                      onTap: () {
-                        _yesNoSmartAlert(context);
-                      },
-                      icons: Icons.delete_forever,
-                      iconStyle: IconStyle(backgroundColor: Colors.red),
-                      title: "Delete account",
-                      titleStyle: kSignUpInfoStyle.copyWith(
-                          fontWeight: FontWeight.bold, color: Colors.red)),
-                ],
-              ),
-              SettingsGroup(
-                settingsGroupTitleStyle:
-                    kSignUpInfoStyle.copyWith(fontWeight: FontWeight.w900),
-                settingsGroupTitle: "Information",
-                items: [
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.share_rounded,
-                    iconStyle: IconStyle(
-                      backgroundColor: Colors.lightGreen,
-                    ),
-                    title: 'Share',
-                    subtitle: "Share our App with your friends <3",
-                  ),
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.info_rounded,
-                    iconStyle: IconStyle(
-                      backgroundColor: Colors.purple,
-                    ),
-                    title: 'About',
-                    subtitle: "Learn more about our App",
-                  ),
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.insert_drive_file_outlined,
-                    iconStyle: IconStyle(
-                      backgroundColor: Colors.blueGrey,
-                    ),
-                    title: 'KVKK',
-                    subtitle: "Read KVKK",
-                  ),
-                ],
-              ),
-            ],
-          ),
+            )),
+          ],
         ),
       ),
-      backgroundColor: kBackgroundColor,
     );
   }
 }

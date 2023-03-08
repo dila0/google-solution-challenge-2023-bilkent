@@ -8,7 +8,6 @@ class FlutterContactPicker {
   static const MethodChannel _channel =
       MethodChannel('flutter_native_contact_picker');
 
-  /// Method to call native code and get contact detail
   static Future<Contact?> selectContact() async {
     final Map<dynamic, dynamic>? result =
         await _channel.invokeMethod('selectContact');
@@ -19,7 +18,6 @@ class FlutterContactPicker {
   }
 }
 
-/// Represents a contact selected by the user.
 class Contact {
   Contact({this.fullName = "", List<String>? phoneNumbers}) {
     if (phoneNumbers == null) {
