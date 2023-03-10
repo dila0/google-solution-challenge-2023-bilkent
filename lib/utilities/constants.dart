@@ -152,6 +152,13 @@ const kSavedAudioTextStyle = TextStyle(
   fontWeight: FontWeight.w900,
 );
 
+const kWarningTextStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 13.0,
+  color: Colors.black87,
+  fontWeight: FontWeight.w500,
+);
+
 const kEmergencyContactTextStyle = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 17.0,
