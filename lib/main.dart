@@ -48,9 +48,10 @@ class GoogleSolution extends StatelessWidget {
             ? IntroScreen()
             : MainPage(), //check if already logged in
         theme: ThemeData(
+          scaffoldBackgroundColor: kBackgroundColor,
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
-              primary: Colors.white70,
+              primary: Colors.black87,
             ),
           ),
         ),

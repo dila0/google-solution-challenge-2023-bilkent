@@ -27,6 +27,7 @@ class ContactCard extends StatefulWidget {
 }
 
 class _ContactCard extends State<ContactCard> {
+
   _ContactCard(this.contactName, this.imageUrl, this.utilitiesText,
       this.durationText, this.page);
   final String contactName;
@@ -39,6 +40,9 @@ class _ContactCard extends State<ContactCard> {
 
   @override
   Widget build(BuildContext context) {
+
+    double deviceWidth =  MediaQuery.of(context).size.width;
+    print("Width = $deviceWidth");
     if (FirebaseUtility.favourites.contains(contactName)) {
       fav = true;
     }
@@ -57,7 +61,7 @@ class _ContactCard extends State<ContactCard> {
         color: kContactColor,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
-          width: 330.0,
+          width:(deviceWidth < 400) ? 100 : 330.0,
           height: selected ? 160.0 : 130.0,
           child: Column(
             children: <Widget>[
@@ -67,14 +71,15 @@ class _ContactCard extends State<ContactCard> {
                 style: kContactNameTextStyle,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  const SizedBox(width: 10.0),
+                  //const SizedBox(width: 10.0),
                   Image.asset(
                     imageUrl ?? '',
                     height: 60.0,
                     width: 60.0,
                   ),
-                  const SizedBox(width: 15.0),
+                  //const SizedBox(width: 15.0),
                   SizedBox(
                     width: 200.0,
                     child: Text(
@@ -83,7 +88,7 @@ class _ContactCard extends State<ContactCard> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const SizedBox(width: 10.0),
+                  //const SizedBox(width: 10.0),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
