@@ -10,6 +10,7 @@ import 'package:google_solution/utilities/bottom_bar.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import 'package:google_solution/utilities/custom_animations.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_alert_dialog/models/alert_dialog_style.dart';
 import 'package:smart_alert_dialog/models/alert_dialog_text.dart';
 import 'package:smart_alert_dialog/smart_alert_dialog.dart';
@@ -23,7 +24,9 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool darkMode = false;
+  late bool triggerWordDetection;
+  late SharedPreferences prefs;
+
   void _yesNoSmartAlert(BuildContext context) {
     showDialog(
       context: context,
@@ -43,6 +46,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onConfirmPressed: () => FirebaseUtility.deleteAccount(context),
       ),
     );
+  }
+
+  void getPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      triggerWordDetection = prefs.getBool('triggerWord') ?? false;
+    });
+  }
+
+  void changeTriggerWordDetectionStatus() async {
+    triggerWordDetection = !triggerWordDetection;
+    await prefs.setBool('triggerWord', triggerWordDetection);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getPreferences();
   }
 
   @override
@@ -72,24 +94,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
             physics: const BouncingScrollPhysics(),
             children: [
               SettingsGroup(
-                settingsGroupTitle: "Appearance",
+                settingsGroupTitle: "Preferences",
                 settingsGroupTitleStyle:
                     kSignUpInfoStyle.copyWith(fontWeight: FontWeight.w900),
                 items: [
                   SettingsItem(
                     onTap: () {
                       setState(() {
-                        darkMode = !darkMode;
+                        changeTriggerWordDetectionStatus();
                       });
                     },
-                    icons: Icons.dark_mode_rounded,
+                    icons: Icons.mic,
                     iconStyle: IconStyle(
                       backgroundColor: Colors.black54,
                     ),
-                    title: 'Dark mode',
-                    subtitle: "Automatic",
+                    title: 'Trigger Word Detection',
+                    subtitle: "Experimental!",
                     trailing: Switch.adaptive(
-                      value: darkMode,
+                      value: triggerWordDetection,
                       onChanged: (value) {},
                     ),
                   ),
