@@ -9,6 +9,7 @@ import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
 import 'package:google_solution/utilities/contact_card.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_solution/utilities/bottom_bar.dart';
 import 'package:google_solution/utilities/register_button.dart';
 import 'package:google_solution/contact_options/mom_screen.dart';
@@ -34,14 +35,65 @@ class ContactOptionsScreen extends StatefulWidget {
   _ContactOptionsScreenState createState() => _ContactOptionsScreenState();
 }
 
+
+/// Determine the current position of the device.
+///
+/// When the location services are not enabled or permissions
+/// are denied the `Future` will return an error.
+Future<Position> _determinePosition() async {
+  bool serviceEnabled;
+  LocationPermission permission;
+
+  // Test if location services are enabled.
+  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    // Location services are not enabled don't continue
+    // accessing the position and request users of the
+    // App to enable the location services.
+    return Future.error('Location services are disabled.');
+  }
+
+  permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      // Permissions are denied, next time you could try
+      // requesting permissions again (this is also where
+      // Android's shouldShowRequestPermissionRationale
+      // returned true. According to Android guidelines
+      // your App should show an explanatory UI now.
+      return Future.error('Location permissions are denied');
+    }
+  }
+
+  if (permission == LocationPermission.deniedForever) {
+    // Permissions are denied forever, handle appropriately.
+    return Future.error(
+        'Location permissions are permanently denied, we cannot request permissions.');
+  }
+
+  // When we reach here, permissions are granted and we can
+  // continue accessing the position of the device.
+  Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  return position;
+}
 class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
   int _counter = 0;
   StreamController<int>? _events;
+  Position? position;
   @override
   initState() {
     super.initState();
     _events = new StreamController<int>();
     _events?.add(5);
+    Future<Position> pos;
+    if(position == null){
+      pos =  _determinePosition();
+      _determinePosition().then(
+              (Position s) => setState(() {position = s;})
+      );
+    }
+
   }
 
   Timer? _timer;
@@ -79,7 +131,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
     });
   }
 
-  void alertD(BuildContext ctx) {
+  void alertD(BuildContext ctx, Position position) {
     var alert = AlertDialog(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -156,7 +208,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                                 _events?.close();
                                 _events = new StreamController<int>.broadcast();
                                 _events?.add(5);
-                                sendSMS(message: message, recipients: contacts);
+                                sendSMS(message: "$message   https://www.google.com/maps/search/?api=1&query=${position.latitude},${position.longitude}.", recipients: contacts);
                                 launchUrl(Uri.parse("tel://112"));
                                 Navigator.pop(context, 'OK');
                               },
@@ -352,7 +404,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                           height: MediaQuery.of(context).size.height / 12,
                           pressedFunct: () => {
                                 _startTimer(),
-                                alertD(context),
+                                alertD(context, position! ),
                               }),
                     ),
                   ],
