@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_solution/models/messageData.dart';
@@ -16,12 +18,13 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  Color pickedColor = FirebaseUtility.myColor;
   Widget buildColorPicker() {
     return ColorPicker(
-        pickerColor: myColor,
+        pickerColor: FirebaseUtility.myColor,
         onColorChanged: (color) {
           setState(() {
-            myColor = color;
+            pickedColor = color;
           });
         });
   }
@@ -39,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             buildColorPicker(),
             TextButton(
-              child: Text(
+              child: const Text(
                 'SELECT',
                 style: TextStyle(
                   fontSize: 20.0,
@@ -48,6 +51,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               onPressed: () {
                 Navigator.of(context).pop();
+                setState(() {
+                  FirebaseUtility.updateColor(pickedColor);
+                });
               },
             ),
           ],
@@ -56,7 +62,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Color myColor = kButtonColor;
   bool isEnabled = false;
   final _auth = FirebaseAuth.instance;
 
@@ -80,10 +85,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: myColor,
+                        color: FirebaseUtility.myColor
+                            .withOpacity(FirebaseUtility.myColor.opacity),
+                        border: Border.all(color: Colors.blueGrey, width: 0.01),
                         boxShadow: [
                           BoxShadow(
-                            color: myColor.withOpacity(0.8),
+                            color: FirebaseUtility.myColor.withOpacity(
+                                FirebaseUtility.myColor.opacity * 0.8),
                             blurRadius: .2,
                             spreadRadius: .8,
                           ),
@@ -131,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: const [
                                   Text('Edit Message',
                                       style:
-                                          kEditTextStyle) //TODO mayge change the whole thing with emergency_contact_textfield.dart
+                                          kEditTextStyle) //TODO maybe change the whole thing with emergency_contact_textfield.dart
                                 ],
                               ))),
                       Container(

@@ -24,7 +24,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  late bool triggerWordDetection;
+  bool triggerWordDetection = false;
   late SharedPreferences prefs;
 
   void _yesNoSmartAlert(BuildContext context) {

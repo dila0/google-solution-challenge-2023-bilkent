@@ -30,6 +30,7 @@ class FirebaseUtility {
   static List<String> contacts = [];
   static List<String> contactNames = [];
   static Set<String> favourites = {};
+  static Color myColor = kButtonColor;
 
   ///read from database and update local static variables
   static Future<bool> refresh() async {
@@ -62,11 +63,14 @@ class FirebaseUtility {
       contacts = [];
       contactNames = [];
     }
-
+    int colorString = (ds.data()['color'] ?? kButtonColor.value);
+    double opacity = (ds.data()['colorOpacity'] ?? 1.0).toDouble();
+    myColor = Color(colorString).withOpacity(opacity);
     return true;
   }
 
   /// Sets local static variables
+  /// Used for sign up
   static void setUserData(
       {required name, required surname, required phoneNumber, customMessage}) {
     FirebaseUtility.name = name;
@@ -85,6 +89,8 @@ class FirebaseUtility {
       'emergencyContacts': contacts,
       'favourites': favourites,
       'contactNames': contactNames,
+      'color': myColor.value,
+      'colorOpacity': myColor.opacity
     }).catchError((error) => {print(error)});
 
     //TODO handle error
@@ -155,6 +161,17 @@ class FirebaseUtility {
     FirebaseUtility.contactNames = contactNames;
     _fireStore.collection('users').doc(_auth.currentUser?.uid).update(
         {'contactNames': contactNames}).catchError((error) => {print(error)});
+  }
+
+  static void updateColor(Color color) {
+    FirebaseUtility.myColor = color;
+    _fireStore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .update({'color': color.value}).catchError(
+            (error) => {print(error)}); //TODO handle error
+    _fireStore.collection('users').doc(_auth.currentUser?.uid).update(
+        {'colorOpacity': color.opacity}).catchError((error) => {print(error)});
   }
 
   static void updateName(String name) {
