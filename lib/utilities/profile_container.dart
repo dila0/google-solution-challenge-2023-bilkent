@@ -23,34 +23,40 @@ class ProfilePageContainer extends StatelessWidget {
       child: Material(
         borderRadius: const BorderRadius.all(Radius.circular(kButtonRoundness)),
         elevation: 1.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: iconName,
-                  iconSize: kBottomIconSize,
-                  color: kCirclesColor,
-                ),
-                Text(
-                  profileNameString,
-                  style: kProfileNameTextStyle,
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                userNameString,
-                textAlign: TextAlign.right,
-                textDirection: TextDirection.ltr,
-                style: kProfileNameTextStyle,
+        child: Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: iconName,
+                    iconSize: kBottomIconSize,
+                    color: kCirclesColor,
+                  ),
+                  Text(
+                    profileNameString,
+                    style: kProfileNameTextStyle,
+                  ),
+                ],
               ),
-            ),
-            //TODO: Take username
-          ],
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 9.0),
+                  child: Text(
+                    "$userNameString   ",
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    textAlign: TextAlign.right,
+                    textDirection: TextDirection.ltr,
+                    style: kProfileNameTextStyle,
+                  ),
+                ),
+              ),
+              //TODO: Take username
+            ],
+          ),
         ),
       ),
     );
