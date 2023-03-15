@@ -24,6 +24,7 @@ import 'contact_options/bestie_screen.dart';
 import 'contact_options/lover_screen.dart';
 import 'screens/phone_call_screen.dart';
 import 'screens/incoming_call_screen.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,10 @@ void main() async {
   if (FirebaseAuth.instance.currentUser != null) {
     await FirebaseUtility.refresh();
   }
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((value) => runApp(GoogleSolution()));
   runApp(GoogleSolution());
 }
 
