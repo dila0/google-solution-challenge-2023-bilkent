@@ -1,3 +1,4 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:porcupine_flutter/porcupine.dart';
 import 'package:porcupine_flutter/porcupine_error.dart';
 import 'package:porcupine_flutter/porcupine_manager.dart';
@@ -6,7 +7,8 @@ import 'dart:async';
 
 class audioListener {
   //API key
-  final accessKey = "INSERT_YOUR_API_KEY_HERE";
+  FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
+  String accessKey = "INSERT_YOUR_API_KEY_HERE_IF_NEEDED";
   final int speakingThreshold = 80;
 
   //Emergency and Stopped functions that'll be given by the user
@@ -39,6 +41,9 @@ class audioListener {
 
   //Initialize Porcupine Manager
   void createPorcupineManager() async {
+    await remoteConfig.fetchAndActivate();
+
+    accessKey = remoteConfig.getValue('PORCUPINE_KEY').asString();
     try {
       porcupineManager = await PorcupineManager.fromBuiltInKeywords(
           accessKey, [BuiltInKeyword.AMERICANO], _wakeWordCallback);
