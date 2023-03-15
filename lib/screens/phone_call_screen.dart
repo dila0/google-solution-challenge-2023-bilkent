@@ -43,12 +43,16 @@ class _CallScreenState extends State<CallScreen> {
   @override
   void initState() {
     super.initState();
-    listener = audioListener(emergency, userStoppedTalking);
+    listener = audioListener(emergency, userStoppedTalking, showErrorSnackbar);
     getPreferences();
     listener.startNoiseMeter();
     if (wordDetectionEnabled) {
       listener.startPorcupine();
     }
+  }
+
+  void showErrorSnackbar(String title, String message) {
+    SnackBarUtility.showFailureSnackBar(context, message, title);
   }
 
   void _stopTimer() {
@@ -58,7 +62,7 @@ class _CallScreenState extends State<CallScreen> {
   }
 
   void emergency() {
-    //SnackBarUtility.showSuccessSnackBar(context, "Americano", "!!!!!!");
+    SnackBarUtility.showSuccessSnackBar(context, "Americano", "!!!!!!");
     //_startTimer();
     //alertD(context, position! );
   }

@@ -1,4 +1,5 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:google_solution/utilities/snack_bar_utility.dart';
 import 'package:porcupine_flutter/porcupine.dart';
 import 'package:porcupine_flutter/porcupine_error.dart';
 import 'package:porcupine_flutter/porcupine_manager.dart';
@@ -14,7 +15,7 @@ class audioListener {
   //Emergency and Stopped functions that'll be given by the user
   Function emergency;
   Function userStoppedTalking;
-
+  Function ErrorOnPorcupine;
   //Porcupine Utilities
   int wordCounter = 0;
   PorcupineManager? porcupineManager;
@@ -33,7 +34,8 @@ class audioListener {
 
   //Initialize everything
   //The constructor takes in two functions as parameters
-  audioListener(this.emergency, this.userStoppedTalking) {
+  audioListener(
+      this.emergency, this.userStoppedTalking, this.ErrorOnPorcupine) {
     //the constructor initializes both Porcupine and NoiseMeter objects
     createPorcupineManager();
     noiseMeter = NoiseMeter(onNoiseError);
@@ -48,7 +50,8 @@ class audioListener {
       porcupineManager = await PorcupineManager.fromBuiltInKeywords(
           accessKey, [BuiltInKeyword.AMERICANO], _wakeWordCallback);
     } on PorcupineException catch (err) {
-      print(err.message);
+      ErrorOnPorcupine(
+          "Error trying to start trigger word detection", err.message);
     }
   }
 
