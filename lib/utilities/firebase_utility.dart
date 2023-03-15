@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_solution/models/messageData.dart';
+import 'package:google_solution/utilities/custom_animations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/start_screen.dart';
 import 'constants.dart';
 import 'custom_contact_picker.dart';
@@ -31,6 +33,7 @@ class FirebaseUtility {
   static List<String> contactNames = [];
   static Set<String> favourites = {};
   static Color myColor = kButtonColor;
+  static late SharedPreferences prefs;
 
   ///read from database and update local static variables
   static Future<bool> refresh() async {
@@ -41,7 +44,12 @@ class FirebaseUtility {
         .then((ds) async {
       await insertData(ds);
     });
+    await getPreferences();
     return false;
+  }
+
+  static Future<void> getPreferences() async {
+    prefs = await SharedPreferences.getInstance();
   }
 
   static Future<bool> insertData(ds) async {
@@ -235,6 +243,8 @@ class FirebaseUtility {
     customMessage = kMessage;
     contacts = [];
     favourites = {};
+    myColor = kButtonColor;
+    contactNames = [];
   }
 
   static void logout(BuildContext context) {
@@ -251,7 +261,9 @@ class FirebaseUtility {
               });
     }
     reset();
-    Navigator.pushNamedAndRemoveUntil(context, StartScreen.id,
+    Navigator.pushAndRemoveUntil(
+        context,
+        CustomAnimations.slideTransition(page: StartScreen()),
         (route) => false); //In any case Navigate back to start page
   }
 
@@ -270,7 +282,9 @@ class FirebaseUtility {
               });
     }
     reset();
-    Navigator.pushNamedAndRemoveUntil(context, StartScreen.id,
+    Navigator.pushAndRemoveUntil(
+        context,
+        CustomAnimations.slideTransition(page: StartScreen()),
         (route) => false); //In any case Navigate back to start page
   }
 

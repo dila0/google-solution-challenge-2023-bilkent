@@ -48,7 +48,7 @@ class audioListener {
       porcupineManager = await PorcupineManager.fromBuiltInKeywords(
           accessKey, [BuiltInKeyword.AMERICANO], _wakeWordCallback);
     } on PorcupineException catch (err) {
-      print(err);
+      print(err.message);
     }
   }
 

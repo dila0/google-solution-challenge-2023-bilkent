@@ -1,11 +1,20 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_sms/flutter_sms.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_solution/utilities/constants.dart';
+import 'package:google_solution/utilities/snack_bar_utility.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swipe_to/swipe_to.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../models/callerData.dart';
+import '../utilities/audioListener.dart';
+import '../utilities/firebase_utility.dart';
+import '../utilities/register_button.dart';
 import 'contact_options_screen.dart';
 import 'incoming_call_screen.dart';
 
@@ -16,6 +25,190 @@ class CallScreen extends StatefulWidget {
 }
 
 class _CallScreenState extends State<CallScreen> {
+  int _counter = 0;
+  StreamController<int>? _events;
+  Position? position;
+  late audioListener listener;
+  Timer? _timer;
+  late SharedPreferences prefs;
+  late bool wordDetectionEnabled;
+
+  void getPreferences() {
+    prefs = FirebaseUtility.prefs;
+    setState(() {
+      wordDetectionEnabled = prefs.getBool('triggerWord') ?? false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    listener = audioListener(emergency, userStoppedTalking);
+    getPreferences();
+    listener.startNoiseMeter();
+    if (wordDetectionEnabled) {
+      listener.startPorcupine();
+    }
+  }
+
+  void _stopTimer() {
+    if (_timer == null) return;
+
+    _timer?.cancel();
+  }
+
+  void emergency() {
+    //SnackBarUtility.showSuccessSnackBar(context, "Americano", "!!!!!!");
+    //_startTimer();
+    //alertD(context, position! );
+  }
+
+  void userStoppedTalking() {}
+  void _startTimer() {
+    _counter = 5;
+
+    if (_timer != null) {
+      _timer?.cancel();
+    }
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      //setState(() {
+      if (_counter > 0) {
+        _counter--;
+      } else {
+        _events?.close();
+        _events = new StreamController<int>();
+        _events?.add(5);
+        Navigator.pop(context, 'OK');
+        sendSMS(message: message, recipients: contacts);
+        launchUrl(Uri.parse("tel://112"));
+        setState(() {
+          isDone = true;
+        });
+        _timer?.cancel();
+      }
+      //});
+      print(_counter);
+      _events?.add(_counter);
+    });
+  }
+
+  void alertD(BuildContext ctx, Position position) {
+    var alert = AlertDialog(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        backgroundColor: Colors.grey[100],
+        elevation: 0.0,
+        content: StreamBuilder<int>(
+            stream: _events?.stream,
+            builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+              print(snapshot.data.toString());
+              return Container(
+                height: 170,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const Padding(
+                        padding: EdgeInsets.only(
+                            top: 10, left: 10, right: 10, bottom: 15),
+                        child: Text(
+                          'WARNING',
+                          style: TextStyle(
+                              color: kCallContainerColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        )),
+                    const Text(
+                      'MESSAGE WILL BE SENT TO YOUR CONTACT AND 112 WILL BE CALLED',
+                      style: kWarningTextStyle,
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                        '${(snapshot.data == null || snapshot.data.toString() == '0') ? '5' : snapshot?.data.toString()}'),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Material(
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pop(context, 'OK');
+                                _stopTimer();
+                                _events?.close();
+                                _events = StreamController<int>.broadcast();
+                                _events?.add(5);
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: kButtonColor,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: const Center(
+                                    child: Text(
+                                  'CANCEL',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                              ),
+                            ),
+                          ),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Material(
+                            child: InkWell(
+                              onTap: () {
+                                _stopTimer();
+                                _events?.close();
+                                _events = StreamController<int>.broadcast();
+                                _events?.add(5);
+                                sendSMS(
+                                    message:
+                                        "$message   https://www.google.com/maps/search/?api=1&query=${position.latitude},${position.longitude}.",
+                                    recipients: contacts);
+                                launchUrl(Uri.parse("tel://112"));
+                                Navigator.pop(context, 'OK');
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    color: kButtonColor),
+                                child: const Center(
+                                  child: Text(
+                                    'OKAY',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ), //new column child
+                  ],
+                ),
+              );
+            }));
+    showDialog(
+        context: ctx,
+        barrierDismissible: false,
+        builder: (BuildContext c) {
+          return alert;
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,6 +310,18 @@ class _CallScreenState extends State<CallScreen> {
                               size: MediaQuery.of(context).size.height / 20,
                             ),
                           ],
+                        ),
+                        Visibility(
+                          visible: !wordDetectionEnabled,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: RegisterButton(
+                                title: 'EMERGENCY CALL',
+                                minWidth:
+                                    MediaQuery.of(context).size.height / 2,
+                                height: MediaQuery.of(context).size.height / 12,
+                                pressedFunct: () => {emergency()}),
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {

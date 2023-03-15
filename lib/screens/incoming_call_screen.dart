@@ -31,6 +31,12 @@ class _IncomingCallScreen extends State<IncomingScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    audioPlayer.stop();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(

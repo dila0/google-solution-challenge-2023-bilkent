@@ -48,8 +48,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void getPreferences() async {
-    prefs = await SharedPreferences.getInstance();
+  void getPreferences() {
+    prefs = FirebaseUtility.prefs;
     setState(() {
       triggerWordDetection = prefs.getBool('triggerWord') ?? false;
     });
