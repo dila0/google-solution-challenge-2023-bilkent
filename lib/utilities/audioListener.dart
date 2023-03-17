@@ -49,6 +49,7 @@ class audioListener {
     try {
       porcupineManager = await PorcupineManager.fromBuiltInKeywords(
           accessKey, [BuiltInKeyword.AMERICANO], _wakeWordCallback);
+      await porcupineManager?.start();
     } on PorcupineException catch (err) {
       ErrorOnPorcupine(
           "Error trying to start trigger word detection", err.message);
