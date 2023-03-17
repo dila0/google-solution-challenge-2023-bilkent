@@ -51,6 +51,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void getPreferences() {
 
     setState(() {
+      if(prefs == null){
+        triggerWordDetection = false;
+        return;
+      }
       triggerWordDetection = prefs.getBool('triggerWord') ?? false;
     });
   }
