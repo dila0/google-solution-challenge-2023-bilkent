@@ -103,11 +103,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     kSignUpInfoStyle.copyWith(fontWeight: FontWeight.w900),
                 items: [
                   SettingsItem(
-                    onTap: () {
-                      setState(() {
-                        changeTriggerWordDetectionStatus();
-                      });
-                    },
                     icons: Icons.mic,
                     iconStyle: IconStyle(
                       backgroundColor: Colors.black54,
@@ -116,7 +111,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     subtitle: "Experimental!",
                     trailing: Switch.adaptive(
                       value: triggerWordDetection,
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        setState(() {
+                          changeTriggerWordDetectionStatus();
+                        });
+                      },
                     ),
                   ),
                 ],
