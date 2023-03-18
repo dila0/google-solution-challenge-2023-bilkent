@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_alert_dialog/models/alert_dialog_style.dart';
 import 'package:smart_alert_dialog/models/alert_dialog_text.dart';
 import 'package:smart_alert_dialog/smart_alert_dialog.dart';
-
+import 'package:flutter/src/material/material.dart';
 import '../utilities/profile_container.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -25,28 +25,111 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool triggerWordDetection = false;
+  bool toDelete = false;
   SharedPreferences prefs = FirebaseUtility.prefs;
 
-  void _yesNoSmartAlert(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => SmartAlertDialog(
-        style: AlertDialogStyle(
-            confirm: AlertDialogStyle.DEFAULT_CONFIRM
-                .copyWith(color: const Color(0xFFE53935)),
-            cancel: AlertDialogStyle.DEFAULT_CANCEL
-                .copyWith(color: const Color(0xFF26A69A)),
-            message: kContactUtilitiesTextStyle.copyWith(
-                fontWeight: FontWeight.bold),
-            title: kProfileNameTextStyle.copyWith(
-                fontWeight: FontWeight.bold, fontSize: 18)),
-        title: "Are you sure you would like to delete your account?",
-        text: AlertDialogText(),
-        message: "This action cannot be reversed!",
-        onConfirmPressed: () => FirebaseUtility.deleteAccount(context),
-      ),
-    );
+  void _yesNoSmartAlert(BuildContext context, String message, String text, String action) {
+
+
+       // onConfirmPressed:() => FirebaseUtility.deleteAccount(context)
+       var alert = AlertDialog(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      backgroundColor: Colors.grey[100],
+      elevation: 0.0,
+      content:  Container(
+              height: 170,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children:  <Widget>[
+                  Padding(
+                      padding: EdgeInsets.only(
+                          top: 10, left: 10, right: 10, bottom: 15),
+                      child: Text(message,
+                        style: TextStyle(
+                            color: kCallContainerColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      )),
+                  Text(text,
+                    style: kWarningTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context, 'OK');
+
+                            },
+                            child: Container(
+                              width: 100,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: kButtonColor,
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              child: const Center(
+                                  child: Text(
+                                    'CANCEL',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                            ),
+                          ),
+
+                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child:  InkWell(
+                            onTap: () {
+                              Navigator.pop(context, 'OK');
+                              if(action == "delete")
+                              FirebaseUtility.deleteAccount(context);
+                              else{
+                                FirebaseUtility.logout(context);
+                              }
+                            },
+                            child: Container(
+                              width: 100,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: kButtonColor),
+                              child: const Center(
+                                child: Text(
+                                  'OKAY',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              ),
+            );
+            showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext c){
+                return alert;}
+            );
   }
+
+
+
 
   void getPreferences() {
 
@@ -152,7 +235,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   SettingsItem(
                     onTap: () {
-                      FirebaseUtility.logout(context);
+                      _yesNoSmartAlert(context,'You are about to sign out!'," Are you sure you would like to log out from your account?", "logout");
                     },
                     icons: Icons.exit_to_app_rounded,
                     iconStyle: IconStyle(backgroundColor: Colors.amber),
@@ -161,7 +244,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   SettingsItem(
                       onTap: () {
-                        _yesNoSmartAlert(context);
+                        _yesNoSmartAlert(context,'Are you sure you would like to delete your account?',"This action cannot be undone!", "delete");
+
                       },
                       icons: Icons.delete_forever,
                       iconStyle: IconStyle(backgroundColor: Colors.red),
