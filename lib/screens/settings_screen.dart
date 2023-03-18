@@ -56,6 +56,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     style: kWarningTextStyle,
                     textAlign: TextAlign.center,
                   ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
