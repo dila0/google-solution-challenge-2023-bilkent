@@ -61,12 +61,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-
+  FocusNode? currentFocusNode;
+  FocusNode? leftFocusNode;
+  FocusNode? rightFocusNode;
+  FocusNode? noFocusNode;
+  changeFocus(FocusNode? focusNodeNext) {
+    currentFocusNode?.unfocus();
+    focusNodeNext?.requestFocus();
+    currentFocusNode = focusNodeNext;
+  }
   bool isEnabled = false;
   final _auth = FirebaseAuth.instance;
 
   @override
+  void initState() {
+    super.initState();
+    currentFocusNode = FocusNode();
+    leftFocusNode = FocusNode();
+    rightFocusNode = FocusNode();
+    noFocusNode = FocusNode();
+  }
+  @override
   Widget build(BuildContext context) {
+    var focusNode = FocusNode();
     final user = _auth.currentUser;
     return Scaffold(
       backgroundColor: kBackgroundColor,
@@ -126,8 +143,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       GestureDetector(
                           onTap: () {
                             setState(() {
+                              Future.delayed(const Duration(milliseconds: 10), ()
+                              {
+                                FocusScope
+                                    .of(
+                                    context)
+                                    .requestFocus(
+                                    leftFocusNode);
+                                print(FocusScope.of(context).focusedChild.toString());
+
+                              });
                               isEnabled = true;
                             });
+                            // setState(() {
+                            //
+                            //   changeFocus(leftFocusNode);
+                            //   isEnabled = true;
+                            // });
                           },
                           child: Container(
                               margin: EdgeInsets.symmetric(
@@ -161,6 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       isEnabled = false;
                                     });
                                   },
+                                  focusNode: leftFocusNode,
                                   autofocus: true,
                                   controller: TextEditingController(),
                                   onSubmitted: (value) {
@@ -178,6 +211,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   keyboardType: TextInputType.text,
                                   decoration: InputDecoration(
                                     enabled: isEnabled,
+                                    //enabled: true,
                                     border: InputBorder.none,
                                     hintText:
                                         '  ${FirebaseUtility.customMessage}',
