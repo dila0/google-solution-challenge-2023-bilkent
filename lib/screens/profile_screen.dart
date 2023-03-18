@@ -143,7 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       GestureDetector(
                           onTap: () {
                             setState(() {
-                              Future.delayed(const Duration(milliseconds: 10), ()
+                              Future.delayed(const Duration(milliseconds: 100), ()
                               {
                                 FocusScope
                                     .of(
