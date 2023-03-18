@@ -36,7 +36,7 @@ class _CallScreenState extends State<CallScreen> {
   late bool wordDetectionEnabled;
   int _soundCounter = 1;
   String? contact;
-  int soundCount  =0;
+  int soundCount = 0;
 
   void getPreferences() {
     prefs = FirebaseUtility.prefs;
@@ -48,15 +48,17 @@ class _CallScreenState extends State<CallScreen> {
   @override
   void initState() {
     super.initState();
-    listener = audioListener(emergency, userStoppedTalking, showErrorSnackbar,audioPlayer);
+    listener = audioListener(
+        emergency, userStoppedTalking, showErrorSnackbar, audioPlayer);
     getPreferences();
     listener.startNoiseMeter();
     if (wordDetectionEnabled) {
       listener.startPorcupine();
     }
 
-    contact = Provider.of<callerData>(context,listen: false).callerName;
-    soundCount = Provider.of<callerData>(context,listen: false).getSoundNumber();
+    contact = Provider.of<callerData>(context, listen: false).callerName;
+    soundCount =
+        Provider.of<callerData>(context, listen: false).getSoundNumber();
     audioPlayer.open(
       Audio("sounds/$contact$_soundCounter.mp3"),
       autoStart: true,
@@ -88,12 +90,12 @@ class _CallScreenState extends State<CallScreen> {
   }
 
   void userStoppedTalking() {
-    if(audioPlayer.isPlaying.value) {
+    if (audioPlayer.isPlaying.value) {
       return;
     }
-    if(audioPlayer == null) return;
+    if (audioPlayer == null) return;
     _soundCounter++;
-    if(_soundCounter <= soundCount) {
+    if (_soundCounter <= soundCount) {
       audioPlayer.open(
         Audio("sounds/$contact$_soundCounter.mp3"),
         //autoStart: true,
@@ -103,6 +105,7 @@ class _CallScreenState extends State<CallScreen> {
       audioPlayer.play();
     }
   }
+
   void _startTimer() {
     _counter = 5;
 
@@ -256,11 +259,11 @@ class _CallScreenState extends State<CallScreen> {
     audioPlayer.dispose();
     listener.stopNoiseMeter();
     listener.stopPorcupine();
-
   }
+
   @override
   Widget build(BuildContext context) {
-   // contact = Provider.of<callerData>(context).callerName;
+    // contact = Provider.of<callerData>(context).callerName;
     // soundCount = Provider.of<callerData>(context).getSoundNumber();
     // audioPlayer.open(
     //   Audio("sounds/$contact$soundCount.mp3"),
@@ -316,86 +319,82 @@ class _CallScreenState extends State<CallScreen> {
                 ),
               ),
               Center(
-                child: Expanded(
-                  child: Container(
-                    height: 3 * (MediaQuery.of(context).size.height / 7),
-                    margin: const EdgeInsets.symmetric(horizontal: 25),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                          MediaQuery.of(context).size.height / 40),
-                      color: kCallContainerColor,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IconWidget(
-                              iconPath: LineIcons.microphoneSlash,
-                              iconDescription: "Mute",
-                              size: MediaQuery.of(context).size.height / 20,
-                            ),
-                            IconWidget(
-                              iconPath: Icons.pause_rounded,
-                              iconDescription: "Hold",
-                              size: MediaQuery.of(context).size.height / 20,
-                            ),
-                            IconWidget(
-                              iconPath: Icons.note_alt_outlined,
-                              iconDescription: "Note",
-                              size: MediaQuery.of(context).size.height / 20,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IconWidget(
-                              iconPath: LineIcons.volumeUp,
-                              iconDescription: "Speaker",
-                              size: MediaQuery.of(context).size.height / 20,
-                            ),
-                            IconWidget(
-                              iconPath: LineIcons.plus,
-                              iconDescription: "Add call",
-                              size: MediaQuery.of(context).size.height / 20,
-                            ),
-                            IconWidget(
-                              iconPath: LineIcons.braille,
-                              iconDescription: "Keypad",
-                              size: MediaQuery.of(context).size.height / 20,
-                            ),
-                          ],
-                        ),
-                        Visibility(
-                          visible: !wordDetectionEnabled,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: RegisterButton(
-                                title: 'EMERGENCY CALL',
-                                minWidth:
-                                    MediaQuery.of(context).size.height / 2,
-                                height: MediaQuery.of(context).size.height / 12,
-                                pressedFunct: () => {emergency()}),
+                child: Container(
+                  height: 3 * (MediaQuery.of(context).size.height / 7),
+                  margin: const EdgeInsets.symmetric(horizontal: 25),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                        MediaQuery.of(context).size.height / 40),
+                    color: kCallContainerColor,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconWidget(
+                            iconPath: LineIcons.microphoneSlash,
+                            iconDescription: "Mute",
+                            size: MediaQuery.of(context).size.height / 20,
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.pop(context);
-                            audioPlayer.stop();
-                            audioPlayer.dispose();
-
-                          },
-                          child: CircleAvatar(
-                            radius: MediaQuery.of(context).size.height / 20,
-                            backgroundColor: Color(0xDFFF2323),
-                            child: Icon(LineIcons.phoneSlash),
+                          IconWidget(
+                            iconPath: Icons.pause_rounded,
+                            iconDescription: "Hold",
+                            size: MediaQuery.of(context).size.height / 20,
                           ),
-                        )
-                      ],
-                    ),
+                          IconWidget(
+                            iconPath: Icons.note_alt_outlined,
+                            iconDescription: "Note",
+                            size: MediaQuery.of(context).size.height / 20,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconWidget(
+                            iconPath: LineIcons.volumeUp,
+                            iconDescription: "Speaker",
+                            size: MediaQuery.of(context).size.height / 20,
+                          ),
+                          IconWidget(
+                            iconPath: LineIcons.plus,
+                            iconDescription: "Add call",
+                            size: MediaQuery.of(context).size.height / 20,
+                          ),
+                          IconWidget(
+                            iconPath: LineIcons.braille,
+                            iconDescription: "Keypad",
+                            size: MediaQuery.of(context).size.height / 20,
+                          ),
+                        ],
+                      ),
+                      Visibility(
+                        visible: !wordDetectionEnabled,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RegisterButton(
+                              title: 'EMERGENCY CALL',
+                              minWidth: MediaQuery.of(context).size.height / 2,
+                              height: MediaQuery.of(context).size.height / 12,
+                              pressedFunct: () => {emergency()}),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          audioPlayer.stop();
+                          audioPlayer.dispose();
+                        },
+                        child: CircleAvatar(
+                          radius: MediaQuery.of(context).size.height / 20,
+                          backgroundColor: Color(0xDFFF2323),
+                          child: Icon(LineIcons.phoneSlash),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
