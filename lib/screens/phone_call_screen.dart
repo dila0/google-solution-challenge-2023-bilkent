@@ -26,7 +26,7 @@ class CallScreen extends StatefulWidget {
 }
 
 class _CallScreenState extends State<CallScreen> {
-  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
+  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId("0");
   int _counter = 0;
   StreamController<int>? _events;
   Position? position;
@@ -91,14 +91,16 @@ class _CallScreenState extends State<CallScreen> {
     if(audioPlayer.isPlaying.value) {
       return;
     }
+    if(audioPlayer == null) return;
     _soundCounter++;
     if(_soundCounter <= soundCount) {
       audioPlayer.open(
         Audio("sounds/$contact$_soundCounter.mp3"),
-        autoStart: true,
+        //autoStart: true,
         showNotification: true,
         loopMode: LoopMode.none,
       );
+      audioPlayer.play();
     }
   }
   void _startTimer() {
@@ -174,6 +176,7 @@ class _CallScreenState extends State<CallScreen> {
                               onTap: () {
                                 Navigator.pop(context, 'OK');
                                 _stopTimer();
+                                _stopTimer();
                                 _events?.close();
                                 _events = StreamController<int>.broadcast();
                                 _events?.add(5);
@@ -247,15 +250,24 @@ class _CallScreenState extends State<CallScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    audioPlayer.dispose();
+    listener.stopNoiseMeter();
+    listener.stopPorcupine();
+
+  }
+  @override
   Widget build(BuildContext context) {
    // contact = Provider.of<callerData>(context).callerName;
     // soundCount = Provider.of<callerData>(context).getSoundNumber();
-    audioPlayer.open(
-      Audio("sounds/$contact$soundCount.mp3"),
-      autoStart: true,
-      showNotification: true,
-      loopMode: LoopMode.none,
-    );
+    // audioPlayer.open(
+    //   Audio("sounds/$contact$soundCount.mp3"),
+    //   autoStart: true,
+    //   showNotification: true,
+    //   loopMode: LoopMode.none,
+    // );
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -372,6 +384,9 @@ class _CallScreenState extends State<CallScreen> {
                           onTap: () {
                             Navigator.pop(context);
                             Navigator.pop(context);
+                            audioPlayer.stop();
+                            audioPlayer.dispose();
+
                           },
                           child: CircleAvatar(
                             radius: MediaQuery.of(context).size.height / 20,
