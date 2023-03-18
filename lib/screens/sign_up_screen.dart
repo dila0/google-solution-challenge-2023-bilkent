@@ -6,6 +6,7 @@ import 'package:google_solution/utilities/circles.dart';
 import 'package:google_solution/utilities/register_button.dart';
 import 'package:google_solution/utilities/register_text_field.dart';
 import 'package:google_solution/utilities/bottom_text_sign_in.dart';
+import '../utilities/custom_animations.dart';
 import 'sign_in_screen.dart';
 import 'contact_options_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -100,7 +101,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           phoneNumber: phoneNumber,
           customMessage: kMessage); //update the local static variables
       FirebaseUtility.saveUserData(); //write to database
-      Navigator.pushNamed(context, MainPage.id);
+
+      Navigator.pushAndRemoveUntil(context,
+          CustomAnimations.slideTransition(page: MainPage()), (route) => false);
     } on FirebaseAuthException catch (error) {
       isSuccess = false;
       switch (error.code) {

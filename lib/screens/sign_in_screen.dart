@@ -10,6 +10,7 @@ import 'package:google_solution/screens/sign_up_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
+import '../utilities/custom_animations.dart';
 import '../utilities/snack_bar_utility.dart';
 import 'main_screen.dart';
 
@@ -47,8 +48,11 @@ class _SignInScreenState extends State<SignInScreen> {
           email: email, password: password);
 
       if (user != null) {
-        await FirebaseUtility.refresh()
-            .then((value) => Navigator.pushNamed(context, MainPage.id));
+        await FirebaseUtility.refresh().then((value) =>
+            Navigator.pushAndRemoveUntil(
+                context,
+                CustomAnimations.slideTransition(page: MainPage()),
+                (route) => false));
         setState(() {
           showSpinner = false;
         });
