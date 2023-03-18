@@ -35,6 +35,8 @@ class _CallScreenState extends State<CallScreen> {
   late SharedPreferences prefs;
   late bool wordDetectionEnabled;
   int _soundCounter = 1;
+  String? contact;
+  int soundCount  =0;
 
   void getPreferences() {
     prefs = FirebaseUtility.prefs;
@@ -53,12 +55,20 @@ class _CallScreenState extends State<CallScreen> {
       listener.startPorcupine();
     }
 
+    contact = Provider.of<callerData>(context,listen: false).callerName;
+    soundCount = Provider.of<callerData>(context,listen: false).getSoundNumber();
     audioPlayer.open(
-      Audio("sounds/ses$_soundCounter.mp3"),
+      Audio("sounds/$contact$_soundCounter.mp3"),
       autoStart: true,
       showNotification: true,
       loopMode: LoopMode.none,
     );
+    // audioPlayer.open(
+    //   Audio("sounds/DAD1.mp3"),
+    //   autoStart: true,
+    //   showNotification: true,
+    //   loopMode: LoopMode.none,
+    // );
   }
 
   void showErrorSnackbar(String title, String message) {
@@ -82,12 +92,14 @@ class _CallScreenState extends State<CallScreen> {
       return;
     }
     _soundCounter++;
-    audioPlayer.open(
-      Audio("sounds/ses$_soundCounter.mp3"),
-      autoStart: true,
-      showNotification: true,
-      loopMode: LoopMode.none,
-    );
+    if(_soundCounter <= soundCount) {
+      audioPlayer.open(
+        Audio("sounds/$contact$_soundCounter.mp3"),
+        autoStart: true,
+        showNotification: true,
+        loopMode: LoopMode.none,
+      );
+    }
   }
   void _startTimer() {
     _counter = 5;
@@ -236,6 +248,14 @@ class _CallScreenState extends State<CallScreen> {
 
   @override
   Widget build(BuildContext context) {
+   // contact = Provider.of<callerData>(context).callerName;
+    // soundCount = Provider.of<callerData>(context).getSoundNumber();
+    audioPlayer.open(
+      Audio("sounds/$contact$soundCount.mp3"),
+      autoStart: true,
+      showNotification: true,
+      loopMode: LoopMode.none,
+    );
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
