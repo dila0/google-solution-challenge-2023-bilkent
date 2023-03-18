@@ -26,7 +26,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool triggerWordDetection = false;
   bool toDelete = false;
-  SharedPreferences prefs = FirebaseUtility.prefs;
+  late SharedPreferences prefs;
+
 
   void _yesNoSmartAlert(BuildContext context, String message, String text, String action) {
 
@@ -132,9 +133,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
 
   void getPreferences() {
-
     setState(() {
-      if(prefs == null){
+      if (prefs == null) {
         triggerWordDetection = false;
         return;
       }
@@ -150,9 +150,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    prefs = FirebaseUtility.prefs;
     getPreferences();
     super.initState();
-
   }
 
   @override
