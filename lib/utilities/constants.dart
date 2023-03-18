@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const kButtonColor = Color(0xFFF5547F);
 const kCirclesColor = Color(0xFFEE96B8);
-const kContactColor = Color(0xFFF3B5CB);
+const kContactColor = Color(0xFFF0B6CB);
 const kBackgroundColor = Color(0xFFFCEEF7);
 const kBottomAppBarColor = Color(0XFFFFD7FC);
 const kCallBackgroundColor = Color(0xFF1A2319);
