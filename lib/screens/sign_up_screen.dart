@@ -171,85 +171,83 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const Circles(),
             //text fields
             Center(
-              child: Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 10,
-                    ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 10,
+                  ),
 
-                    //started text
-                    Text(startedText, style: kSignUpInScreen),
-                    SizedBox(height: MediaQuery.of(context).size.height / 30),
+                  //started text
+                  Text(startedText, style: kSignUpInScreen),
+                  SizedBox(height: MediaQuery.of(context).size.height / 30),
 
-                    //basic info
-                    Text(getInfoText, style: kSignUpInfoStyle),
-                    SizedBox(height: MediaQuery.of(context).size.height / 30),
+                  //basic info
+                  Text(getInfoText, style: kSignUpInfoStyle),
+                  SizedBox(height: MediaQuery.of(context).size.height / 30),
 
-                    //name
-                    RegisterTextField(
-                      hintText: 'Enter Your Name',
-                      onChanged: setName,
-                      inputType: TextInputType.name,
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 40),
-                    //surname
-                    RegisterTextField(
-                      hintText: 'Enter Your Surname',
-                      onChanged: setSurname,
-                      inputType: TextInputType.name,
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 40),
-                    //email
-                    RegisterTextField(
-                      hintText: '*Enter Your Email',
-                      onChanged: setEmail,
-                      inputType: TextInputType.emailAddress,
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 40),
-                    //phone number
-                    RegisterTextField(
-                      hintText: 'Enter Your Phone Number',
-                      onChanged: setPhoneNumber,
-                      inputType: TextInputType.phone,
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 40),
-                    //choose password
-                    RegisterTextField(
-                      hintText: '*Choose a Password',
-                      onChanged: setPassword,
+                  //name
+                  RegisterTextField(
+                    hintText: 'Enter Your Name',
+                    onChanged: setName,
+                    inputType: TextInputType.name,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  //surname
+                  RegisterTextField(
+                    hintText: 'Enter Your Surname',
+                    onChanged: setSurname,
+                    inputType: TextInputType.name,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  //email
+                  RegisterTextField(
+                    hintText: '*Enter Your Email',
+                    onChanged: setEmail,
+                    inputType: TextInputType.emailAddress,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  //phone number
+                  RegisterTextField(
+                    hintText: 'Enter Your Phone Number',
+                    onChanged: setPhoneNumber,
+                    inputType: TextInputType.phone,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  //choose password
+                  RegisterTextField(
+                    hintText: '*Choose a Password',
+                    onChanged: setPassword,
+                    obscured: true,
+                    inputType: TextInputType.visiblePassword,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  //confirm password
+                  RegisterTextField(
+                      hintText: '*Confirm Your Password',
+                      onChanged: setPasswordCheck,
                       obscured: true,
                       inputType: TextInputType.visiblePassword,
+                      isLast: true),
+                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  //register button
+                  RegisterButton(
+                    title: registerText,
+                    minWidth: MediaQuery.of(context).size.height / 4,
+                    height: MediaQuery.of(context).size.height / 21,
+                    pressedFunct: signUp,
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  //bottom text
+                  const Center(
+                    child: BottomText(
+                      bottomText: 'Already have an account?  ',
+                      bottomHyperLink: 'Sign In',
+                      page: SignInScreen(),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 40),
-                    //confirm password
-                    RegisterTextField(
-                        hintText: '*Confirm Your Password',
-                        onChanged: setPasswordCheck,
-                        obscured: true,
-                        inputType: TextInputType.visiblePassword,
-                        isLast: true),
-                    SizedBox(height: MediaQuery.of(context).size.height / 40),
-                    //register button
-                    RegisterButton(
-                      title: registerText,
-                      minWidth: MediaQuery.of(context).size.height / 4,
-                      height: MediaQuery.of(context).size.height / 21,
-                      pressedFunct: signUp,
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 40),
-                    //bottom text
-                    const Center(
-                      child: BottomText(
-                        bottomText: 'Already have an account?  ',
-                        bottomHyperLink: 'Sign In',
-                        page: SignInScreen(),
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 85),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 85),
+                ],
               ),
             ),
           ],

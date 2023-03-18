@@ -23,11 +23,11 @@ class ProfilePageContainer extends StatelessWidget {
       child: Material(
         borderRadius: const BorderRadius.all(Radius.circular(kButtonRoundness)),
         elevation: 1.0,
-        child: Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Row(
                 children: [
                   IconButton(
                     onPressed: () {},
@@ -41,22 +41,22 @@ class ProfilePageContainer extends StatelessWidget {
                   ),
                 ],
               ),
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 9.0),
-                  child: Text(
-                    "$userNameString   ",
-                    overflow: TextOverflow.ellipsis,
-                    softWrap: false,
-                    textAlign: TextAlign.right,
-                    textDirection: TextDirection.ltr,
-                    style: kProfileNameTextStyle,
-                  ),
+            ),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 9.0),
+                child: Text(
+                  "$userNameString   ",
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  textAlign: TextAlign.right,
+                  textDirection: TextDirection.ltr,
+                  style: kProfileNameTextStyle,
                 ),
               ),
-              //TODO: Take username
-            ],
-          ),
+            ),
+            //TODO: Take username
+          ],
         ),
       ),
     );
