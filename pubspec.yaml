@@ -92,7 +92,7 @@ flutter:
   - images/woman1.png
   - images/woman2.png
   - images/heart.png
-  - sounds/ringtone.mp3
+  - sounds/
   fonts:
     - family: AmaticSC
       fonts:

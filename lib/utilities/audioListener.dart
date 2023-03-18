@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:google_solution/utilities/snack_bar_utility.dart';
 import 'package:porcupine_flutter/porcupine.dart';
@@ -11,7 +12,7 @@ class audioListener {
   FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
   String accessKey = "INSERT_YOUR_API_KEY_HERE_IF_NEEDED";
   final int speakingThreshold = 80;
-
+  final int silenceSecondsThreshold = 6;
   //Emergency and Stopped functions that'll be given by the user
   Function emergency;
   Function userStoppedTalking;
@@ -24,18 +25,18 @@ class audioListener {
   //Noise Meter Utilities
   bool isNoiseRecording = false;
   StreamSubscription<NoiseReading>? noiseSubscription;
+  AssetsAudioPlayer player;
   late NoiseMeter noiseMeter;
   double noiseLevel = 0;
   bool talking = false;
   int stopSpeaking = 0;
-  bool waitedThree = false;
   bool timerStarted = false;
   bool logic = true;
-
+  int silenceCount = 0;
   //Initialize everything
   //The constructor takes in two functions as parameters
   audioListener(
-      this.emergency, this.userStoppedTalking, this.ErrorOnPorcupine) {
+      this.emergency, this.userStoppedTalking, this.ErrorOnPorcupine, this.player) {
     //the constructor initializes both Porcupine and NoiseMeter objects
     createPorcupineManager();
     noiseMeter = NoiseMeter(onNoiseError);
@@ -86,29 +87,32 @@ class audioListener {
       this.isNoiseRecording = true;
     }
     noiseLevel = noiseReading.meanDecibel;
-    if (noiseReading.meanDecibel > speakingThreshold) {
-      talking = true;
-      waitedThree = false;
-      logic = false;
-    } else {
-      if (!logic) {
-        if (waitedThree) {
-          talking = false;
-          stopSpeaking++; //for debugging
-          userStoppedTalking(); //User stopped talking, call the appropriate function
-          waitedThree = false;
-          logic = true;
-        } else {
-          if (!timerStarted) {
-            Timer(Duration(seconds: 3), () {
-              waitedThree = true;
-              timerStarted = false;
-            });
-            timerStarted = true;
+    if(player.isPlaying.value == false) {
+      if (noiseReading.meanDecibel > speakingThreshold) {
+        talking = true;
+        logic = false;
+        silenceCount = 0;
+      } else {
+        if (!logic) {
+          if (silenceCount == silenceSecondsThreshold) {
+            silenceCount = 0;
+            talking = false;
+            stopSpeaking++; //for debugging
+            userStoppedTalking(); //User stopped talking, call the appropriate function
+            logic = true;
+          } else {
+            if (!timerStarted) {
+              Timer(Duration(seconds: 1), () {
+                timerStarted = false;
+                silenceCount++;
+              });
+              timerStarted = true;
+            }
           }
         }
       }
     }
+
   }
 
   //Not entirely necessary

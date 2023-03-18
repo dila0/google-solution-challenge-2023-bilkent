@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sms/flutter_sms.dart';
 import 'package:geolocator/geolocator.dart';
@@ -25,6 +26,7 @@ class CallScreen extends StatefulWidget {
 }
 
 class _CallScreenState extends State<CallScreen> {
+  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
   int _counter = 0;
   StreamController<int>? _events;
   Position? position;
@@ -32,6 +34,7 @@ class _CallScreenState extends State<CallScreen> {
   Timer? _timer;
   late SharedPreferences prefs;
   late bool wordDetectionEnabled;
+  int _soundCounter = 1;
 
   void getPreferences() {
     prefs = FirebaseUtility.prefs;
@@ -43,12 +46,19 @@ class _CallScreenState extends State<CallScreen> {
   @override
   void initState() {
     super.initState();
-    listener = audioListener(emergency, userStoppedTalking, showErrorSnackbar);
+    listener = audioListener(emergency, userStoppedTalking, showErrorSnackbar,audioPlayer);
     getPreferences();
     listener.startNoiseMeter();
     if (wordDetectionEnabled) {
       listener.startPorcupine();
     }
+
+    audioPlayer.open(
+      Audio("sounds/ses$_soundCounter.mp3"),
+      autoStart: true,
+      showNotification: true,
+      loopMode: LoopMode.none,
+    );
   }
 
   void showErrorSnackbar(String title, String message) {
@@ -67,7 +77,18 @@ class _CallScreenState extends State<CallScreen> {
     //alertD(context, position! );
   }
 
-  void userStoppedTalking() {}
+  void userStoppedTalking() {
+    if(audioPlayer.isPlaying.value) {
+      return;
+    }
+    _soundCounter++;
+    audioPlayer.open(
+      Audio("sounds/ses$_soundCounter.mp3"),
+      autoStart: true,
+      showNotification: true,
+      loopMode: LoopMode.none,
+    );
+  }
   void _startTimer() {
     _counter = 5;
 
