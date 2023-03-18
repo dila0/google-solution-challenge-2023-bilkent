@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_solution/models/messageData.dart';
 import 'package:google_solution/screens/intro_screen.dart';
+import 'package:google_solution/screens/sign_in_screen.dart';
 import 'package:google_solution/utilities/custom_animations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/start_screen.dart';
@@ -264,7 +265,7 @@ class FirebaseUtility {
     reset();
     Navigator.pushAndRemoveUntil(
         context,
-        CustomAnimations.slideTransition(page: IntroScreen()),
+        CustomAnimations.slideTransition(page: StartScreen()),
         (route) => false); //In any case Navigate back to start page
   }
 
@@ -285,7 +286,7 @@ class FirebaseUtility {
     reset();
     Navigator.pushAndRemoveUntil(
         context,
-        CustomAnimations.slideTransition(page: IntroScreen()),
+        CustomAnimations.slideTransition(page: StartScreen()),
         (route) => false); //In any case Navigate back to start page
   }
 

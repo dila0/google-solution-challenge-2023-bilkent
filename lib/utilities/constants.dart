@@ -33,6 +33,12 @@ const kWelcomeTextStyle = TextStyle(
   color: Colors.black87,
 );
 
+const kIntroDescriptionStyle = TextStyle(
+  fontFamily: 'Amatic SC',
+  fontSize: 23.0,
+  fontWeight: FontWeight.w300,
+  color: Colors.black,
+);
 const kSignUpInScreen = TextStyle(
   fontFamily: 'Oswald',
   fontSize: 25.0,
