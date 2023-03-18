@@ -38,7 +38,7 @@ class _IntroScreen extends State<IntroScreen>{
         styleTitle:kWelcomeTextStyle,
         styleDescription: kIntroDescriptionStyle,
         description:
-        "If you ever feel unsafe, just select one of the pre-saved contact options and have a real cht with it. It understands when you answer the question and simulates a phone call.",
+        "If you ever feel unsafe, just select one of our contact options and have a conversation with it. It understands when you answer the question and it simulates a phone call.",
         pathImage: "images/photo2.png",
         backgroundColor: Color(0xffFDEDF8),
       ),
@@ -49,9 +49,22 @@ class _IntroScreen extends State<IntroScreen>{
         styleTitle:kWelcomeTextStyle,
         styleDescription: kIntroDescriptionStyle,
         description:
-        "When you feel like you must notice your loved ones that you're feeling in danger or you may not be safe without making it obvious, you just say \"Americano\" and we text your emergency contacts your current location.!",
+        "When you feel like you better notice your loved ones of your situation without making it obvious, you just say \"Americano\" during the phone call and we text your emergency contacts your current location!",
         pathImage: "images/photo3.png",
         backgroundColor: Color(0xffFDEDF8),
+      ),
+    );
+    listContentConfig.add(
+      const ContentConfig(
+        title: "HOW DOES IT WORK",
+        styleTitle:kWelcomeTextStyle,
+        styleDescription: kIntroDescriptionStyle,
+
+        description:
+        "You can edit the message that will be sent alongside your location to maximise personalization.",
+        pathImage: "images/photo4.png",
+        backgroundColor: Color(0xffFDEDF8),
+
       ),
     );
         listContentConfig.add(
@@ -61,11 +74,24 @@ class _IntroScreen extends State<IntroScreen>{
           styleDescription: kIntroDescriptionStyle,
 
         description:
-        "Do not forget to select your emergency contacts in the settings page after you signed-up to maximize the benefits of uygulama adı!",
-        pathImage: "images/photo4.png",
+        "Do not forget to select your emergency contacts in the settings page after you signed-up to maximize the benefits of Lunaris!",
+        pathImage: "images/photo5.png",
           backgroundColor: Color(0xffFDEDF8),
 
     ),
+    );
+    listContentConfig.add(
+      const ContentConfig(
+        title: "LETS GET STARTED!",
+        styleTitle:kWelcomeTextStyle,
+        styleDescription: kIntroDescriptionStyle,
+
+        description:
+        "It doesn't matter if you are walking alone at night or you wish to leave a place that you feel uncomfortable in... \n\nLunaris is here to help you!",
+        pathImage: "images/photo5.png",
+        backgroundColor: Color(0xffFDEDF8),
+
+      ),
     );
   }
 
