@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution/utilities/constants.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:provider/provider.dart';
-import 'package:swipe_to/swipe_to.dart';
-import '../models/callerData.dart';
-import 'contact_options_screen.dart';
 import 'incoming_call_screen.dart';
 import 'package:banner_carousel/banner_carousel.dart';
 

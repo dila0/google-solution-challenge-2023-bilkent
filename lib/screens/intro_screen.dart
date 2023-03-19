@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution/screens/sign_up_screen.dart';
-import 'package:google_solution/screens/start_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:provider/provider.dart';
 import 'package:intro_slider/intro_slider.dart';
 
 class IntroScreen extends StatefulWidget{

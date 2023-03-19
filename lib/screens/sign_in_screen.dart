@@ -4,12 +4,9 @@ import 'package:google_solution/utilities/circles.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
 import 'package:google_solution/utilities/register_text_field.dart';
 import 'package:google_solution/utilities/register_button.dart';
-import 'package:google_solution/screens/contact_options_screen.dart';
 import 'package:google_solution/utilities/bottom_text_sign_in.dart';
 import 'package:google_solution/screens/sign_up_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-
 import '../utilities/custom_animations.dart';
 import '../utilities/snack_bar_utility.dart';
 import 'main_screen.dart';

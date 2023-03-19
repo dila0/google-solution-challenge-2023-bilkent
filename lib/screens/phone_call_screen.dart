@@ -1,23 +1,19 @@
 import 'dart:async';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sms/flutter_sms.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/snack_bar_utility.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:swipe_to/swipe_to.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/callerData.dart';
 import '../utilities/audioListener.dart';
 import '../utilities/firebase_utility.dart';
 import '../utilities/register_button.dart';
 import 'contact_options_screen.dart';
-import 'incoming_call_screen.dart';
 
 class CallScreen extends StatefulWidget {
   static const String id = 'Call Screen';

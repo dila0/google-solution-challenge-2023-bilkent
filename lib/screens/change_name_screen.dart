@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
-
 import '../utilities/register_text_field.dart';
 
 class ChangeName extends StatelessWidget {

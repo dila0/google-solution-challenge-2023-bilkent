@@ -10,16 +10,8 @@ import 'package:google_solution/utilities/circles.dart';
 import 'package:google_solution/utilities/contact_card.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_solution/utilities/bottom_bar.dart';
 import 'package:google_solution/utilities/register_button.dart';
-import 'package:google_solution/contact_options/mom_screen.dart';
-import 'package:google_solution/contact_options/dad_screen.dart';
-import 'package:google_solution/contact_options/lover_screen.dart';
-import 'package:google_solution/contact_options/bestie_screen.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'incoming_call_screen.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
 
 String startText = 'CONTACT OPTIONS';

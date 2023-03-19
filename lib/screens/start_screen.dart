@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_solution/screens/sign_up_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
-import 'package:google_solution/utilities/firebase_utility.dart';
 
 String boldText = 'WALK ALONE SAFE';
 String buttonText = 'GET STARTED';

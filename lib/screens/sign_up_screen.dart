@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_solution/screens/incoming_call_screen.dart';
 import 'package:google_solution/screens/main_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
@@ -8,12 +7,8 @@ import 'package:google_solution/utilities/register_text_field.dart';
 import 'package:google_solution/utilities/bottom_text_sign_in.dart';
 import '../utilities/custom_animations.dart';
 import 'sign_in_screen.dart';
-import 'contact_options_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:google_solution/firebase_options.dart';
 import 'package:google_solution/utilities/snack_bar_utility.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
 
 String startedText = 'LET\'S GET STARTED';

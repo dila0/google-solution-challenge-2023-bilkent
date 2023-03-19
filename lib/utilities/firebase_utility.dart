@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:google_solution/models/messageData.dart';
-import 'package:google_solution/screens/intro_screen.dart';
-import 'package:google_solution/screens/sign_in_screen.dart';
 import 'package:google_solution/utilities/custom_animations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/start_screen.dart';

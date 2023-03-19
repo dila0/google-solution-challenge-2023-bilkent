@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution/utilities/constants.dart';
-import 'package:google_solution/screens/sign_up_screen.dart';
 
 class RegisterButton extends StatelessWidget {
   const RegisterButton(

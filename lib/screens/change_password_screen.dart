@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../utilities/constants.dart';
 import '../utilities/firebase_utility.dart';
 import '../utilities/register_text_field.dart';

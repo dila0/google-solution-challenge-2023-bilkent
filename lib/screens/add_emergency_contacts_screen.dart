@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_solution/utilities/emergency_contact_textfield.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
 import '../utilities/constants.dart';
-import '../utilities/profile_container.dart';
-import '../utilities/register_text_field.dart';
 import '../utilities/custom_contact_picker.dart';
 
 class AddEmergencyContact extends StatefulWidget {

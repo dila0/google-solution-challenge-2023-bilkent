@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution/screens/add_emergency_contacts_screen.dart';
 import 'package:google_solution/utilities/custom_animations.dart';
-import 'package:google_solution/utilities/firebase_utility.dart';
 import 'constants.dart';
 
 class EmergencyContactContainer extends StatelessWidget {

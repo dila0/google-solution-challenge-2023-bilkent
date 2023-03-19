@@ -1,11 +1,7 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_solution/models/messageData.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
-import 'package:google_solution/utilities/bottom_bar.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
 import 'package:google_solution/utilities/profile_container.dart';

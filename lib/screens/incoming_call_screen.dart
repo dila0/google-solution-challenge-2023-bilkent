@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution/models/callerData.dart';
 import 'package:google_solution/screens/phone_call_screen.dart';
-import 'package:google_solution/screens/start_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
-import 'package:google_solution/utilities/circles.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'package:provider/provider.dart';
-import 'contact_options_screen.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
 class IncomingScreen extends StatefulWidget {

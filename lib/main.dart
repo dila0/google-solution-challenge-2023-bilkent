@@ -7,21 +7,14 @@ import 'package:google_solution/screens/call_information_screen.dart';
 import 'package:google_solution/screens/contact_details_screen.dart';
 import 'package:google_solution/screens/intro_screen.dart';
 import 'package:google_solution/screens/main_screen.dart';
-import 'package:google_solution/screens/settings_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
 import 'package:provider/provider.dart';
-import 'models/messageData.dart';
 import 'screens/sign_in_screen.dart';
 import 'screens/sign_up_screen.dart';
 import 'screens/contact_options_screen.dart';
 import 'screens/start_screen.dart';
 import 'screens/profile_screen.dart';
-import 'screens/emergency_call.dart';
-import 'contact_options/mom_screen.dart';
-import 'contact_options/dad_screen.dart';
-import 'contact_options/bestie_screen.dart';
-import 'contact_options/lover_screen.dart';
 import 'screens/phone_call_screen.dart';
 import 'screens/incoming_call_screen.dart';
 import 'package:flutter/services.dart';
@@ -46,7 +39,6 @@ class GoogleSolution extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<callerData>(create: (context) => callerData()),
-        ChangeNotifierProvider<messageData>(create: (context) => messageData())
       ],
       child: MaterialApp(
         home: (user == null)

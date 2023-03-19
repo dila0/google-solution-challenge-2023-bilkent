@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
-import 'package:line_icons/line_icon.dart';
-import 'package:line_icons/line_icons.dart';
 import '../models/callerData.dart';
 import '../screens/incoming_call_screen.dart';
 import '../screens/info_page.dart';
 import 'constants.dart';
 import 'package:favorite_button/favorite_button.dart';
-import 'package:google_solution/contact_options/dad_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'custom_animations.dart';

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../utilities/constants.dart';
-import '../utilities/firebase_utility.dart';
-import '../utilities/register_text_field.dart';
+
 
 class infoPage extends StatelessWidget {
   String? contact;
@@ -32,9 +30,6 @@ class infoPage extends StatelessWidget {
 
     String fakeUI = "The buttons in the call page when you answer the call from your $contact, are there just make it look like you're having an actual phone call. So make sure you do no try to engage with them :)";
 
-    void clickedDone() {
-        Navigator.pop(context);
-      }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
