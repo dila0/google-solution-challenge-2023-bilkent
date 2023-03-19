@@ -4,10 +4,13 @@ import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import '../models/callerData.dart';
 import '../screens/incoming_call_screen.dart';
+import '../screens/info_page.dart';
 import 'constants.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:google_solution/contact_options/dad_screen.dart';
 import 'package:provider/provider.dart';
+
+import 'custom_animations.dart';
 
 class ContactCard extends StatefulWidget {
   ContactCard(
@@ -135,10 +138,17 @@ class _ContactCard extends State<ContactCard> {
                               return page;
                             }));
                           },
-                          child: Icon(
-                            Icons.question_mark_outlined,
-                            color: Colors.purpleAccent,
-                            size: 15,
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                CustomAnimations.slideTransition(
+                                  page: infoPage(contactName),
+                                )),
+                            child: Icon(
+                              Icons.question_mark_outlined,
+                              color: Colors.black87,
+                              size: 15,
+                            ),
                           ),
                         )
                       : Text(''),

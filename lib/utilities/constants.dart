@@ -20,6 +20,18 @@ const kCallerIdTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
 );
 
+const kInfoTileStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 20.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.black87,
+);
+const kInfoTextStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 15.0,
+  fontWeight: FontWeight.w500,
+  color: Colors.black87,
+);
 const kButtonTextStyle = TextStyle(
   fontFamily: 'Amatic SC',
   fontSize: 20.0,
