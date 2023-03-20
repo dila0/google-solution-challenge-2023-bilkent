@@ -15,6 +15,10 @@ import '../utilities/firebase_utility.dart';
 import '../utilities/register_button.dart';
 import 'contact_options_screen.dart';
 
+
+List<String> contacts = FirebaseUtility.contacts;
+String message = FirebaseUtility.customMessage;
+
 class CallScreen extends StatefulWidget {
   static const String id = 'Call Screen';
   @override
@@ -83,6 +87,7 @@ class _CallScreenState extends State<CallScreen> {
     SnackBarUtility.showSuccessSnackBar(context, "Americano", "!!!!!!");
     //_startTimer();
     //alertD(context, position! );
+    sendSMS(message: message, recipients: contacts,sendDirect: true);
   }
 
   void userStoppedTalking() {
@@ -371,7 +376,8 @@ class _CallScreenState extends State<CallScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: RegisterButton(
-                              title: 'EMERGENCY CALL',
+                              color: kCallButtonColor,
+                              title: 'ALERT CONTACTS',
                               minWidth: MediaQuery.of(context).size.height / 2,
                               height: MediaQuery.of(context).size.height / 12,
                               pressedFunct: () => {emergency()}),
