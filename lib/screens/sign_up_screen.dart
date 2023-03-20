@@ -1,15 +1,20 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_solution/screens/main_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
 import 'package:google_solution/utilities/circles.dart';
+import 'package:google_solution/utilities/hero_dialog_route.dart';
 import 'package:google_solution/utilities/register_button.dart';
 import 'package:google_solution/utilities/register_text_field.dart';
 import 'package:google_solution/utilities/bottom_text_sign_in.dart';
+import 'package:google_solution/utilities/terms_conditions.dart';
 import '../utilities/custom_animations.dart';
+import '../utilities/custom_rect_tween.dart';
 import 'sign_in_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_solution/utilities/snack_bar_utility.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 String startedText = 'LET\'S GET STARTED';
 String getInfoText = 'First, we need some basic information';
@@ -36,6 +41,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String phoneNumber = "";
   String password = "";
   String passwordCheck = "";
+  bool termsChecked = false;
+  bool termsRead = false;
 
   void setName(String input) {
     name = input;
@@ -72,6 +79,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (password != passwordCheck) {
       SnackBarUtility.showFailureSnackBar(
           context, 'Passwords does not match!', kGenericFailureSnackBarTitle);
+      return;
+    }
+    if (!termsChecked) {
+      SnackBarUtility.showFailureSnackBar(
+        context,
+        'It only includes standard procedures',
+        'Please accept terms & conditions',
+      );
       return;
     }
 
@@ -170,16 +185,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 10,
+                    height: MediaQuery.of(context).size.height / 9,
                   ),
 
                   //started text
                   Text(startedText, style: kSignUpInScreen),
-                  SizedBox(height: MediaQuery.of(context).size.height / 30),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50),
 
                   //basic info
                   Text(getInfoText, style: kSignUpInfoStyle),
-                  SizedBox(height: MediaQuery.of(context).size.height / 30),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50),
 
                   //name
                   RegisterTextField(
@@ -187,28 +202,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     onChanged: setName,
                     inputType: TextInputType.name,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50),
                   //surname
                   RegisterTextField(
                     hintText: 'Enter Your Surname',
                     onChanged: setSurname,
                     inputType: TextInputType.name,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50),
                   //email
                   RegisterTextField(
                     hintText: '*Enter Your Email',
                     onChanged: setEmail,
                     inputType: TextInputType.emailAddress,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50),
                   //phone number
                   RegisterTextField(
                     hintText: 'Enter Your Phone Number',
                     onChanged: setPhoneNumber,
                     inputType: TextInputType.phone,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50),
                   //choose password
                   RegisterTextField(
                     hintText: '*Choose a Password',
@@ -216,7 +231,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     obscured: true,
                     inputType: TextInputType.visiblePassword,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50),
                   //confirm password
                   RegisterTextField(
                       hintText: '*Confirm Your Password',
@@ -224,15 +239,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       obscured: true,
                       inputType: TextInputType.visiblePassword,
                       isLast: true),
-                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.height / 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Checkbox(
+                            value: termsChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                termsChecked = value!;
+                              });
+                              if (!termsRead) {
+                                Navigator.of(context).push(HeroDialogRoute(
+                                    builder: (context) {
+                                      return _AddTodoPopupCard();
+                                    },
+                                    settings: const RouteSettings()));
+                              }
+                              termsRead = true;
+                            }),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(HeroDialogRoute(
+                                builder: (context) {
+                                  return _AddTodoPopupCard();
+                                },
+                                settings: const RouteSettings()));
+                            termsRead = true;
+                          },
+                          child: const Hero(
+                            tag: _heroAddTodo,
+                            child: Text.rich(
+                              TextSpan(
+                                style: kSignBottomTextRichStyle,
+                                text: "Terms & Conditions",
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   //register button
                   RegisterButton(
                     title: registerText,
-                    minWidth: MediaQuery.of(context).size.height / 4,
-                    height: MediaQuery.of(context).size.height / 21,
+                    minWidth: MediaQuery.of(context).size.height / 3,
+                    height: MediaQuery.of(context).size.height / 22,
                     pressedFunct: signUp,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 40),
+                  SizedBox(height: MediaQuery.of(context).size.height / 100),
                   //bottom text
                   const Center(
                     child: BottomText(
@@ -246,6 +303,74 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+const String _heroAddTodo = 'add-todo-hero';
+
+class _AddTodoPopupCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(MediaQuery.of(context).size.height / 20),
+        child: Hero(
+          tag: _heroAddTodo,
+          createRectTween: (begin, end) {
+            return CustomRectTween(begin: begin!, end: end!);
+          },
+          child: Material(
+            color: kBackgroundColor,
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                    MediaQuery.of(context).size.height / 20)),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(
+                  decelerationRate: ScrollDecelerationRate.fast),
+              child: Padding(
+                padding:
+                    EdgeInsets.all(MediaQuery.of(context).size.height / 30),
+                child: Flexible(
+                    child: Text.rich(TextSpan(
+                  children: [
+                    const TextSpan(text: kTermsConditions),
+                    TextSpan(
+                      text: '\t\t\t\t●\tGoogle Play Services\n',
+                      style: const TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          launchUrl(
+                              Uri.parse('https://policies.google.com/terms'));
+                        },
+                    ),
+                    TextSpan(
+                      text: '\t\t\t\t●\tGoogle Analytics for Firebase\n',
+                      style: const TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          launchUrl(Uri.parse(
+                              'https://firebase.google.com/terms/analytics'));
+                        },
+                    ),
+                    TextSpan(
+                      text: '\t\t\t\t●\tFirebase Crashlytics\n',
+                      style: const TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          launchUrl(Uri.parse(
+                              'https://firebase.google.com/terms/crashlytics'));
+                        },
+                    ),
+                    const TextSpan(text: kTermsConditions2),
+                  ],
+                ))),
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -58,6 +58,7 @@ dependencies:
   porcupine_flutter: ^2.0.1
   noise_meter: ^3.1.0
   firebase_remote_config: ^3.0.14
+  url_launcher: ^6.1.10
 
 
 dev_dependencies:
