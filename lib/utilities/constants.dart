@@ -13,6 +13,8 @@ const kButtonRoundness = 10.0;
 
 const kCallContainerColor = Color(0xBF070907);
 
+const kCallButtonColor = Color(0x4F070900);
+
 const kCallerIdTextStyle = TextStyle(
   fontFamily: 'Poppins',
   fontSize: 40.0,
