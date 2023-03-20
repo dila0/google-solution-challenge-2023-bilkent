@@ -276,7 +276,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: 'Share',
                     subtitle: "Share our App with your friends <3",
                   ),
-                  SettingsItem(
+                  /*SettingsItem(
                     onTap: () {},
                     icons: Icons.info_rounded,
                     iconStyle: IconStyle(
@@ -284,7 +284,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     title: 'About',
                     subtitle: "Learn more about our App",
-                  ),
+                  ),*/
                   SettingsItem(
                     onTap: () {
                       Navigator.of(context).push(HeroDialogRoute(
