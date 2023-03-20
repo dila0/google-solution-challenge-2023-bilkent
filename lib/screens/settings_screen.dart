@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:google_solution/screens/change_name_screen.dart';
 import 'package:google_solution/screens/change_password_screen.dart';
 import 'package:google_solution/utilities/constants.dart';
@@ -268,7 +269,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 settingsGroupTitle: "Information",
                 items: [
                   SettingsItem(
-                    onTap: () {},
+                    onTap: () {
+                      FlutterShare.share(
+                        title: "Share Lunaris with your friends!",
+                        text:
+                            "I am using Lunaris. I think you might like it. Click below to download it!",
+                        linkUrl: "INSERT APP URL", //TODO insert app url
+                      );
+                    },
                     icons: Icons.share_rounded,
                     iconStyle: IconStyle(
                       backgroundColor: Colors.lightGreen,
