@@ -44,6 +44,7 @@ class FirebaseUtility {
       await insertData(ds);
     });
     await getPreferences();
+
     return false;
   }
 

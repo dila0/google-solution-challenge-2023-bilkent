@@ -70,23 +70,30 @@ Future<Position> _determinePosition() async {
   return position;
 }
 
-class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
+class _ContactOptionsScreenState extends State<ContactOptionsScreen> with TickerProviderStateMixin{
   int _counter = 0;
   StreamController<int>? _events;
   Position? position;
+  AnimationController? animationController;
   @override
   initState() {
     super.initState();
-    _events = new StreamController<int>();
+    _events = StreamController<int>();
     _events?.add(5);
     Future<Position> pos;
-    if (position == null) {
-      pos = _determinePosition();
-      _determinePosition().then((Position s) => setState(() {
-            //TODO RETURNED NULL is it fine?
-            position = s;
-          }));
-    }
+    // if (position == null) {
+    //   pos = _determinePosition();
+    //   _determinePosition().then((Position s) => setState(() {
+    //         //TODO RETURNED NULL is it fine?
+    //         position = s;
+    //       }));
+    // }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   Timer? _timer;
@@ -129,7 +136,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
     });
   }
 
-  void alertD(BuildContext ctx, Position position) {
+  void alertD(BuildContext ctx) async{
     var alert = AlertDialog(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -206,23 +213,14 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                                 _events?.close();
                                 _events = new StreamController<int>.broadcast();
                                 _events?.add(5);
-                                if(position != null)
-                                Future <String> res = sendSMS(
-                                    message:
-                                        "$message   https://www.google.com/maps/search/?api=1&query=${position.latitude},${position.longitude}.",
-                                    recipients: contacts, sendDirect: true).catchError((onError) {
-                                  print(onError);
-                                });
-                                else {
+                                  position = await _determinePosition();
                                   Future <String> res = sendSMS(
                                       message:
-                                      "$message   https://www.google.com/maps/search/?api=1&query=${position
-                                          .latitude},${position.longitude}.",
+                                      "$message   https://www.google.com/maps/search/?api=1&query=${position?.latitude},${position?.longitude}.",
                                       recipients: contacts, sendDirect: true)
                                       .catchError((onError) {
                                     print(onError);
                                   });
-                                }
                                 if ( await Vibration.hasVibrator() ?? false) {
                                 Vibration.vibrate();
                                 }
@@ -279,10 +277,13 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
   final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    if(position == null){
-      return CircularProgressIndicator();
-    }
-    else {
+    // if(position == null){
+    //   return CircularProgressIndicator(
+    //       valueColor: animationController!
+    //           .drive(ColorTween(begin: Colors.blueAccent, end: Colors.red))
+    //   );
+    // }
+    // else {
       final user = _auth.currentUser;
       String userName = "${FirebaseUtility.name} ${FirebaseUtility.surname}";
       return Scaffold(
@@ -420,7 +421,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
                             height: MediaQuery.of(context).size.height / 12,
                             pressedFunct: () => {
                                   _startTimer(),
-                                  alertD(context, position!),
+                                  alertD(context),
                                 }),
                       ),
                     ],
@@ -431,7 +432,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> {
           ));
     }
   }
-}
+//}
 /*
 () => showDialog<String>(
 context: context,
