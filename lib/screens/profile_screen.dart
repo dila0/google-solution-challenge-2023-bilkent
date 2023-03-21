@@ -86,141 +86,143 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final user = _auth.currentUser;
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: Stack(
-        children: <Widget>[
-          const Circles(),
-          Center(
-            child: Column(
-              children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-                GestureDetector(
-                  onTap: () {
-                    changeColor(context);
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: FirebaseUtility.myColor
-                          .withOpacity(FirebaseUtility.myColor.opacity),
-                      border: Border.all(color: Colors.blueGrey, width: 0.01),
-                      boxShadow: [
-                        BoxShadow(
-                          color: FirebaseUtility.myColor.withOpacity(
-                              FirebaseUtility.myColor.opacity * 0.8),
-                          blurRadius: .2,
-                          spreadRadius: .8,
-                        ),
-                      ],
+      body: SingleChildScrollView(
+        child: Stack(
+          children: <Widget>[
+            const Circles(),
+            Center(
+              child: Column(
+                children: [
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+                  GestureDetector(
+                    onTap: () {
+                      changeColor(context);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: FirebaseUtility.myColor
+                            .withOpacity(FirebaseUtility.myColor.opacity),
+                        border: Border.all(color: Colors.blueGrey, width: 0.01),
+                        boxShadow: [
+                          BoxShadow(
+                            color: FirebaseUtility.myColor.withOpacity(
+                                FirebaseUtility.myColor.opacity * 0.8),
+                            blurRadius: .2,
+                            spreadRadius: .8,
+                          ),
+                        ],
+                      ),
+                      width: MediaQuery.of(context).size.width * 0.33,
+                      height: MediaQuery.of(context).size.width * 0.33,
                     ),
-                    width: MediaQuery.of(context).size.width * 0.33,
-                    height: MediaQuery.of(context).size.width * 0.33,
                   ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.07,
-                ),
-                ProfilePageContainer(
-                  iconName: const Icon(Icons.account_circle_rounded),
-                  profileNameString: 'Name: ',
-                  userNameString: FirebaseUtility.name,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.05,
-                ),
-                ProfilePageContainer(
-                  iconName: const Icon(Icons.mail),
-                  profileNameString: 'Mail Address: ',
-                  userNameString: user == null ? '' : user.email ?? 'Error',
-                  //TODO: Sadece başı alınacak mailin
-                ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.05),
-                EmergencyContactContainer(),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                Column(
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            Future.delayed(const Duration(milliseconds: 100),
-                                () {
-                              FocusScope.of(context)
-                                  .requestFocus(leftFocusNode);
-                              print(FocusScope.of(context)
-                                  .focusedChild
-                                  .toString());
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.07,
+                  ),
+                  ProfilePageContainer(
+                    iconName: const Icon(Icons.account_circle_rounded),
+                    profileNameString: 'Name: ',
+                    userNameString: FirebaseUtility.name,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  ProfilePageContainer(
+                    iconName: const Icon(Icons.mail),
+                    profileNameString: 'Mail Address: ',
+                    userNameString: user == null ? '' : user.email ?? 'Error',
+                    //TODO: Sadece başı alınacak mailin
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.width * 0.05),
+                  EmergencyContactContainer(),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                  Column(
+                    children: [
+                      GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              Future.delayed(const Duration(milliseconds: 100),
+                                  () {
+                                FocusScope.of(context)
+                                    .requestFocus(leftFocusNode);
+                                print(FocusScope.of(context)
+                                    .focusedChild
+                                    .toString());
+                              });
+                              isEnabled = true;
                             });
-                            isEnabled = true;
-                          });
-                          // setState(() {
-                          //
-                          //   changeFocus(leftFocusNode);
-                          //   isEnabled = true;
-                          // });
-                        },
-                        child: Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal:
-                                    MediaQuery.of(context).size.width * 0.08,
-                                vertical:
-                                    MediaQuery.of(context).size.width * 0.008),
-                            child: Row(
-                              children: const [
-                                Text('Edit Message',
-                                    style:
-                                        kEditTextStyle) //TODO maybe change the whole thing with emergency_contact_textfield.dart
-                              ],
-                            ))),
-                    Container(
-                        margin: EdgeInsets.symmetric(
-                            horizontal:
-                                MediaQuery.of(context).size.width * 0.05),
-                        color: Colors.white60,
-                        //height: 3*(MediaQuery.of(context).size.height)/17,
-                        child: Material(
-                            borderRadius: const BorderRadius.all(
-                                Radius.circular(kButtonRoundness)),
-                            elevation: 1,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: TextField(
-                                onTapOutside: (_) {
-                                  setState(() {
-                                    isEnabled = false;
-                                  });
-                                },
-                                focusNode: leftFocusNode,
-                                autofocus: true,
-                                controller: TextEditingController(),
-                                onSubmitted: (value) {
-                                  setState(() {
-                                    // db.put('message', value);
-                                    FirebaseUtility.updateCustomMessage(
-                                        value, context);
-                                    FirebaseUtility.customMessage =
-                                        FirebaseUtility.customMessage;
-                                    isEnabled = false;
-                                  });
-                                },
-                                //minLines: 1,
-                                maxLines: null,
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  enabled: isEnabled,
-                                  //enabled: true,
-                                  border: InputBorder.none,
-                                  hintText:
-                                      '  ${FirebaseUtility.customMessage}',
-                                  hintMaxLines: 8,
+                            // setState(() {
+                            //
+                            //   changeFocus(leftFocusNode);
+                            //   isEnabled = true;
+                            // });
+                          },
+                          child: Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.08,
+                                  vertical: MediaQuery.of(context).size.width *
+                                      0.008),
+                              child: Row(
+                                children: const [
+                                  Text('Edit Message',
+                                      style:
+                                          kEditTextStyle) //TODO maybe change the whole thing with emergency_contact_textfield.dart
+                                ],
+                              ))),
+                      Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.05),
+                          color: Colors.white60,
+                          //height: 3*(MediaQuery.of(context).size.height)/17,
+                          child: Material(
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(kButtonRoundness)),
+                              elevation: 1,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: TextField(
+                                  onTapOutside: (_) {
+                                    setState(() {
+                                      isEnabled = false;
+                                    });
+                                  },
+                                  focusNode: leftFocusNode,
+                                  autofocus: true,
+                                  controller: TextEditingController(),
+                                  onSubmitted: (value) {
+                                    setState(() {
+                                      // db.put('message', value);
+                                      FirebaseUtility.updateCustomMessage(
+                                          value, context);
+                                      FirebaseUtility.customMessage =
+                                          FirebaseUtility.customMessage;
+                                      isEnabled = false;
+                                    });
+                                  },
+                                  //minLines: 1,
+                                  maxLines: null,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                    enabled: isEnabled,
+                                    //enabled: true,
+                                    border: InputBorder.none,
+                                    hintText:
+                                        '  ${FirebaseUtility.customMessage}',
+                                    hintMaxLines: 8,
+                                  ),
                                 ),
-                              ),
-                            )))
-                  ],
-                )
-              ],
+                              )))
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

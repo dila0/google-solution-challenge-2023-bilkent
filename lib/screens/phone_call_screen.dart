@@ -134,7 +134,7 @@ class _CallScreenState extends State<CallScreen> {
 
     Future<String> res = sendSMS(
             message:
-                "$message   https://www.google.com/maps/search/?api=1&query=${position?.latitude},${position?.longitude}.",
+                "${FirebaseUtility.customMessage} https://www.google.com/maps/search/?api=1&query=${position?.latitude},${position?.longitude}.",
             recipients: contacts,
             sendDirect: true)
         .catchError((onError) {

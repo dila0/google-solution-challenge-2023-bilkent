@@ -14,10 +14,10 @@ import 'package:google_solution/utilities/register_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
 import 'package:vibration/vibration.dart';
+
 String startText = 'CONTACT OPTIONS';
 String welcomeString = 'Welcome';
 List<String> contacts = FirebaseUtility.contacts;
-String message = FirebaseUtility.customMessage;
 bool isDone = false;
 
 class ContactOptionsScreen extends StatefulWidget {
@@ -70,7 +70,8 @@ Future<Position> _determinePosition() async {
   return position;
 }
 
-class _ContactOptionsScreenState extends State<ContactOptionsScreen> with TickerProviderStateMixin{
+class _ContactOptionsScreenState extends State<ContactOptionsScreen>
+    with TickerProviderStateMixin {
   int _counter = 0;
   StreamController<int>? _events;
   Position? position;
@@ -103,7 +104,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> with Ticker
     _timer?.cancel();
   }
 
-  void _startTimer() async{
+  void _startTimer() async {
     _counter = 5;
 
     if (_timer != null) {
@@ -118,7 +119,10 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> with Ticker
         _events = new StreamController<int>();
         _events?.add(5);
         Navigator.pop(context, 'OK');
-        Future<String> _result = sendSMS(message: message, recipients: contacts, sendDirect: true)
+        Future<String> _result = sendSMS(
+                message: FirebaseUtility.customMessage,
+                recipients: contacts,
+                sendDirect: true)
             .catchError((onError) {
           print(onError);
         });
@@ -136,7 +140,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> with Ticker
     });
   }
 
-  void alertD(BuildContext ctx) async{
+  void alertD(BuildContext ctx) async {
     var alert = AlertDialog(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -213,16 +217,17 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> with Ticker
                                 _events?.close();
                                 _events = new StreamController<int>.broadcast();
                                 _events?.add(5);
-                                  position = await _determinePosition();
-                                  Future <String> res = sendSMS(
-                                      message:
-                                      "$message   https://www.google.com/maps/search/?api=1&query=${position?.latitude},${position?.longitude}.",
-                                      recipients: contacts, sendDirect: true)
-                                      .catchError((onError) {
-                                    print(onError);
-                                  });
-                                if ( await Vibration.hasVibrator() ?? false) {
-                                Vibration.vibrate();
+                                position = await _determinePosition();
+                                Future<String> res = sendSMS(
+                                        message:
+                                            "${FirebaseUtility.customMessage}   https://www.google.com/maps/search/?api=1&query=${position?.latitude},${position?.longitude}.",
+                                        recipients: contacts,
+                                        sendDirect: true)
+                                    .catchError((onError) {
+                                  print(onError);
+                                });
+                                if (await Vibration.hasVibrator() ?? false) {
+                                  Vibration.vibrate();
                                 }
                                 //launchUrl(Uri.parse("tel://112"));
                                 Navigator.pop(context, 'OK');
@@ -284,154 +289,152 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen> with Ticker
     //   );
     // }
     // else {
-      final user = _auth.currentUser;
-      String userName = "${FirebaseUtility.name} ${FirebaseUtility.surname}";
-      return Scaffold(
-          backgroundColor: kBackgroundColor,
-          body: Stack(
-            children: [
-              NestedScrollView(
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) => [
-                  MediaQuery.removePadding(
-                    context: context,
-                    removeTop: true,
-                    removeBottom: true,
-                    child: SliverAppBar(
-                      stretch: true,
-                      title: const Circles(),
-                      backgroundColor: kBackgroundColor,
-                      elevation: 0,
-                      toolbarHeight: MediaQuery.of(context).size.height / 6,
-                      centerTitle: false,
-                      titleSpacing: 0,
-                      automaticallyImplyLeading: false,
-                    ),
-                  ),
-                ],
-                body: MediaQuery.removePadding(
+    final user = _auth.currentUser;
+    String userName = "${FirebaseUtility.name} ${FirebaseUtility.surname}";
+    return Scaffold(
+        backgroundColor: kBackgroundColor,
+        body: Stack(
+          children: [
+            NestedScrollView(
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) => [
+                MediaQuery.removePadding(
                   context: context,
                   removeTop: true,
-                  child: ListView(
-                    //TODO her şeyi scrollview içine mi alsak? welcome falan da kaysa, sliver appbar diye bişey var ondan yapılabilir
-                    physics: const BouncingScrollPhysics(),
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView(
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          children: <Widget>[
-                            Center(
+                  removeBottom: true,
+                  child: SliverAppBar(
+                    stretch: true,
+                    title: const Circles(),
+                    backgroundColor: kBackgroundColor,
+                    elevation: 0,
+                    toolbarHeight: MediaQuery.of(context).size.height / 6,
+                    centerTitle: false,
+                    titleSpacing: 0,
+                    automaticallyImplyLeading: false,
+                  ),
+                ),
+              ],
+              body: MediaQuery.removePadding(
+                context: context,
+                removeTop: true,
+                child: ListView(
+                  //TODO her şeyi scrollview içine mi alsak? welcome falan da kaysa, sliver appbar diye bişey var ondan yapılabilir
+                  physics: const BouncingScrollPhysics(),
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView(
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        children: <Widget>[
+                          Center(
+                              child: Text(
+                            welcomeString,
+                            style: kSignUpInfoStyle.copyWith(
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 20),
+                          )),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 0,
+                                horizontal:
+                                    MediaQuery.of(context).size.height / 15),
+                            child: Center(
                                 child: Text(
-                              welcomeString,
+                              userName,
                               style: kSignUpInfoStyle.copyWith(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 20),
-                            )),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 0,
-                                  horizontal:
-                                      MediaQuery.of(context).size.height / 15),
-                              child: Center(
-                                  child: Text(
-                                userName,
-                                style: kSignUpInfoStyle.copyWith(
-                                  fontSize: 40,
-                                ),
-                                textAlign: TextAlign.center,
-                              )),
-                            ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 40),
-                            Center(
-                                child: Text(startText, style: kSignUpInScreen)),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal:
-                                      MediaQuery.of(context).size.height / 40),
-                              child: ListView(
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                children: [
-                                  ContactCard(
-                                    page: CallInfo(),
-                                    imageUrl: 'images/mom_daughter.png',
-                                    contactName: 'MOM',
-                                    durationText: '2min',
-                                    utilitiesText:
-                                        'A two minute relaxing audio with your mom while walking',
-                                  ),
-                                  const SizedBox(height: 10.0),
-                                  ContactCard(
-                                    page: CallInfo(),
-                                    imageUrl: 'images/dad_girl.png',
-                                    contactName: 'DAD',
-                                    durationText: '2min',
-                                    utilitiesText:
-                                        'A two minute relaxing audio with your dad while walking',
-                                  ),
-                                  const SizedBox(height: 10.0),
-                                  ContactCard(
-                                    page: CallInfo(),
-                                    imageUrl: 'images/bestie.png',
-                                    contactName: 'BESTIE',
-                                    durationText: '2min',
-                                    utilitiesText:
-                                        'A two minute relaxing audio with your best friend while walking',
-                                  ),
-                                  const SizedBox(height: 10.0),
-                                  ContactCard(
-                                    page: CallInfo(),
-                                    imageUrl: 'images/lovers.png',
-                                    contactName: 'LOVER',
-                                    durationText: '2min',
-                                    utilitiesText:
-                                        'A two minute relaxing audio with your lover while walking',
-                                  ),
-                                  SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              8),
-                                ],
+                                fontSize: 40,
                               ),
+                              textAlign: TextAlign.center,
+                            )),
+                          ),
+                          SizedBox(
+                              height: MediaQuery.of(context).size.height / 40),
+                          Center(
+                              child: Text(startText, style: kSignUpInScreen)),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.height / 40),
+                            child: ListView(
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              children: [
+                                ContactCard(
+                                  page: CallInfo(),
+                                  imageUrl: 'images/mom_daughter.png',
+                                  contactName: 'MOM',
+                                  durationText: '2min',
+                                  utilitiesText:
+                                      'A two minute relaxing audio with your mom while walking',
+                                ),
+                                const SizedBox(height: 10.0),
+                                ContactCard(
+                                  page: CallInfo(),
+                                  imageUrl: 'images/dad_girl.png',
+                                  contactName: 'DAD',
+                                  durationText: '2min',
+                                  utilitiesText:
+                                      'A two minute relaxing audio with your dad while walking',
+                                ),
+                                const SizedBox(height: 10.0),
+                                ContactCard(
+                                  page: CallInfo(),
+                                  imageUrl: 'images/bestie.png',
+                                  contactName: 'BESTIE',
+                                  durationText: '2min',
+                                  utilitiesText:
+                                      'A two minute relaxing audio with your best friend while walking',
+                                ),
+                                const SizedBox(height: 10.0),
+                                ContactCard(
+                                  page: CallInfo(),
+                                  imageUrl: 'images/lovers.png',
+                                  contactName: 'LOVER',
+                                  durationText: '2min',
+                                  utilitiesText:
+                                      'A two minute relaxing audio with your lover while walking',
+                                ),
+                                SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height / 8),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height / 40),
-                        child: RegisterButton(
-                            title: 'EMERGENCY CALL',
-                            minWidth: MediaQuery.of(context).size.height / 2,
-                            height: MediaQuery.of(context).size.height / 12,
-                            pressedFunct: () => {
-                                  _startTimer(),
-                                  alertD(context),
-                                }),
-                      ),
-                    ],
-                  ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height / 40),
+                      child: RegisterButton(
+                          title: 'EMERGENCY CALL',
+                          minWidth: MediaQuery.of(context).size.height / 2,
+                          height: MediaQuery.of(context).size.height / 12,
+                          pressedFunct: () => {
+                                _startTimer(),
+                                alertD(context),
+                              }),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ));
-    }
+            ),
+          ],
+        ));
   }
+}
 //}
 /*
 () => showDialog<String>(
