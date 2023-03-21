@@ -310,6 +310,7 @@ class _CallScreenState extends State<CallScreen> {
     // TODO: implement dispose
     super.dispose();
     audioPlayer.dispose();
+    audioPlayer.stop();
     listener.stopNoiseMeter();
     listener.stopPorcupine();
   }
