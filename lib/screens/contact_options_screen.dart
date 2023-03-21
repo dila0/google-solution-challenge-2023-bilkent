@@ -14,7 +14,7 @@ import 'package:google_solution/utilities/register_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
 import 'package:vibration/vibration.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 String startText = 'CONTACT OPTIONS';
 String welcomeString = 'Welcome';
 List<String> contacts = FirebaseUtility.contacts;
@@ -79,6 +79,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen>
   @override
   initState() {
     super.initState();
+    getPermission();
     _events = StreamController<int>();
     _events?.add(5);
     Future<Position> pos;
@@ -434,6 +435,10 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen>
           ],
         ));
   }
+}
+
+void getPermission()async{
+  await [ Permission.sms ].request();
 }
 //}
 /*

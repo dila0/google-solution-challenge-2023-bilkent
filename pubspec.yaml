@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   swipe_to: 1.0.2
+  permission_handler: ^10.2.0
   provider: ^6.0.5
   banner_carousel: ^1.2.1
   assets_audio_player: ^3.0.6
