@@ -28,7 +28,7 @@ class infoPage extends StatelessWidget {
 
     String safeWordDisabled = "The safe word detection feature is experimental and we cannot offer it to the market yet due to the monetary restrictions. However if your \"Trigger Word Detection\" is close, there will be a button in your screen that does the exact operations as described above!";
 
-    String fakeUI = "The buttons in the call page when you answer the call from your $contact, are there just make it look like you're having an actual phone call. So make sure you do no try to engage with them :)";
+    String fakeUI = "The buttons in the call page when you answer the call from your $contact, are there just make it look like you're having an actual phone call. So make sure you do not try to engage with them :)";
 
     return Scaffold(
       appBar: AppBar(
@@ -51,6 +51,7 @@ class infoPage extends StatelessWidget {
       ),
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(decelerationRate: ScrollDecelerationRate.fast),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

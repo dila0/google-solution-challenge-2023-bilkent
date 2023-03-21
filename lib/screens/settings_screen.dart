@@ -271,7 +271,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   SettingsItem(
                     onTap: () {
                       FlutterShare.share(
-                        title: "Share Lunaris with your friends!",
+                        title: "Hi!",
                         text:
                             "I am using Lunaris. I think you might like it. Click below to download it!",
                         linkUrl: "INSERT APP URL", //TODO insert app url

@@ -198,6 +198,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen>
                             child: InkWell(
                               onTap: () async {
                                 _stopTimer();
+                                Navigator.pop(context, 'OK');
                                 _events?.close();
                                 _events = new StreamController<int>.broadcast();
                                 _events?.add(5);
@@ -214,7 +215,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen>
                                   Vibration.vibrate();
                                 }
                                 //launchUrl(Uri.parse("tel://112"));
-                                Navigator.pop(context, 'OK');
+
                               },
                               child: Container(
                                 width: 100,
