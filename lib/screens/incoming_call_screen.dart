@@ -6,6 +6,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:swipe_to/swipe_to.dart';
 import 'package:provider/provider.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
 class IncomingScreen extends StatefulWidget {
   static const String id = 'Incoming Call Screen';
@@ -19,18 +20,20 @@ class _IncomingCallScreen extends State<IncomingScreen> {
   @override
   void initState() {
     super.initState();
-    audioPlayer.open(
-      Audio("sounds/ringtone.mp3"),
-      autoStart: true,
-      showNotification: true,
-      loopMode: LoopMode.none,
-    );
+    FlutterRingtonePlayer.playRingtone();
+    // audioPlayer.open(
+    //   Audio("sounds/ringtone.mp3"),
+    //   autoStart: true,
+    //   showNotification: true,
+    //   loopMode: LoopMode.none,
+    // );
   }
 
   @override
   void dispose() {
     super.dispose();
-    audioPlayer.stop();
+ //   audioPlayer.stop();
+    FlutterRingtonePlayer.stop();
   }
 
   @override
@@ -73,7 +76,8 @@ class _IncomingCallScreen extends State<IncomingScreen> {
                       offsetDx: (0.8),
                       onRightSwipe: () {
                         Navigator.pushNamed(context, CallScreen.id);
-                        audioPlayer.stop();
+                        FlutterRingtonePlayer.stop();
+                        //audioPlayer.stop();
                       },
                       iconSize: 0,
                     ),
@@ -87,7 +91,8 @@ class _IncomingCallScreen extends State<IncomingScreen> {
                       offsetDx: (0.8),
                       onLeftSwipe: () {
                         Navigator.pop(context);
-                        audioPlayer.stop();
+                        FlutterRingtonePlayer.stop();
+                        //audioPlayer.stop();
                       },
                       iconSize: 0,
                     ),

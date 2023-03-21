@@ -375,7 +375,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen>
                                 ContactCard(
                                   page: CallInfo(),
                                   imageUrl: 'images/lovers.png',
-                                  contactName: 'LOVER',
+                                  contactName: 'BOYFRIEND',
                                   durationText: '2min',
                                   utilitiesText:
                                       'A two minute relaxing audio with your lover while walking',
