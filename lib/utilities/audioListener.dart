@@ -31,13 +31,16 @@ class audioListener {
   int stopSpeaking = 0;
   bool timerStarted = false;
   bool logic = true;
+  bool triggerWordEnabled;
   int silenceCount = 0;
   //Initialize everything
   //The constructor takes in two functions as parameters
-  audioListener(
-      this.emergency, this.userStoppedTalking, this.ErrorOnPorcupine, this.player) {
+  audioListener(this.emergency, this.userStoppedTalking, this.ErrorOnPorcupine,
+      this.player, this.triggerWordEnabled) {
     //the constructor initializes both Porcupine and NoiseMeter objects
-    createPorcupineManager();
+    if (triggerWordEnabled) {
+      createPorcupineManager();
+    }
     noiseMeter = NoiseMeter(onNoiseError);
   }
 
@@ -86,7 +89,7 @@ class audioListener {
       this.isNoiseRecording = true;
     }
     noiseLevel = noiseReading.meanDecibel;
-    if(player.isPlaying.value == false) {
+    if (player.isPlaying.value == false) {
       if (noiseReading.meanDecibel > speakingThreshold) {
         talking = true;
         logic = false;
@@ -111,7 +114,6 @@ class audioListener {
         }
       }
     }
-
   }
 
   //Not entirely necessary

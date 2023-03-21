@@ -48,8 +48,8 @@ class _CallScreenState extends State<CallScreen> {
   @override
   void initState() {
     super.initState();
-    listener = audioListener(
-        emergency, userStoppedTalking, showErrorSnackbar, audioPlayer);
+    listener = audioListener(emergency, userStoppedTalking, showErrorSnackbar,
+        audioPlayer, wordDetectionEnabled);
     getPreferences();
     listener.startNoiseMeter();
     if (wordDetectionEnabled) {

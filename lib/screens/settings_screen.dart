@@ -340,47 +340,51 @@ class _AddTodoPopupCard extends StatelessWidget {
             elevation: 5,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(
-                    MediaQuery.of(context).size.height / 20)),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(
-                  decelerationRate: ScrollDecelerationRate.fast),
-              child: Padding(
-                padding:
-                    EdgeInsets.all(MediaQuery.of(context).size.height / 30),
-                child: Flexible(
-                    child: Text.rich(TextSpan(
-                  children: [
-                    const TextSpan(text: kTermsConditions),
-                    TextSpan(
-                      text: '\t\t\t\t●\tGoogle Play Services\n',
-                      style: const TextStyle(color: Colors.blue),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          launchUrl(
-                              Uri.parse('https://policies.google.com/terms'));
-                        },
-                    ),
-                    TextSpan(
-                      text: '\t\t\t\t●\tGoogle Analytics for Firebase\n',
-                      style: const TextStyle(color: Colors.blue),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          launchUrl(Uri.parse(
-                              'https://firebase.google.com/terms/analytics'));
-                        },
-                    ),
-                    TextSpan(
-                      text: '\t\t\t\t●\tFirebase Crashlytics\n',
-                      style: const TextStyle(color: Colors.blue),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          launchUrl(Uri.parse(
-                              'https://firebase.google.com/terms/crashlytics'));
-                        },
-                    ),
-                    const TextSpan(text: kTermsConditions2),
-                  ],
-                ))),
+                    MediaQuery.of(context).size.height / 25)),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: MediaQuery.of(context).size.height / 200),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(
+                    decelerationRate: ScrollDecelerationRate.fast),
+                child: Padding(
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.height / 30),
+                  child: Flexible(
+                      child: Text.rich(TextSpan(
+                    children: [
+                      const TextSpan(text: kTermsConditions),
+                      TextSpan(
+                        text: '\t\t\t\t●\tGoogle Play Services\n',
+                        style: const TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            launchUrl(
+                                Uri.parse('https://policies.google.com/terms'));
+                          },
+                      ),
+                      TextSpan(
+                        text: '\t\t\t\t●\tGoogle Analytics for Firebase\n',
+                        style: const TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            launchUrl(Uri.parse(
+                                'https://firebase.google.com/terms/analytics'));
+                          },
+                      ),
+                      TextSpan(
+                        text: '\t\t\t\t●\tFirebase Crashlytics\n',
+                        style: const TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            launchUrl(Uri.parse(
+                                'https://firebase.google.com/terms/crashlytics'));
+                          },
+                      ),
+                      const TextSpan(text: kTermsConditions2),
+                    ],
+                  ))),
+                ),
               ),
             ),
           ),
