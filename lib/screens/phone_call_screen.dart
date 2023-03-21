@@ -26,7 +26,7 @@ class CallScreen extends StatefulWidget {
 }
 
 class _CallScreenState extends State<CallScreen> {
-  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId("0");
+  late AssetsAudioPlayer audioPlayer;
   int _counter = 0;
   StreamController<int>? _events;
   Position? position;
@@ -48,9 +48,10 @@ class _CallScreenState extends State<CallScreen> {
   @override
   void initState() {
     super.initState();
+    audioPlayer = AssetsAudioPlayer.newPlayer();
+    getPreferences();
     listener = audioListener(emergency, userStoppedTalking, showErrorSnackbar,
         audioPlayer, wordDetectionEnabled);
-    getPreferences();
     listener.startNoiseMeter();
     if (wordDetectionEnabled) {
       listener.startPorcupine();
@@ -151,11 +152,10 @@ class _CallScreenState extends State<CallScreen> {
     if (_soundCounter <= soundCount) {
       audioPlayer.open(
         Audio("sounds/$contact$_soundCounter.mp3"),
-        //autoStart: true,
+        autoStart: true,
         showNotification: true,
         loopMode: LoopMode.none,
       );
-      audioPlayer.play();
     }
   }
 
@@ -308,11 +308,11 @@ class _CallScreenState extends State<CallScreen> {
   @override
   void dispose() {
     // TODO: implement dispose
-    super.dispose();
-    audioPlayer.dispose();
     audioPlayer.stop();
+    audioPlayer.dispose();
     listener.stopNoiseMeter();
     listener.stopPorcupine();
+    super.dispose();
   }
 
   @override
