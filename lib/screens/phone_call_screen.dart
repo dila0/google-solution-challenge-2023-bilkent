@@ -317,8 +317,8 @@ class _CallScreenState extends State<CallScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // contact = Provider.of<callerData>(context).callerName;
-    // soundCount = Provider.of<callerData>(context).getSoundNumber();
+     contact = Provider.of<callerData>(context).callerName;
+     soundCount = Provider.of<callerData>(context).getSoundNumber();
     // audioPlayer.open(
     //   Audio("sounds/$contact$soundCount.mp3"),
     //   autoStart: true,

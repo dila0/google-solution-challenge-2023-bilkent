@@ -13,7 +13,7 @@ class callerData extends ChangeNotifier{
   int getSoundNumber() {
     if (callerName == "DAD") return 9;
     else if (callerName == "Mother") return 13;
-    else if (callerName == "Lover") return 15;
+    else if (callerName == "BOYFRIEND") return 15;
     else if (callerName == "Friend") return 9;
 
     return 0;
