@@ -4,7 +4,9 @@ class CustomAnimations {
   static PageRouteBuilder slideTransition(
       {required Widget page,
       bool reverse = false,
-      Duration duration = const Duration(milliseconds: 200)}) {
+      Duration duration = const Duration(
+        milliseconds: 170,
+      )}) {
     double start = 0;
     double end = 1;
     if (!reverse) {
