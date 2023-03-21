@@ -9,12 +9,12 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vibration/vibration.dart';
 import '../models/callerData.dart';
 import '../utilities/audioListener.dart';
 import '../utilities/firebase_utility.dart';
 import '../utilities/register_button.dart';
 import 'contact_options_screen.dart';
-
 
 List<String> contacts = FirebaseUtility.contacts;
 String message = FirebaseUtility.customMessage;
@@ -83,11 +83,63 @@ class _CallScreenState extends State<CallScreen> {
     _timer?.cancel();
   }
 
-  void emergency() {
-    SnackBarUtility.showSuccessSnackBar(context, "Americano", "!!!!!!");
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try
+        // requesting permissions again (this is also where
+        // Android's shouldShowRequestPermissionRationale
+        // returned true. According to Android guidelines
+        // your App should show an explanatory UI now.
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    return position;
+  }
+
+  void emergency() async {
     //_startTimer();
     //alertD(context, position! );
-    sendSMS(message: message, recipients: contacts,sendDirect: true);
+
+    position = await _determinePosition();
+
+    if (await Vibration.hasVibrator() ?? false) {
+      Vibration.vibrate();
+    }
+
+    Future<String> res = sendSMS(
+            message:
+                "$message   https://www.google.com/maps/search/?api=1&query=${position?.latitude},${position?.longitude}.",
+            recipients: contacts,
+            sendDirect: true)
+        .catchError((onError) {
+      print(onError);
+    });
   }
 
   void userStoppedTalking() {
