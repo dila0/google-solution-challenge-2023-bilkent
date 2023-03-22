@@ -84,7 +84,7 @@ class _IntroScreen extends State<IntroScreen>{
 
         description:
         "It doesn't matter if you are walking alone at night or you wish to leave a place that you feel uncomfortable in... \n\nLunaris is here to help you!",
-        pathImage: "images/photo5.png",
+        pathImage: "images/photo6.png",
         backgroundColor: Color(0xffFDEDF8),
 
       ),

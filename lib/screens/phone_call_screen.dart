@@ -359,12 +359,13 @@ class _CallScreenState extends State<CallScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 24,
                     ),
-                    Text("${Provider.of<callerData>(context).callerName}) ❤️",
+                    Text("${Provider.of<callerData>(context).callerName} ❤️",
                         style: kCallerIdTextStyle),
                     SizedBox(height: MediaQuery.of(context).size.height / 60),
                     CircleAvatar(
                       radius: MediaQuery.of(context).size.height / 10,
-                      backgroundImage: ExactAssetImage('images/father.jpg'),
+                      backgroundColor: Colors.blueGrey,
+                      //backgroundImage: ExactAssetImage('images/father.jpg'),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 11,
