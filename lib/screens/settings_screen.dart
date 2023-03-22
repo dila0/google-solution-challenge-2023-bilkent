@@ -12,6 +12,7 @@ import 'package:google_solution/utilities/bottom_bar.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import 'package:google_solution/utilities/custom_animations.dart';
 import 'package:google_solution/utilities/firebase_utility.dart';
+import 'package:google_solution/utilities/snack_bar_utility.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_alert_dialog/models/alert_dialog_style.dart';
 import 'package:smart_alert_dialog/models/alert_dialog_text.dart';
@@ -200,8 +201,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       value: triggerWordDetection,
                       onChanged: (value) {
                         setState(() {
-                          changeTriggerWordDetectionStatus();
+                          //changeTriggerWordDetectionStatus();
                         });
+                        SnackBarUtility.showSystemFailureSnackBar(context, 'We are currently working on this feature.\nStay tuned!', 'COMING SOON');
                       },
                     ),
                   ),

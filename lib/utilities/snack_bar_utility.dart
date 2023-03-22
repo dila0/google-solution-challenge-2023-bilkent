@@ -4,6 +4,7 @@ import 'package:google_solution/utilities/constants.dart';
 
 class SnackBarUtility {
   static const Color failureColor = kButtonColor;
+  static const Color systemErrorColor = Color(0xffFFC66D);
   static const Color successColor = Colors.teal; //TODO change??
   static void showSnackBar(BuildContext context, String message, String title,
       Color color, ContentType contentType) {
@@ -48,7 +49,7 @@ class SnackBarUtility {
         title: title,
         message: message,
         contentType: ContentType.help,
-        color: failureColor,
+        color: systemErrorColor,
       ),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
