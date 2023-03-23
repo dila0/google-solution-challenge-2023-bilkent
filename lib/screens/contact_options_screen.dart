@@ -198,7 +198,7 @@ class _ContactOptionsScreenState extends State<ContactOptionsScreen>
                             child: InkWell(
                               onTap: () async {
                                 _stopTimer();
-                                Navigator.pop(context, 'OK');
+                                Navigator.pop(context, 'SEND NOW');
                                 _events?.close();
                                 _events = new StreamController<int>.broadcast();
                                 _events?.add(5);
