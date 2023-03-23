@@ -276,7 +276,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         title: "Hi!",
                         text:
                             "I am using Lunaris. I think you might like it. Click below to download it!",
-                        linkUrl: "INSERT APP URL", //TODO insert app url
+                        linkUrl: " https://play.google.com/store/apps/details?id=com.hekatech.google_solution", //TODO insert app url
                       );
                     },
                     icons: Icons.share_rounded,
