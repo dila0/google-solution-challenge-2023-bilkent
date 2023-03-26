@@ -33,7 +33,15 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool triggerWordDetection = false;
   bool toDelete = false;
+  int waitDuration = 2;
   late SharedPreferences prefs;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    changeWaitDuration(waitDuration);
+    super.dispose();
+  }
 
   void _yesNoSmartAlert(
       BuildContext context, String message, String text, String action) {
@@ -140,15 +148,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       if (prefs == null) {
         triggerWordDetection = false;
+        waitDuration = 3;
         return;
       }
+
       triggerWordDetection = prefs.getBool('triggerWord') ?? false;
+      waitDuration = FirebaseUtility.prefs.getInt("waitDuration") ?? 2;
     });
   }
 
   void changeTriggerWordDetectionStatus() async {
     triggerWordDetection = !triggerWordDetection;
     await prefs.setBool('triggerWord', triggerWordDetection);
+  }
+
+  void changeWaitDuration(int duration) async {
+    await prefs.setInt('waitDuration', duration);
   }
 
   @override
@@ -158,6 +173,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     getPreferences();
     super.initState();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -205,6 +222,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         });
                         SnackBarUtility.showSystemFailureSnackBar(context, 'We are currently working on this feature.\nStay tuned!', 'COMING SOON');
                       },
+                    ),
+                  ),
+                  SettingsItem(
+                    icons: Icons.timelapse,
+                    iconStyle: IconStyle(
+                      backgroundColor: Colors.purple,
+                    ),
+                    title: "Wait duration: $waitDuration s" ,
+                    subtitle: "Wait until resuming",
+
+                    trailing: Container(
+                      width: MediaQuery.of(context).size.height / 6,
+                      child: Slider.adaptive(value: waitDuration.toDouble(),min: 1, max: 6,divisions: 6, onChanged: (double value){
+
+                        setState(() {
+                          waitDuration = value.round();
+                        });
+                      }),
                     ),
                   ),
                 ],

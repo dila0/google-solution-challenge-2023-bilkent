@@ -271,11 +271,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                           child: const Hero(
                             tag: _heroAddTodo,
-                            child: Text.rich(
-                              TextSpan(
+f                            child: Text(
+                              "Terms & Conditions",
                                 style: kSignBottomTextRichStyle,
-                                text: "Terms & Conditions",
-                              ),
                             ),
                           ),
                         )

@@ -1,5 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:google_solution/utilities/firebase_utility.dart';
 import 'package:porcupine_flutter/porcupine.dart';
 import 'package:porcupine_flutter/porcupine_error.dart';
 import 'package:porcupine_flutter/porcupine_manager.dart';
@@ -11,7 +12,7 @@ class audioListener {
   FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
   String accessKey = "INSERT_YOUR_API_KEY_HERE_IF_NEEDED";
   final int speakingThreshold = 80;
-  final int silenceSecondsThreshold = 6;
+  int silenceSecondsThreshold = 2;
   //Emergency and Stopped functions that'll be given by the user
   Function emergency;
   Function userStoppedTalking;
@@ -41,6 +42,15 @@ class audioListener {
     if (triggerWordEnabled) {
       createPorcupineManager();
     }
+
+    if (FirebaseUtility.prefs == null) {
+      silenceSecondsThreshold = 3;
+
+    }else{
+      silenceSecondsThreshold = FirebaseUtility.prefs.getInt("waitDuration") ?? 3;
+    }
+
+
     noiseMeter = NoiseMeter(onNoiseError);
   }
 
