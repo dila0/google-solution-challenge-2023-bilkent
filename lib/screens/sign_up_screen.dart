@@ -110,8 +110,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           surname: surname,
           phoneNumber: phoneNumber,
           customMessage: kMessage); //update the local static variables
-      FirebaseUtility.saveUserData(); //write to database
-
+       FirebaseUtility.saveUserData(); //write to database
+      await FirebaseUtility.getPreferences();
       Navigator.pushAndRemoveUntil(context,
           CustomAnimations.slideTransition(page: MainPage()), (route) => false);
     } on FirebaseAuthException catch (error) {
@@ -337,40 +337,39 @@ class _AddTodoPopupCard extends StatelessWidget {
                 child: Padding(
                   padding:
                       EdgeInsets.all(MediaQuery.of(context).size.height / 30),
-                  child: Flexible(
-                      child: Text.rich(TextSpan(
+                  child: Text.rich(TextSpan(
                     children: [
-                      const TextSpan(text: kTermsConditions),
-                      TextSpan(
-                        text: '\t\t\t\t●\tGoogle Play Services\n',
-                        style: const TextStyle(color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            launchUrl(
-                                Uri.parse('https://policies.google.com/terms'));
-                          },
-                      ),
-                      TextSpan(
-                        text: '\t\t\t\t●\tGoogle Analytics for Firebase\n',
-                        style: const TextStyle(color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            launchUrl(Uri.parse(
-                                'https://firebase.google.com/terms/analytics'));
-                          },
-                      ),
-                      TextSpan(
-                        text: '\t\t\t\t●\tFirebase Crashlytics\n',
-                        style: const TextStyle(color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            launchUrl(Uri.parse(
-                                'https://firebase.google.com/terms/crashlytics'));
-                          },
-                      ),
-                      const TextSpan(text: kTermsConditions2),
+                  const TextSpan(text: kTermsConditions),
+                  TextSpan(
+                    text: '\t\t\t\t●\tGoogle Play Services\n',
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        launchUrl(
+                            Uri.parse('https://policies.google.com/terms'));
+                      },
+                  ),
+                  TextSpan(
+                    text: '\t\t\t\t●\tGoogle Analytics for Firebase\n',
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        launchUrl(Uri.parse(
+                            'https://firebase.google.com/terms/analytics'));
+                      },
+                  ),
+                  TextSpan(
+                    text: '\t\t\t\t●\tFirebase Crashlytics\n',
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        launchUrl(Uri.parse(
+                            'https://firebase.google.com/terms/crashlytics'));
+                      },
+                  ),
+                  const TextSpan(text: kTermsConditions2),
                     ],
-                  ))),
+                  )),
                 ),
               ),
             ),

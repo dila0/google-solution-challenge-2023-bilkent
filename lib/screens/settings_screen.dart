@@ -276,7 +276,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         title: "Hi!",
                         text:
                             "I am using Lunaris. I think you might like it. Click below to download it!",
-                        linkUrl: " https://play.google.com/store/apps/details?id=com.hekatech.google_solution", //TODO insert app url
+                        linkUrl: "https://play.google.com/store/apps/details?id=com.hekatech.google_solution",
                       );
                     },
                     icons: Icons.share_rounded,
@@ -352,40 +352,39 @@ class _AddTodoPopupCard extends StatelessWidget {
                 child: Padding(
                   padding:
                       EdgeInsets.all(MediaQuery.of(context).size.height / 30),
-                  child: Flexible(
-                      child: Text.rich(TextSpan(
+                  child: Text.rich(TextSpan(
                     children: [
-                      const TextSpan(text: kTermsConditions),
-                      TextSpan(
-                        text: '\t\t\t\t●\tGoogle Play Services\n',
-                        style: const TextStyle(color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            launchUrl(
-                                Uri.parse('https://policies.google.com/terms'));
-                          },
-                      ),
-                      TextSpan(
-                        text: '\t\t\t\t●\tGoogle Analytics for Firebase\n',
-                        style: const TextStyle(color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            launchUrl(Uri.parse(
-                                'https://firebase.google.com/terms/analytics'));
-                          },
-                      ),
-                      TextSpan(
-                        text: '\t\t\t\t●\tFirebase Crashlytics\n',
-                        style: const TextStyle(color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            launchUrl(Uri.parse(
-                                'https://firebase.google.com/terms/crashlytics'));
-                          },
-                      ),
-                      const TextSpan(text: kTermsConditions2),
+                  const TextSpan(text: kTermsConditions),
+                  TextSpan(
+                    text: '\t\t\t\t●\tGoogle Play Services\n',
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        launchUrl(
+                            Uri.parse('https://policies.google.com/terms'));
+                      },
+                  ),
+                  TextSpan(
+                    text: '\t\t\t\t●\tGoogle Analytics for Firebase\n',
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        launchUrl(Uri.parse(
+                            'https://firebase.google.com/terms/analytics'));
+                      },
+                  ),
+                  TextSpan(
+                    text: '\t\t\t\t●\tFirebase Crashlytics\n',
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        launchUrl(Uri.parse(
+                            'https://firebase.google.com/terms/crashlytics'));
+                      },
+                  ),
+                  const TextSpan(text: kTermsConditions2),
                     ],
-                  ))),
+                  )),
                 ),
               ),
             ),
