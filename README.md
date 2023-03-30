@@ -58,7 +58,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Lunaris-ss][/unnamed.webp]](https://play.google.com/store/apps/details?id=com.hekatech.google_solution)
+[![Lunaris-ss][product-screenshot]](https://play.google.com/store/apps/details?id=com.hekatech.google_solution)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -195,3 +195,5 @@ Don't forget to give the project a star! Thanks again!
 
 [Dart]: https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white
 [dart-url]: https://dart.dev
+
+[product-screenshot]: /unnamed.webp
