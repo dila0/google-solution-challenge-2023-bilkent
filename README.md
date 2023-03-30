@@ -163,10 +163,10 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 
 ##### This project is  developed for Google Solution Challange 2023 by:
-* [Ali Tunahan Işık](https://github.com/ali-tunahan)    ![LinkedIn][linkedin-shield][linkedin-url-ati]
-* [Atakan Şerifoğlu](https://github.com/atakanserifoglu)   ![LinkedIn][linkedin-shield][linkedin-url-atakan]
-* [Dila Tosun](https://github.com/dila0)   ![LinkedIn][linkedin-shield][linkedin-url-dila]
-* [Tuna Bozkurt](https://github.com/tbozk)   ![LinkedIn][linkedin-shield][linkedin-url-tuna]
+* [Ali Tunahan Işık](https://github.com/ali-tunahan)    [![LinkedIn][linkedin-shield]][linkedin-url-ati]
+* [Atakan Şerifoğlu](https://github.com/atakanserifoglu)   [![LinkedIn][linkedin-shield]][linkedin-url-atakan]
+* [Dila Tosun](https://github.com/dila0)   [![LinkedIn][linkedin-shield]][linkedin-url-dila]
+* [Tuna Bozkurt](https://github.com/tbozk)   [![LinkedIn][linkedin-shield]][linkedin-url-tuna]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
