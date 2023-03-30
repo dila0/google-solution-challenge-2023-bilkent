@@ -1,9 +1,9 @@
 <div id="top"></div>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
+[![Contributors]][contributors-url]
+[![Forks]][forks-url]
+[![Stargazers]][stars-url]
+[![Issues]][issues-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -163,10 +163,10 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 
 ##### This project is  developed for Google Solution Challange 2023 by:
-* [Ali Tunahan Işık](https://github.com/ali-tunahan) [![LinkedIn][linkedin-shield][linkedin-url-ati]
-* [Atakan Şerifoğlu](https://github.com/atakanserifoglu)[![LinkedIn][linkedin-shield][linkedin-url-atakan]
-* [Dila Tosun](https://github.com/dila0)[![LinkedIn][linkedin-shield][linkedin-url-dila]
-* [Tuna Bozkurt](https://github.com/tbozk)[![LinkedIn][linkedin-shield][linkedin-url-tuna]
+* [Ali Tunahan Işık](https://github.com/ali-tunahan)    ![LinkedIn][linkedin-shield][linkedin-url-ati]
+* [Atakan Şerifoğlu](https://github.com/atakanserifoglu)   ![LinkedIn][linkedin-shield][linkedin-url-atakan]
+* [Dila Tosun](https://github.com/dila0)   ![LinkedIn][linkedin-shield][linkedin-url-dila]
+* [Tuna Bozkurt](https://github.com/tbozk)   ![LinkedIn][linkedin-shield][linkedin-url-tuna]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -174,14 +174,9 @@ Don't forget to give the project a star! Thanks again!
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
 [contributors-url]: https://github.com/dila0/google-solution-challenge-2023-bilkent/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
 [forks-url]: https://github.com/dila0/google-solution-challenge-2023-bilkent/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
 [stars-url]: https://github.com/dila0/google-solution-challenge-2023-bilkent/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
 [issues-url]: https://github.com/dila0/google-solution-challenge-2023-bilkent/issues
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
