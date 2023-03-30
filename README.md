@@ -1,9 +1,9 @@
 <div id="top"></div>
 
-[![Contributors]][contributors-url]
-[![Forks]][forks-url]
-[![Stargazers]][stars-url]
-[![Issues]][issues-url]
+[Contributors][contributors-url]
+[Forks][forks-url]
+[Stargazers][stars-url]
+[Issues][issues-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -58,7 +58,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Lunaris-ss][screenshot]](https://play.google.com/store/apps/details?id=com.hekatech.google_solution)
+[![Lunaris-ss][/unnamed.webp]](https://play.google.com/store/apps/details?id=com.hekatech.google_solution)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
