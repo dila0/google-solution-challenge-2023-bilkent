@@ -67,8 +67,6 @@
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 * [![Flutter][Flutter]][flutter-url]
 * [![Firebase][Firebase]][firebase-url]
 * [![Dart][Dart]][dart-url]
@@ -84,7 +82,6 @@ We have developed our app using Flutter 3.7.7
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * Flutter
   ```sh
   npm install -g flutter-cli
@@ -92,8 +89,6 @@ This is an example of how to list things you need to use the software and how to
   ```
 
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Clone the repo
    ```sh
@@ -116,7 +111,7 @@ OR
 
 
 
-<!-- USAGE EXAMPLES -->
+
 ## Usage
 Register using your credentials.
 Change your emergency message through profile and add emergency contacts.
